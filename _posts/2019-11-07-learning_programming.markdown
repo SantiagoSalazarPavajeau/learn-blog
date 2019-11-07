@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Learning Programming"
-date:       2019-11-07 11:37:54 +0000
+date:       2019-11-07 06:37:55 -0500
 permalink:  learning_programming
 ---
 
@@ -12,4 +12,4 @@ I decided to go back to school and study business which really helped me figure 
 
 Then I took a course on data science and learned that in the end a strong foundation in coding is fundamental for a profession in technology.
 
-Now I am starting a more formal programming journey and I am very excited advancing. 
+Learning ruby has been very eye opening to fundamental programming concepts so far. For example, building databases from scratch with complex functionality is very interesting, but most importantly these programming skills allow for innovation to happen through a website or an app product which finally is where the most added value can be generated.
