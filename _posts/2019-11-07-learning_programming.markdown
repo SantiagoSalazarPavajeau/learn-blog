@@ -13,3 +13,5 @@ I decided to go back to school and study business which really helped me figure 
 Then I took a course on data science and learned that in the end a strong foundation in coding is fundamental for a profession in technology.
 
 Learning ruby has been very eye opening to fundamental programming concepts so far. For example, building databases from scratch with complex functionality is very interesting, but most importantly these programming skills allow for innovation to happen through a website or an app product which finally is where the most added value can be generated.
+
+In other words programming can solve many business problems so it is a key for innovation. So when we  are able to clearly identify a customer need or a business problem I believe programming can be very useful to satisfy that customer need or solve that business problem.
