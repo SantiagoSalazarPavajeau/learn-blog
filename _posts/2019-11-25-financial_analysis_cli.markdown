@@ -1,6 +1,6 @@
 ---
 layout: post
-title:      "Ruby CLI Gem Project "
+title:      "Public Company Data Ruby CLI Gem Project "
 date:       2019-11-25 20:44:01 -0500
 permalink:  financial_analysis_cli
 ---
