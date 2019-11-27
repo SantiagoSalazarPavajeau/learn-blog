@@ -31,6 +31,9 @@ Overall, this project was a very rewarding experience and eventhough it was very
 
 I am very pleased with the outcome of the project and feel like I have learned so much about object oriented ruby,  procedural ruby, and CLI applications only after a little bit less than two month of learning ruby. 
 
+### [Link to GitHub repository](https://github.com/SantiagoSalazarPavajeau/financial_analysis_cli)
+
+
 
 
 
