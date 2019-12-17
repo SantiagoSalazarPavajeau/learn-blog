@@ -7,6 +7,21 @@ permalink:  financial_analysis_cli
 
 In this project, we were required to create a ruby gem to show the use of object-orientation, scraping/APIs and the command line. So the gem had to be able to provide information to the user through the command line and this information had to be extracted from the web, then stored in instances of objects. In the end, I think these requirements allowed it to be innovative in terms of fetching data but as far as user interaction it was quite simple. 
 
+```
+Time for some Financial Analysis
+1. National Western Life Group Inc. -> ticker: NWLI
+2. Humana Inc. -> ticker: HUM
+3. Reata Pharmaceuticals Inc. -> ticker: RETA
+4. Chipotle Mexican Grill Inc. -> ticker: CMG
+5. Paycom Software Inc. -> ticker: PAYC
+6. Amazon.com Inc. -> ticker: AMZN
+7. Booking Holdings Inc. -> ticker: BKNG
+8. Charter Communications Inc. -> ticker: CHTR
+9. Graham Holdings Company -> ticker: GHC
+10. Rogers Corporation -> ticker: ROG
+Choose a company you would like more information on by typing its ticker (e.g. AAPL). Type list to see some available companies or type exit.
+```
+
 At first, focusing on what type of data I was going to obtain, I considered scraping a social media site to find the latest clothing or shoes, however, scraping this information was not the best option as the site that I was first looking at (Pinterest) has a private API, so in the end I was not able to acquire access to the site's official API. Then, I started to do some more research and got tips about different free and open APIs like Dubai API and BBVA API and the BBVA API definitely started to interest me more as it made me think that obtaining financial data could be a solid approach to the project given that it is so clear and straightforward to obtain. Then I found one startup that provides an accounting API to businesses and that made me think about obtaining data about balance sheets, income statements, etc. and, so I was lucky to find a great API offered by a website that provides information about financial markets and public companies. This API was free and open, and the calls had easily accessible data that was a great fit to create the CLI gem and fulfill the requirements. 
 
 So the final gem I created allows the user to access information about public companies from several command-line prompts. At first, it displays a list of the most traded companies of the day and allows the user to obtain more information about the company of their choice. I connected several API calls in order to make information about the company easily accessible with few commands. So even though the interaction with the user is fairly simple I believe it is not complicated and allows an in-depth overview of the company with only 2 levels of data.
