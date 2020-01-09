@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Context of web development and full stack software engineering"
-date:       2020-01-09 19:58:22 +0000
+date:       2020-01-09 14:58:23 -0500
 permalink:  context_of_web_development_and_full_stack_software_engineering
 ---
 
@@ -16,4 +16,6 @@ So historically the first websites when the internet started, were used just to 
 So software applications can now run on the web just like they used to run on the desktop, and web applications for browsers can be used in almost any device. 
 
 With this understanding it is easy to see how full stack web development can built products and tools that allow a business for example to offer and sell their products (e-commerce), have invoices and accounting to be automated (ERP) and also the management of client/customer contact (CRM). These are all types of applications that can be developed with the same principles of management of information and data.
+
+Nonetheless, having this insight mainly means that there is much more to be learned (than before) about the technologies that make this possible.
 
