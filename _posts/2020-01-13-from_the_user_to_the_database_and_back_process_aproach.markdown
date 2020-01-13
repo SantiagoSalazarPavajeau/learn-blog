@@ -1,10 +1,11 @@
 ---
 layout: post
 title:      "From the user to the database and back: process aproach"
-date:       2020-01-13 20:47:50 +0000
+date:       2020-01-13 15:47:51 -0500
 permalink:  from_the_user_to_the_database_and_back_process_aproach
 ---
 
+When the user inputs data into a website using several the data travels from HTML to Ruby and to SQL. Moreover, in ruby we use Sinatra for get and post requests, then ActiveRecord and ORM to instantiate ruby objects and finally connect the data to an SQL database. The following code snippets describe these steps in the process of saving user input into our program and also even showing a dynamic response to the user input. 
 
 The user inputs data into a form from a website and 
 
