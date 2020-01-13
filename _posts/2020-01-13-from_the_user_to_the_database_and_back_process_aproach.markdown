@@ -9,7 +9,7 @@ When the user inputs data into a website using several the data travels from HTM
 
 The user inputs data into a form from a website and 
 
-![](https://photos.google.com/search/_tra_/photo/AF1QipNzc2hfx_pyDVZ8_frXhTAB5fsGgYVB5qxyWvy6http://)
+![](https://photos.google.com/search/_tra_/photo/AF1QipNzc2hfx_pyDVZ8_frXhTAB5fsGgYVB5qxyWvy6)
 
 the html to acheive this looks like:
 
