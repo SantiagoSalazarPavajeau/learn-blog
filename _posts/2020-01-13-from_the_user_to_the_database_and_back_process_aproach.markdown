@@ -9,7 +9,7 @@ When the user inputs data into a website using Ruby/Sinatra the data travels fro
 
 The user inputs data into a form from a website:
 
-![https://photos.google.com/search/_tra_/photo/AF1QipNzc2hfx_pyDVZ8_frXhTAB5fsGgYVB5qxyWvy6](https://photos.google.com/search/_tra_/photo/AF1QipNzc2hfx_pyDVZ8_frXhTAB5fsGgYVB5qxyWvy6)
+![](https://photos.app.goo.gl/DTjLPuUP3PJJk9Qu9)
 
 And the html to acheive this should look like:
 
