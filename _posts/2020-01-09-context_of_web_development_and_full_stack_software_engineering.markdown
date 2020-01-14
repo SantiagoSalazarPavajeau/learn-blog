@@ -5,7 +5,7 @@ date:       2020-01-09 14:58:23 -0500
 permalink:  context_of_web_development_and_full_stack_software_engineering
 ---
 
-At this point in the of the program we are acquiring some fundamental knowledge and skills that allow us to start to see the big picture of Software Engineering.
+At this point of the Flatiron program we are acquiring some fundamental knowledge and skills that allow us to start to see the big picture of Software Engineering.
 
 We are starting to see the fundamentals that make up the relationship between front end and back end programming with Ruby. We started by learning back end fundamentals from procedural and object oriented Ruby to then move to SQL and object relational mapping (ORM) and thus be able to manipulate information with objects or classes, and also with databases. So after going through these lessons it has started to become clear that only the front end is missing so the user can interact with our code. 
 
