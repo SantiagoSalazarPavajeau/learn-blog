@@ -40,26 +40,27 @@ get "/"
 end
 ```
 
+ActiveRecord saves the data to the database.
+
+```
+Model.create(params[:attribute])
+```
 
 Ruby instantiates an object.
 
 ```
 class Model
 
-     def method
-            @ruby_instances_and_methods
+     attr_accessor :attribute
+
+     def self.method
+            self.first
      end
 
 end
 ```
 
-ActiveRecord sends the data to the database.
-
-```
-Model.create(params[:attribute])
-```
-
-ORM of the method uses SQL to run the method.
+ORM of the method uses SQL to map the object to the database.
 
 ```
 sql = "CREATE TABLE models (  id  INTEGER PRIMARY KEY, 
@@ -79,7 +80,7 @@ To ouput information from out app we can use a Sinatra POST request
 
 ```
 post "/"
-     @ruby_instances_and_methods
+     Model.method
 		 erb: htm_and_ruby_file_name
 end
 ```
@@ -96,7 +97,7 @@ And send the ruby instance variable into the front end on the HTML through the E
   <body>
     <h1>Title</h1>
 
-    <h2><%= @ruby_instances_and_methods %></h2>
+    <h2><%= Model.method %></h2>
   </body>
 </html>
 ```
