@@ -9,6 +9,11 @@ When the user inputs data into a website using Ruby/Sinatra the data travels fro
 
 The user inputs data into a form from a website:
 
+<form method="POST" action="/site">
+      <input type="text" name="attribute">
+      <input type="submit">
+</form>
+
 ![](https://photos.app.goo.gl/DTjLPuUP3PJJk9Qu9)
 
 And the html to acheive this should look like:
