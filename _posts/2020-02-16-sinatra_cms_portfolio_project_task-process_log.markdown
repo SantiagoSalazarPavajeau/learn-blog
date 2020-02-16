@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Sinatra CMS Portfolio Project: Task-Process Log"
-date:       2020-02-16 22:48:46 +0000
+date:       2020-02-16 17:48:47 -0500
 permalink:  sinatra_cms_portfolio_project_task-process_log
 ---
 
