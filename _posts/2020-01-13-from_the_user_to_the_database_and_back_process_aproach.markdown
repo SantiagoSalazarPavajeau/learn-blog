@@ -1,6 +1,6 @@
 ---
 layout: post
-title:      "From the user to the database and back: process aproach"
+title:      "From the user to the database and back: steps "
 date:       2020-01-13 15:47:51 -0500
 permalink:  from_the_user_to_the_database_and_back_process_aproach
 ---
