@@ -5,7 +5,13 @@ date:       2020-02-16 17:48:47 -0500
 permalink:  sinatra_cms_portfolio_project_task-process_log
 ---
 
-This project has been one of the most challenging and at the same time rewarding, because it is the first time we get to see and experience the whole idea of developing a web application. I decided to pick an app which required more models than the MVP and by the end realized that there was a reason why the MVP only had limited requirements. However, I think I was able to deliver the functionality I was interested in the begining and found myself trying to make the application more simple in the last days working in the project. I still feel like if I could add some more Front End  customization, *(and also server side)* it would satisfy all of my expectations from the application I wanted to build. In the next section I review the requirements and how I have worked to meet them to submit the portfolio project.
+This project has been a big challenge, because it was the first time we got to experience the whole concept of developing a web application.
+
+So having a limited sense of what could be done with the amount of time available I picked an ambitious project that got complex really quickly. Basically I wanted to make a platform where collaboration and communication inside a company could take place. In this case that meant for managers and workers to describe their work processes and that way try to align reality with expectations. Also, empower workers to contribute to improve the company saying what could be done better in their everyday tasks. I became interested in these type of platforms while studying business in school, but working at different places also made me realize how important it is for work activities to be explicit for both workers and managers that way training can be better and also everything can be improved. 
+
+Howevera full blown application with this functionality would mean having different types of users and the models would have to have more attributes and this was out of the scope of the current project. The scope of this project waslimited to launching a simple application to get familiar with how a web application works, but I think in the future I would like to develop more features into this app and fulfill my initial idea.
+
+Even presently (limiting features to several models and only one user) my app ended up having more models than the requirement and by the end realized that there was a reason why we were encouraged to keep it simple. However, I think I was able to deliver some of the functionality I was interested in and even then found myself trying to make the application more simple in the last days working in the project. In the next section I review the requirements and how I have worked to meet them to submit the portfolio project.
 
 **Requirement Overview
 **
