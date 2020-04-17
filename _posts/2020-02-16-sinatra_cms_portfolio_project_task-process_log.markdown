@@ -34,4 +34,5 @@ Last, the user can only modify their own content through the use of the helper m
 
 [Project Repo](https://github.com/SantiagoSalazarPavajeau/TASK-PROCESS-LOG/tree/master/app/views/global_processes)
 
+[Video Walkthrough](https://youtu.be/YbptjVShuwA)
 
