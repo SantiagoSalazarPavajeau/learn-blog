@@ -1,11 +1,11 @@
 # Site settings
 author: Santiago Salazar Pavajeau
-title: Flatiron Projects
+title: Santiago's Projects Blog 
 header-img: img/home-bg.png
 email: santiago.s.pavajeau@gmail.com
 copyright_name: Santiago Salazar Pavajeau
 description: > # this means to ignore newlines until "baseurl:"
-  Santiago
+  Software Engineering - Ruby on Rails - Flatiron School
 baseurl: "" # the subpath of your site, e.g. /blog
 twitter_username: 
 github_username:  SantiagoSalazarPavajeau
