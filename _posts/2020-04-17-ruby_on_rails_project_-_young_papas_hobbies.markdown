@@ -6,9 +6,9 @@ permalink:  ruby_on_rails_project_-_young_papas_hobbies
 ---
 
 
-This project is an oportunity to work with the amazing framework which is Ruby on Rails but also, to build a tool for young fathers like me. So my project is meant to allow young fathers to bring something good out of a challenging experience especially at a young age. They can document their hobbies and build thoughtfull projects.
+This project is an oportunity to work with the amazing framework which is Ruby on Rails but also, to build a tool for young fathers like me. So my project is meant to allow young fathers to bring something good out of a challenging experience especially at a young age. They can document their hobbies and build thoughtfull projects. My past projects were related to [business management](https://santiagosalazarpavajeau.github.io/sinatra_cms_portfolio_project_task-process_log) and [finance](https://santiagosalazarpavajeau.github.io/financial_analysis_cli) so choosing this topic was refreshing.
 
-I had my daughter when I was 19 years old and so its been 10 years. So sometimes I wish I could add being a father to my CV, but all this struggle makes me feel very lucky to finally have found coding as a career.
+I had my daughter when I was 19 years old and so its been 10 years. So sometimes I wish I could add being a father to my CV, but in the end, all this struggle makes me feel very lucky to have finally found a solid path to my dream career in technology.
 
 We have always heard the saying "there is no manual for being a parent", to this I say there is no manual for most things. But if we create the manual ourselves and build knowledge, hopefully the saying will change to "we build the manual for being a parent" and so I hope this web app reflects that intention developing the knowledge and those skills of learning to solve problems and make clear things that were once vague: both problems and solutions, and at the same time have fun at it.
 
@@ -33,7 +33,7 @@ I also added a class model method using some ActiveRecord AREL library methods t
 class Project
 
        def self.count_by_user
-		             all.group(:user_id).count
+		          all.group(:user_id).count
        end
 
 end
@@ -41,7 +41,7 @@ end
 class User
 
         def self.most_active
-                  where("id = #{Project.count_by_user.sort_by{|k,v| [-v, k]}.first.first}")
+                where("id = #{Project.count_by_user.sort_by{|k,v| [-v, k]}.first.first}")
         end
 
 end
@@ -52,7 +52,7 @@ To break this down a little bit, on the *User.most_active* method I reference th
 
 ```
        def self.count_by_user
-		             all.group(:user_id).count
+		           all.group(:user_id).count
        end
 			 
 			 returns (e.g)
