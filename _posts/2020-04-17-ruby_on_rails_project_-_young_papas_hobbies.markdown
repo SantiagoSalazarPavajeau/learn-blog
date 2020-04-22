@@ -8,16 +8,16 @@ permalink:  ruby_on_rails_project_-_young_papas_hobbies
 
 This project is an oportunity to work with the amazing framework which is Ruby on Rails but also, to build a tool for young fathers like me. So my project is meant to allow young fathers to bring something good out of a challenging experience especially at a young age. They can document their hobbies and build thoughtfull projects.
 
-I had my daughter when I was 19 years old and so she is already 10 years old. And I had around ~5 extra years of experience with my siblings as the older brother since I was  around 15 (giving myself some extra credit). But to me being a father means giving everything that I have even if it means being constantly burned out.
+I had my daughter when I was 19 years old and so its been 10 years. So sometimes I wish I could add being a father to my CV, but all this struggle makes me feel very lucky to finally have found coding as a career.
 
-We have always heard the saying "there is no manual for being a parent", to this I say there is no manual for most things. But if we create the manual ourselves, hopefully the saying will change to "we build the manual for being a parent" and so I hope this web app reflects that intention of learning to solve problems and make clear things that were once vague and at the same time have fun at it.
+We have always heard the saying "there is no manual for being a parent", to this I say there is no manual for most things. But if we create the manual ourselves and build knowledge, hopefully the saying will change to "we build the manual for being a parent" and so I hope this web app reflects that intention developing the knowledge and those skills of learning to solve problems and make clear things that were once vague: both problems and solutions, and at the same time have fun at it.
 
-Now with the technical side the requirements included having Active Record associations between the models. In my case my models are User, Project and Hobby:
+Now with the technical side the requirements included having Active Record associations between the models. In this case the models are User, Project and Hobby:
 
 * Users have many Projects through Hobbies
 * Hobbies have many Projects through Users
 
-For the application to be more complete, projects would have many Project-Updates which is another model. 
+For the application to be more complete, projects would have many *Project Updates* which is another model. 
 
 Also developing create, update and destroy functionality within the Model View Conroller system. In this case the model with most functionality is Projects as it has all of the create, update and destroy options built.
 
@@ -76,5 +76,7 @@ I think using Rails helper methods had a learning curve (for example path helper
 
 Lastly an interesting factor that surprised me by the end of the project build was working with front end. I used materialize which I believe is a light version of bootstrap and getting familiar with CSS and HTML was very fast.
 
+[Github Repository](https://github.com/SantiagoSalazarPavajeau/young_papas_hobbies)
 
+[Video Walkthrough](https://youtu.be/1BLh3F6CTUY)
 
