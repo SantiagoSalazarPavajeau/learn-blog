@@ -162,19 +162,21 @@ So the hobby_title attribute is allowing for a attribute of another model to be 
 It has an attribute literally called hobby_title. But if we look at the project created by this *project_params* it is:
 
 ```
+class Project
 
-#<Project id: 16, title: "Steak", description: "best steak even in the world using wayuu steak", created_at: "2020-04-22 13:32:24", updated_at: "2020-04-22 13:32:24", user_id: 1, hobby_id: 7, image_url: nil>
+    def hobby_title=(title)
+        self.hobby = Hobby.find_or_create_by(title: title.strip)
+    end
 
+    def hobby_title
+        self.hobby ? self.hobby.title : nil
+    end
+
+end
 ```
 
-So a hobby_id is assigned by ActiveRecord using the *.create* method, if its an existing or new hobby. And also ActiveRecord finds or creates a new Hobby. So in reality we are skipping the *accepts_nested_attributes*, but when we use the attribute :hobby_title on the input tag, active record recieves it as a nested hash so it can create the hobby object.
+So in reality we are skipping the *accepts_nested_attributes*, but when we use the attribute :hobby_title on the input tag, the project method recieves it as an instance method so it can create the hobby object.
 
-```
-"hobby" {"title"=>"Cooking"}
-```
-
-
-Rails (through the form_for helper) and ActiveRecord (through the .create method) work together to create a hobby object associated to the project object and the project associated to the user with a single line of code, which is pretty impressive.
 
 Lastly an interesting factor that surprised me by the end of the project build was working with front end. I used materialize which I believe is a light version of bootstrap and getting familiar with CSS and HTML was very fast, and I ended up being very satisfied with my front end. Simple things like a Nav bar and buttons make everything much more organized and makes you look forward to React.
 
