@@ -21,9 +21,35 @@ For the application to be more complete, projects would have many *Project Updat
 
 Also developing create, update and destroy functionality within the Model View Conroller system. In this case the model with most functionality is Projects as it has all of the create, update and destroy options built.
 
-The app also has user sign-up and log-in capabilities and also login in from an outside provider which in my case I used Facebook. I used omniauth with tha Facebook API but omniauth supports Google, Github, etc. The user can create a profile, and also delete it through a destroy action. 
+The app also has user sign-up and log-in capabilities and also login in from an outside provider which in my case I used Facebook. 
+
+Through Facebook we obtiain a *auth* hash that works like the *params* hash. This *auth* can be used to create our user as it has name, email and image attributes sent over through Facebook. 
+
+```
+            @user = User.find_or_create_by(username: auth['info']['name'])
+            @user.password = SecureRandom.hex(9)
+						
+            if @user.save
+                session[:user_id] = @user.id
+                redirect_to @user
+            else
+                redirect_to root_path
+            end
+```
+
+There can be different ways to create the user however in my case I used the name attribute and also set a 9 digit random password so the new user passes the validations of has_secure_ password. Then I set the session to the id created by ActiveRecord. 
+
+I used omniauth with the Facebook API but omniauth supports Google, Github, etc. The user can create a profile, and also delete it through a destroy action. 
 
 On the other hand, the user can log in which is in fact a create action on the Session Controller, and log out which is a destroy action. The User and Session create and destroy actions are tightly related as they depend on each other. For example, when deleting a user from the database with the delete button it is necesary to also delete the user_id on the session hash, otherwise the session will remain for a non-existent user.
+
+```
+   def destroy
+        session.delete :user_id
+        @user.delete 
+        redirect_to root_path
+    end
+```
 
 The models have regular and custom validations on the models. The validations include prescence, uniqueness, and length for some of the attributes. This gives access to errors and allows the user to correct their when these errors are displayed on their form.
 
@@ -72,9 +98,85 @@ The *.most_active* model class method then finds the user with most projects and
 
 
 
-I think using Rails helper methods had a learning curve (for example path helpers) but being able to use things like form_for and resources allows to build a powerful app, and allows to see the big picture of building a web app. The main challenges of Rails magic, for me, are dealing with the params hashes so the data goes where it is supposed to and so building nested forms also has a learning curve but it works very well too. 
+I think using Rails helper methods had a learning curve (for example path helpers) but being able to use things like form_for and resources allows you to build a powerful app, and also to see the big picture of building a web app with less technical load. 
 
-Lastly an interesting factor that surprised me by the end of the project build was working with front end. I used materialize which I believe is a light version of bootstrap and getting familiar with CSS and HTML was very fast.
+For example, on my [Sinatra project building an embeded form](https://github.com/SantiagoSalazarPavajeau/TASK-PROCESS-LOG/blob/master/app/views/jobs/edit.erb) was not very DRY and the plain html form had to have all of the information regarding the external model in the form. However, on rails the form details are created for us by only referencing the external model. 
+
+```
+*/views/projects/_form.html.erb
+
+
+<%= form_for @project do |f|%>
+
+<%=f.label :hobby_title%>
+    <%= f.text_field :hobby_title, list: "hobbies_autocomplete" %>
+        <datalist id= "hobbies_autocomplete"> 
+            <%Hobby.all.each do |hobby|%>
+                <option value="<%= hobby.title%> ">
+            <%end%>
+        </datalist>
+				
+...
+				
+				 <%= f.submit%>
+
+<% end%>
+
+```
+
+In this case I am creating a Hobby object from a autocomplete list and the field gives you the option to choose from an existing Hobby or to create a new one, and the rails magic makes it work. The main challenges of Rails magic, for me, are dealing with the params hashes so the data goes where it is supposed to and building nested forms. On the embeded form_for example I pass a hobby title attribute to the params hash like so:
+
+```
+*/controllers/projects_controller.rb
+
+def create
+        @project = current_user.projects.create(project_params)
+end
+...
+
+def project_params
+        params.require(:project).permit(:title, :description, :hobby_title, :image)
+end
+
+```
+
+And rails generates the following form input tag:
+
+```
+
+<input list="hobbies_autocomplete" type="text" name="project[hobby_title]" id="project_hobby_title">
+
+<datalist id="hobbies_autocomplete"> 
+ <option value="..."> </option>
+ ...
+```
+
+So the hobby_title attribute is allowing for a attribute of another model to be sent through the params hash.  If we look at the params hash for a *project_params*:
+
+```
+
+{"title"=>"steak", "description"=>"best steak ever in the world using wayuu steak", "hobby_title"=>"Cooking"}
+
+```
+
+It has an attribute literally called hobby_title. But if we look at the project created by this *project_params* it is:
+
+```
+
+#<Project id: 16, title: "Steak", description: "best steak even in the world using wayuu steak", created_at: "2020-04-22 13:32:24", updated_at: "2020-04-22 13:32:24", user_id: 1, hobby_id: 7, image_url: nil>
+
+```
+
+So a hobby_id is assigned by ActiveRecord using the *.create* method, if its an existing or new hobby. And also ActiveRecord finds or creates a new Hobby. So in reality we are skipping the *accepts_nested_attributes*, but when we use the attribute :hobby_title on the input tag, active record recieves it as a nested hash so it can create the hobby object.
+
+```
+"hobby" {"title"=>"Cooking"}
+```
+
+
+Rails (through the form_for helper) and ActiveRecord (through the .create method) work together to create a hobby object associated to the project object and the project associated to the user with a single line of code, which is pretty impressive.
+
+Lastly an interesting factor that surprised me by the end of the project build was working with front end. I used materialize which I believe is a light version of bootstrap and getting familiar with CSS and HTML was very fast, and I ended up being very satisfied with my front end. Simple things like a Nav bar and buttons make everything much more organized and makes you look forward to React.
 
 [Github Repository](https://github.com/SantiagoSalazarPavajeau/young_papas_hobbies)
 
