@@ -32,7 +32,7 @@ My belongs to resource that has full CRUD functionality is *GlobalProcess*,  and
 
 Last, the user can only modify their own content through the use of the helper methods *logged_in?* and *current_user*, which only allow entry to these views when the user is in the session or in other words logged in.
 
-[Project Repo](https://github.com/SantiagoSalazarPavajeau/TASK-PROCESS-LOG/tree/master/app/views/global_processes)
+[Project Repo](https://github.com/SantiagoSalazarPavajeau/TASK-PROCESS-LOG)
 
 [Video Walkthrough](https://youtu.be/YbptjVShuwA)
 
