@@ -6,7 +6,7 @@ permalink:  ruby_on_rails_project_-_young_papas_hobbies
 ---
 
 
-This project is an oportunity to work with the amazing framework which is Ruby on Rails but also, to build a tool for young fathers like me. So my project is meant to allow young fathers to bring something good out of a challenging experience especially at a young age. They can document their hobbies and build thoughtfull projects. My past projects were related to documenting [Tasks-Processes](https://santiagosalazarpavajeau.github.io/sinatra_cms_portfolio_project_task-process_log) and a [financial analysis CLI](https://santiagosalazarpavajeau.github.io/financial_analysis_cli) so choosing this topic was diferent and refreshing.
+This project is an oportunity to work with the amazing framework which is Ruby on Rails but also, to build a tool for young fathers like me. So my project is meant to allow young fathers to bring something good out of a challenging experience especially at a young age. They can document their hobbies and build thoughtfull projects. My past projects were related to documenting [Tasks-Processes](https://santiagosalazarpavajeau.github.io/sinatra_cms_portfolio_project_task-process_log) and a [financial analysis CLI](https://santiagosalazarpavajeau.github.io/financial_analysis_cli) so choosing this topic was diferent and refreshing because is something that relates more to everyday life.
 
 I had my daughter when I was 19 years old and so its been 10 years. So sometimes I wish I could add being a father to my CV, but in the end, all this struggle makes me feel very lucky to have finally found a solid path to my dream career in technology.
 
