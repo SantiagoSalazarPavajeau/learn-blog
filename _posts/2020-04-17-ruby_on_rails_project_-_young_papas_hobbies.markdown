@@ -82,7 +82,7 @@ credits to: Dakota Martinez for the tip!
 After this my objects contained a new attribute name projects_count, that is updated every time the user creates a new project on the app.
 
 ```
-#<User id: 1, username: "SantiSalazar", password_digest: [FILTERED], bio: "Father at 19 years old.", created_at: "2020-04-11 17:43:46", updated_at: "2020-04-11 17:43:46", email: "santisalazar@yph.com", uid: nil, projects_count: 4>
+#<User id: 1, username: "SantiSalazar", password_digest: [FILTERED], bio: "Father at 19 years old...Turned Software Developer", created_at: "2020-04-11 17:43:46", updated_at: "2020-04-11 17:43:46", email: "santisalazar@yph.com", uid: nil, projects_count: 4>
 ```
 
 
