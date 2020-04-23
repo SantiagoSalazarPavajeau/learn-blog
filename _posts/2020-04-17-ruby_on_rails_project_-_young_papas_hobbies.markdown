@@ -53,49 +53,37 @@ On the other hand, the user can log in which is in fact a create action on the S
 
 The models have regular and custom validations on the models. The validations include prescence, uniqueness, and length for some of the attributes. This gives access to errors and allows the user to correct their when these errors are displayed on their form.
 
-I also added a class model method using some ActiveRecord AREL library methods to access the database quickly. This method allows for the most active user or user with the most posts to be returned. 
+I also added a class model method using some ActiveRecord AREL library methods to access the database quickly. This method allows for the top 3 most active users to be returned. 
+
+To get this working I used the *count cache* functionality which requires you to add a new column on the database you want to implement it and so you start by adding a count cache to the model being counted:
 
 ```
-class Project
-
-       def self.count_by_user
-		          all.group(:user_id).count
-       end
-
+class Project < ApplicationRecord
+    belongs_to :user, counter_cache: true
 end
+```
 
-class User
+Then I ran the migration:
 
-        def self.most_active
-                where("id = #{Project.count_by_user.sort_by{|k,v| [-v, k]}.first.first}")
-        end
+```
+rails g migration add_projects_counter_cache_to_users projects_count:integer
+```
 
+And reset the counter in rails console in order to evade dropping my database.
+
+```
+User.all.each do |user|
+  User.reset_counters(user.id, :projects)
 end
-
 ```
 
-To break this down a little bit, on the *User.most_active* method I reference the *Project.count_by_user*  method. So the *.count_by_user* method takes all the projects and returns each user_id and how many times it was found in the database. So it returns something of an array of arrays with two numbers the user id and the count.
+credits to: Dakota Martinez for the tip!
+
+After this my objects contained a new attribute name projects_count, that is updated every time the user creates a new project on the app.
 
 ```
-       def self.count_by_user
-		           all.group(:user_id).count
-       end
-			 
-			 returns (e.g)
-			 
-   [ [ 1 ,  3 ] ,   [ 2 ,  5 ] ]  # where the key is the user_id and the value is the count
+#<User id: 1, username: "SantiSalazar", password_digest: [FILTERED], bio: "Father at 19 years old.", created_at: "2020-04-11 17:43:46", updated_at: "2020-04-11 17:43:46", email: "santisalazar@yph.com", uid: nil, projects_count: 4>
 ```
-
-The *.most_active* model class method then finds the user with most projects and returns its object. So we take the count by user array and sort it in descending order of the values so the user with most projects is at the top of the list. Then we have to access the first key value pair and also access the user_id with most projects which is the first value in the array.  With this user_id we can use the *.where* Arel to retrieve the most_active user.
-
-```
-
-        def self.most_active
-                  where("id = #{Project.count_by_user.sort_by{|k,v| [-v, k]}.first.first}")
-        end
-
-```
-
 
 
 I think using Rails helper methods had a learning curve (for example path helpers) but being able to use things like form_for and resources allows you to build a powerful app, and also to see the big picture of building a web app with less technical load. 
