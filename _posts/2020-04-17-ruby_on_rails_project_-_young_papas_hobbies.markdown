@@ -10,7 +10,7 @@ This project is an opportunity to work with the amazing framework which is Ruby 
 
 I had my daughter when I was 19 years old and so its been 10 years. So sometimes I wish I could add being a father to my CV, but in the end, all this struggle makes me feel very lucky to have finally found a solid path to my dream career in technology.
 
-We have always heard the saying "there is no manual for being a parent", to this I say there is no manual for most things. But if we create the manual ourselves and build knowledge, hopefully the saying will change to "we build the manual for being a parent" and so I hope this web app reflects that intention developing the knowledge and those skills of learning to solve problems and make clear things that were once vague: both problems and solutions, and at the same time have fun at it.
+We have always heard the saying "there is no manual for being a parent", to this I say there is no manual for most things. But if we create the manual ourselves and build knowledge, hopefully the saying will change to "we build the manual for being a parent" and so I hope this web app reflects that intention developing the knowledge and those skills of learning to solve problems and make clear things that were once vague (describing problems and solutions), and at the same time have fun at it.
 
 Now with the technical side the requirements included having Active Record associations between the models. In this case the models are User, Project and Hobby:
 
