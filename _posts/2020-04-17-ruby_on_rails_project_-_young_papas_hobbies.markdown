@@ -166,8 +166,6 @@ end
 So in reality we are skipping the *accepts_nested_attributes*, but when we use the attribute :hobby_title on the input tag, the project method recieves it as an instance method so it can create the hobby object.
 
 
-Lastly an interesting factor that surprised me by the end of the project build was working with front end. I used materialize which I believe is a light version of bootstrap and getting familiar with CSS and HTML was very fast, and I ended up being very satisfied with my front end. Simple things like a Nav bar and buttons make everything much more organized and makes you look forward to React.
-
 [Github Repository](https://github.com/SantiagoSalazarPavajeau/young_papas_hobbies)
 
 [Video Walkthrough](https://youtu.be/1BLh3F6CTUY)
