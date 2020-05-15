@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "From Ruby to Javascript"
-date:       2020-05-15 13:27:08 +0000
+date:       2020-05-15 09:27:09 -0400
 permalink:  from_ruby_to_javascript
 ---
 
@@ -24,7 +24,7 @@ collection.forEach(function(element){
  
  While Ruby has only a block that will be executed in the iteration, Javascript makes an explicit call to a function. Ruby uses the puts method to print a string to the terminal and Javascript uses the console.log to print to the console on the browser. 
  
-Also Ruby uses *binding.pry* as a debugger, which stops the code in the scope of the execution with the methods and variables defined and available to access in the terminal, while Javascript uses *debbuger* which sends you to the browser where almost the same usability can be found (mostly the downside being that the console in the browser can be by default smaller than a terminal). But in the end it is a matter of getting used to change and learning.
+Also Ruby uses *binding.pry* as a debugger, which stops the code in the scope of the execution with the methods and variables defined and available to access in the terminal, while Javascript uses *debbuger* which sends you to the browser where almost the same usability can be found (mostly the downside being that the console in the browser can be by default smaller than a terminal). Also in the learn.co platform when tests are ran with *learn --f-f* Javascript does not exit the test at the first failure but keeps running all the tests. But in the end it is a matter of getting used to change and learning.
 
 Other big difference that Javascript brings is that many of the built-in functional methods may be limited or difficult to implement but with libraries like [ramda](https://ramdajs.com/) the methods in Javascript can become similar in simplicity to those found in Ruby. 
 
