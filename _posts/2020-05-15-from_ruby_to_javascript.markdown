@@ -1,12 +1,18 @@
 ---
 layout: post
-title:      "From Ruby to Javascript"
+title:      "From Ruby on Rails to Javascript"
 date:       2020-05-15 09:27:09 -0400
 permalink:  from_ruby_to_javascript
 ---
 
 
-Learning Ruby as a first language spoils you in a sense because it is really nice and simple. There are many built in methods that will allow you to do things easily like the .each method which is almost equivalent to a .forEach in Javascript.
+This project is meant to be a fun web application that lets the user "jam" and create simple songs with a few clicks. It allows to add chords to a track that plays a beat. The variety of chords allows you to play almost any chord progression. It uses samples from the minilogue XD for the chords. These sounds are stored in the local directory, and they are accessed through an *audio* html tag. We create the audio tags and accompanying buttons to play the sounds, by using a Javascript class called *Chord*. This class creates all the functionality of the audios, including playing the sounds on a click event, adding the sound to the track and removing the sounds from the track. 
+
+All this functionality is done through the ability of JS to *manipulate the DOM*  (the web page's behavior).
+
+## Transitioning from Ruby to JS
+
+Learning Ruby as a first language spoils you in a sense because it is really simple. There are many built in methods that will allow you to do things easily like the .each method which is almost equivalent to a .forEach in Javascript.
 
 ```
 # Ruby:
