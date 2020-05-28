@@ -10,6 +10,16 @@ This project is meant to be a fun web application that lets the user "jam" and c
 
 All this functionality is done through the ability of JS to *manipulate the DOM*  (the web page's behavior).
 
+## Organizing a Javascript App
+
+In rails applications are organized in a very clear way with controllers, router, models, views. However, when we work with plain Javascript for the front end of our app we have to create our own design to keep our app organized. For this we can use Modules to create different classes that have specific responsabilities. In my case, I saw some of the opportunites to separate concerns later on in my project but ended up choosing the following:
+
+* App: connects the modules.
+* Adapter: defines all the fetch/AJAX requests.
+* UserInterface: manipulates the DOM.
+* Song: creates song object.
+* Chord: creates chord object.
+
 ## Transitioning from Ruby to JS
 
 Learning Ruby as a first language spoils you in a sense because it is really simple. There are many built in methods that will allow you to do things easily like the .each method which is almost equivalent to a .forEach in Javascript.
