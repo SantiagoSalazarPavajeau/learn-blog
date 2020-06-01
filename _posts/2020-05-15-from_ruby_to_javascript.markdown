@@ -6,7 +6,7 @@ permalink:  from_ruby_to_javascript
 ---
 
 
-This project is meant to be a fun web application that lets the user "jam" and create simple songs with a few clicks. It allows to add chords to a track that plays a beat. The variety of chords allows you to play almost any chord progression. It uses samples from the minilogue XD for the chords. These sounds are stored in the local directory, and they are accessed through an *audio* html tag. We create the audio tags and accompanying buttons to play the sounds, by using a Javascript class called *Chord*. This class creates all the functionality of the audios, including playing the sounds on a click event, adding the sound to the track and removing the sounds from the track. 
+This project is meant to be a music web application that lets the user "jam" and create simple songs with a few clicks. It allows to add chords to a track that plays a beat. The variety of chords allows you to play almost any chord progression.  These sounds are stored in the local directory, and they are accessed through an *audio* html tag. We create the audio tags and accompanying buttons to play the sounds, by using a Javascript class called *Chord*. This class creates all the functionality of the audios, including playing the sounds on a click event, adding the sound to the track and removing the sounds from the track. 
 
 All this functionality is done through the ability of JS to *manipulate the DOM*  (the web page's behavior).
 
@@ -14,11 +14,12 @@ All this functionality is done through the ability of JS to *manipulate the DOM*
 
 In rails applications are organized in a very clear way with controllers, router, models, views. However, when we work with plain Javascript for the front end of our app we have to create our own design to keep our app organized. For this we can use Modules to create different classes that have specific responsabilities. In my case, I saw some of the opportunites to separate concerns later on in my project but ended up choosing the following:
 
-* App: connects the modules.
-* Adapter: defines all the fetch/AJAX requests.
-* UserInterface: manipulates the DOM.
+* App: launches the code.
+* Adapter: defines all the fetch/AJAX requests and manipulates the DOM.
 * Song: creates song object.
 * Chord: creates chord object.
+
+I tried to further separate the responsibilities of the Adapter class into a new "UI" class that exclusively manipulated the DOM, however while this works to get data from the database into the front end it is more complicated to use the same lgic when sending POST requests. I found myself having to initialize a request from "UI" class but would have to set a new Adapter on the constructor and then on the constructor set a new UI class. This generates an infinite loop and a stack overload. Thus the Adapter class by itself is able to handle all of the requests and DOM manipulation with methods in its own scope/context.
 
 ## Transitioning from Ruby to JS
 
