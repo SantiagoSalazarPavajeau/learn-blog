@@ -25,15 +25,92 @@ I tried to further separate the responsibilities of the Adapter class into a new
 
 ### Interaction between modules
 
-In a nutshell, the App class declares the Adapder and the Adapter handles all of the rest of the methods to load the app like loading the songs from the database, and the chords. New chord and song objects are created with the response from fetch. 
+In a nutshell, the App class declares the Adapter which handles all of the rest of the methods to load the app like loading the songs from the database, and the chords. So new chord and song objects are created with the response from fetch. 
 
-The songs from the database are created in the front end by passing the json into a the renderSongButton method, which creates a button for the song that plays all of the chords belonging to the song in sequence. 
+The songs from the database are created in the front end by passing the json into a the renderSongButton method, which creates a button for the song that plays all of the chords belonging to the song when clicking on it. 
 
 Then, a new song object is created on load for the user to interact with and save into the database.
 
 ## Editing the song in the track card
 
-So the goal was to be able to edit a song in the track card by adding/removing chords. This was a very challenging issue because of the structure of the chord and song objects. Both classes have to deal with audio html tags in order to play sound, on top of their other attributes.
+So the goal was to be able to edit a song in the track card by adding/removing chords. This was a very challenging issue because of the structure of the chord and song objects. Initially I considered creating new .wav files to create a song but to acheive the editing ended up using an array of html audio tags as the song. 
+
+This brings a new level of complexity because both classes have to deal with audio html tags in order to play sound, on top of their other attributes. And in a song there is a chords attribute that contains the chord objects but also the audios attribute which is a collection of html tags that is iterated over in order to play each audio.
+
+A refactoring could be to only access the audios from the chord objects in the song, so that there are no audios on the song but only chord objects.
+
+The process to delete a chord from a song involved creating a random id property called *edit_id* on the chords so that the audios on the track could be filtered by that edit_id. This attribute is assigned on the creation of a chord object, and its also assigned to the corresponsing audio html tag. For the audios in a song to have the same edit_id than the chords in the song they have to be created simultaneusly, however I encountered a bug where I was not creating them in the same instance so I was getting an edit_id that was not the same. So my filter method was not finding the correct id to delete the chord and audio from the song.
+
+```
+chordButtonTrack.addEventListener("click", (e)=>{
+             
+ this.newSong.chords = this.newSong.chords.filter((chord)=>{return chord.edit_id !== newSongChord.edit_id})
+ this.newSong.audios  = this.newSong.audios.filter((audio)=> {return parseInt(audio.id) !== newSongChord.edit_id})
+ newSongChord.audio().pause()
+ newSongChord.audio().currentTime = 0
+ chordButtonTrack.parentNode.removeChild(chordButtonTrack)
+                
+})
+```
+### Playing an array of html audio tags
+
+This was one of the most unexpected issues of the project, I thought it was going to be straight forward playing one audio after another. However the complexity starts at the fact that the song tempo (beat) and the duration of the audio files have to be in sync. Which is an issue mostly outside javascript when just using external audio files. For that reason I created some chord audio files that were at the synchronized with the beat. 
+
+As far as "playing one audio after another" on the audios array in a song, there is a couple of ways to accomplish this, the two main basic methods I found were to with either an "onended" event listener or with a setInterval calback. 
+
+I was able to implement playing the audios on sequence with the setInterval option by creating a callback that would play the next audio every 2 seconds. Since the chords might need to be replayed in the same song, I pause the audios and reset them to the start. On the other hand, to modify the length of the beat and the song while its edited we create a condition to stop the intervals when we finish playing all the audios (array) in the song.
+
+```
+playSong(song) {
+        
+        let allAudios = document.querySelectorAll("audio")
+            
+        for(let audio of allAudios){
+            audio.pause()
+            audio.currentTime = 0
+        }
+        
+        let playAudio = function(index){
+                            return function(){
+                                if (index < song.audios.length -1 ){
+                                    song.audios[index].currentTime = 0
+                                    index += 1
+                                    song.audios[index].play()
+                                } else{
+                                    clearInterval(playInterval)
+                                    clearInterval(stopInterval)
+                                    
+                                    song.beat.pause()
+                                    song.beat.currentTime = 0;
+                              
+                                }
+                                
+                            }
+                        }
+            
+        let stopAudio = function(index){
+                            return function(){
+                                if (index < song.audios.length){
+                                    song.audios[index].pause()
+                                    song.audios[index].currentTime = 0;
+                                
+                                } 
+                                
+                            }
+                        }
+        song.audios[0].play()
+        song.beat.play()
+        
+        let i = 0
+        const playInterval = setInterval(playAudio(i), 2000)
+        const stopInterval = setInterval(stopAudio(i), 1500)
+        
+    }
+```
+
+
+
+
 
 ## Transitioning from Ruby to JS
 
