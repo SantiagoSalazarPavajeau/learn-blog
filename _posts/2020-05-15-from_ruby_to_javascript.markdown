@@ -108,6 +108,8 @@ playSong(song) {
     }
 ```
 
+After having a functioning MVP with plain JS, it is worth mentioning the standard libraries for music apps would be [ Web Audio API](https://en.wikipedia.org/wiki/HTML5_audio#Web_Audio_API_and_MediaStream_Processing_API), [WebMIDI](https://www.w3.org/TR/webmidi/), and [Tone.js](https://tonejs.github.io/.).
+
 
 
 
