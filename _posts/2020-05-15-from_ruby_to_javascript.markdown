@@ -6,7 +6,7 @@ permalink:  from_ruby_to_javascript
 ---
 
 
-This project is meant to be a music web application that lets the user "jam" and create simple songs with a few clicks. It allows to add chords to a track that plays a beat. The variety of chords allows you to play almost any chord progression.  These sounds are stored in the local directory, and they are accessed through an *audio* html tag. We create the audio tags and accompanying buttons to play the sounds, by using a Javascript class called *Chord*. This class creates all the functionality of the audios, including playing the sounds on a click event, adding the sound to the track and removing the sounds from the track. 
+This project is meant to be a music web application that lets the user "jam" and create simple songs with a few clicks. It allows to add chords to a track and plays a beat. The variety of chords allows you to play almost any chord progression.  These sounds are stored in the local directory, and they are accessed through an *audio* html tag. We create the audio tags and accompanying buttons to play the sounds, by using a Javascript class called *Chord*. This class creates all the functionality of the audios, including playing the sounds on a click event, adding the sound to the track and removing the sounds from the track. 
 
 All this functionality is done through the ability of JS to *manipulate the DOM*  (the web page's behavior).
 
@@ -19,7 +19,21 @@ In rails applications are organized in a very clear way with controllers, router
 * Song: creates song object.
 * Chord: creates chord object.
 
-I tried to further separate the responsibilities of the Adapter class into a new "UI" class that exclusively manipulated the DOM, however while this works to get data from the database into the front end it is more complicated to use the same lgic when sending POST requests. I found myself having to initialize a request from "UI" class but would have to set a new Adapter on the constructor and then on the constructor set a new UI class. This generates an infinite loop and a stack overload. Thus the Adapter class by itself is able to handle all of the requests and DOM manipulation with methods in its own scope/context.
+### Troubleshooting accesing contexts of different classes
+
+I tried to further separate the responsibilities of the Adapter class into a new "UI" class that exclusively manipulated the DOM, however while this works to get data from the database into the front end it is more complicated to use the same lgic when sending POST requests. I found myself having to initialize a request from "UI" class but would have to set a new Adapter on the constructor and then on the constructor set a new UI class. This generates an infinite loop and a stack overload. Thus my Adapter class by itself ended up having to handle all of the fetch requests and DOM manipulation with methods in its own scope/context.
+
+### Interaction between modules
+
+In a nutshell, the App class declares the Adapder and the Adapter handles all of the rest of the methods to load the app like loading the songs from the database, and the chords. New chord and song objects are created with the response from fetch. 
+
+The songs from the database are created in the front end by passing the json into a the renderSongButton method, which creates a button for the song that plays all of the chords belonging to the song in sequence. 
+
+Then, a new song object is created on load for the user to interact with and save into the database.
+
+## Editing the song in the track card
+
+So the goal was to be able to edit a song in the track card by adding/removing chords. This was a very challenging issue because of the structure of the chord and song objects. Both classes have to deal with audio html tags in order to play sound, on top of their other attributes.
 
 ## Transitioning from Ruby to JS
 
