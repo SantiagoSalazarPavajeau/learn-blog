@@ -5,6 +5,7 @@ date:       2020-05-15 09:27:09 -0400
 permalink:  from_ruby_to_javascript
 ---
 
+This project was born after I was having again a hard time finding an idea that I liked. First I was considering another blog like app like my previous project [Young Papas Hobbies](https://santiagosalazarpavajeau.github.io/ruby_on_rails_project_-_young_papas_hobbies), however after seeing other projects in Javascript and what it could be done compared to Rails (like games and interactive single page applications), I went for a music app. Also music is a topic I am passionate about since I have been involved in music since I have memory due to my grandmother being a violin player and teacher. Also I recorded an album by myself when I was in highschool around 10 years ago, and I have been gearing up with some music gear lately. Specially proud of my analog synth, which made the chord sounds for this app, I also have been very curious about chord progessions lately which is the reason why I chose to create this specific app.
 
 This project is meant to be a music web application that lets the user "jam" and create simple songs with a few clicks. It allows to add chords to a track and plays a beat. The variety of chords allows you to play almost any chord progression.  These sounds are stored in the local directory, and they are accessed through an *audio* html tag. We create the audio tags and accompanying buttons to play the sounds, by using a Javascript class called *Chord*. This class creates all the functionality of the audios, including playing the sounds on a click event, adding the sound to the track and removing the sounds from the track. 
 
@@ -116,20 +117,32 @@ After having a functioning MVP with plain JS, it is worth mentioning the standar
 
 ## Transitioning from Ruby to JS
 
-Learning Ruby as a first language spoils you in a sense because it is really simple. There are many built in methods that will allow you to do things easily like the .each method which is almost equivalent to a .forEach in Javascript.
+I just wanted to mention some of the basics of moving to JS. Learning Ruby as a first language spoils you in a sense because it is really simple. There are many built in methods that will allow you to do things easily like the .each method which is almost equivalent to a .forEach in Javascript.
 
 ```
 # Ruby:
 
 collection.each do |element|
- puts "Hello!"
+
 end
 
 // Javascript
 
 collection.forEach(function(element){
- console.log("Hello!")
 })
+
+also for specific uses:
+
+collection.map(function(element){
+})
+
+collection.reduce(function(element){
+}) // to return one aggregated value
+
+collection.filter(function(element){
+}) // to return elements of our choice
+
+
 ```
  
  While Ruby has only a block that will be executed in the iteration, Javascript makes an explicit call to a function. Ruby uses the puts method to print a string to the terminal and Javascript uses the console.log to print to the console on the browser. 
