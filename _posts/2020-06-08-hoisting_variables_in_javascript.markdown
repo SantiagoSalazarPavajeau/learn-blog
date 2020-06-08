@@ -1,6 +1,6 @@
 ---
 layout: post
-title:      "The results of using var in Javascript"
+title:      "Delving into var in Javascript"
 date:       2020-06-08 17:17:53 -0400
 permalink:  hoisting_variables_in_javascript
 ---
@@ -87,7 +87,7 @@ function variables( ){
 console.log(a) // returns 1
 ```
 
-So in conclusion, when we are trying to debug code that uses **var** to declare variables, we need to take into account that the behavior of hoisting and scoping of this variables will be different, but if we become familiar with some of this behavior it will not be unexpected.
+So in conclusion, when we are trying to debug code that uses **var** to declare and initialize variables, we need to take into account that the behavior of hoisting, scoping, etc. will not be the same as with **let** and **const**. And this is a powerful tool to have as a developer.
 
 
 Resources:
