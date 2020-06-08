@@ -229,9 +229,13 @@ saveSong(song){
 
 ```
 
+The AJAX call that I did not yet implement was an Edit. This would mean being able to load the songs from the server into the track for edit and I think it can be implemented doing some DOM manipulation making reference to the correct attributes on the Song class to load and PATCH the data.
+
 ## Conclusion
 
-This has been a very rewarding experience, and it has been fun. It was very interesting to have a working app and being able to deploy it to the web through [heroku and Github Pages](https://santiagosalazarpavajeau.github.io/chords_beats_frontend/).
+This has been a very rewarding experience, and it has been fun. Having an MVP makes me feel like I was able to build something from simple and smaller parts into something a little bit more complex that works, it almost feels like building a machine in your backyard workshop. In the end, it was very interesting to have a working app and being able to deploy it to the web through [heroku and Github Pages](https://santiagosalazarpavajeau.github.io/chords_beats_frontend/). 
+
+Also it was very challenging and I faced some stages where I was facing problems that were outside the scope of the Flatiron curriculum (e.g. playing audios). But it was very rewarding to find the solutions. Now what motivates me is to be able to build-up more on this app and optimize it with some external libraries, and iterate over the code in general to improve it.
 
 Github Repos:
 * [Front End](https://github.com/SantiagoSalazarPavajeau/chords_beats_frontend)
