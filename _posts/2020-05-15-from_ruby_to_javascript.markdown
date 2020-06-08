@@ -166,5 +166,5 @@ This has been a very rewarding experience, and it has been fun. It was very inte
 Github Repos:
 * [Front End](https://github.com/SantiagoSalazarPavajeau/chords_beats_frontend)
 * [Back End](https://github.com/SantiagoSalazarPavajeau/chords_beats_backend)
-* [Joined before Postgress implementation](https://github.com/SantiagoSalazarPavajeau/chords_and_beats)
+* [Original before Postgress implementation](https://github.com/SantiagoSalazarPavajeau/chords_and_beats)
 
