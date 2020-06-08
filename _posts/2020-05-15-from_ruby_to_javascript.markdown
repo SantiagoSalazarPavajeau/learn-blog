@@ -159,6 +159,76 @@ Ruby is a great language to start programming and get a grasp of concepts withou
 
 Concepts that loosely translate from Ruby to Javascript also include .self (this), object attribute accessors (constructors) and many more. However, in the end they may act different and so it is important to settle into new concepts and syntax properly.
 
+### Connection between Rails API and a Javascript front end
+
+My Ruby on Rails backend for this project was fairly simple, with the Chord and Song classes being parallel to the front end. I render json for each song and use the Fast Json API serializer to send the nested chord instances to the Adapter on the JS side. The serializer class to produce our service with our data looks like this:
+
+```
+class SongSerializer
+  include FastJsonapi::ObjectSerializer
+  attributes :name, :chords
+
+  def chords
+    object.chords
+  end
+end
+
+```
+
+The chords method, allows for our chords attribute on the serializer to access all the chord objects (and their data structure) belonging to the song.
+
+Also to create a new song I recieve a JSON from the Adapter with the song name and chords and save the song and its chord instances into the database using the params hash. The same process is applied to delete a song by using the params hash to find the song and delete each of its chord instances from the database. The difference between a POST and DELETE request is that the latter does not need a body paramaterer in the configuration object, only a reference to the song id on the URL where our request is directed to, so the id can be accessed from the params hash on the Rails destoy action in the Song controller.
+
+```
+saveSong(song){ 
+        let postObj = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                song: {
+                    name: song.name, // returns name string from input
+                    chords_attributes: song.chords //returns array of chord objects //need only an array of files
+                }
+            })
+        }
+        return fetch(`${this.baseURL}/songs`, postObj)
+            .then(resp => resp.json())
+            .then(json=> {
+                let chordObjs=[]
+
+                for(let chord of json.data.attributes.chords){
+                    chordObjs.push(new Chord(chord.name, chord.file))
+                }
+                let song = new Song(json.data.attributes.name, chordObjs, json.data.id)
+                this.allSongs.push(song)
+
+                this.renderSongButton(song)
+            }) 
+            .catch(error => alert(`Cant render new song and ${error}`))
+    }
+		
+		deleteSong(song){
+        let deleteObj = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+  
+        }
+        return fetch(`${this.baseURL}/songs/${song.id}`, deleteObj)
+            .then(resp => resp.json())
+            .then(()=> {
+                alert("song deleted")
+            }) 
+            .catch(error => alert(`Couldn't delete song and ${error}`))
+    }
+
+```
+
 ## Conclusion
 
 This has been a very rewarding experience, and it has been fun. It was very interesting to have a working app and being able to deploy it to the web through [heroku and Github Pages](https://santiagosalazarpavajeau.github.io/chords_beats_frontend/).
