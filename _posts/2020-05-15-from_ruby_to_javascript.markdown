@@ -36,13 +36,17 @@ Then, a new song object is created on load for the user to interact with and sav
 
 The chords are pushed into a song into three Song methods, chords, to hold all the Chord objects, audios to store the chord audios, and files, to reference the .wav files on the front end directory.
 
-## Editing the song in the track card
+## Main Adapter Methods:
+
+### Editing the song in the track card
 
 So the goal was to be able to edit a song in the track card by adding/removing chords. This was a very challenging issue because of the structure of the chord and song objects. Initially I considered joining the chord .wav sounds into a new .wav file to create a song, however, I found I could use collections of chords to make the song and edit the collections to acheive the editing of the song. Each chord has an "audio" HTML tag that can be played on the browser.
 
 This brought a new level of complexity because both classes had to deal with audio html tags in order to play sound, on top of their other attributes.
 
-The process to delete a chord from a song involved creating a random id property called *edit_id* on the chords so that the audios on the track could be filtered by that edit_id. This attribute is assigned on the creation of a chord object, and its also assigned to the corresponsing audio html tag. For the audios in a song to have the same edit_id than the chords in the song they have to be created simultaneusly, however I encountered a bug where I was not creating them in the same instance so I was getting an edit_id that was not the same. So my filter method was not finding the correct id to delete the chord and audio from the song.
+The process to delete a chord from a song involved creating a random id property called *edit_id* on the chords so that the audios on the track could be filtered by that edit_id. This attribute is assigned on the creation of a chord object, and its also assigned to the corresponsing audio html tag. For the audios in a song to have the same edit_id than the chords in the song they have to be created simultaneusly, however I encountered a bug where I was not creating them in the same instance so I was getting an edit_id that was not the same on the audio tag and the chord attribute. So my filter method was not finding the correct id to delete the chord and audio from the song.
+
+However, after making sure I wasn't creating two different random numbers when they needed to be the same the following method acheived the correct editing of the song:
 
 ```
 chordButtonTrack.addEventListener("click", (e)=>{
@@ -59,12 +63,12 @@ chordButtonTrack.addEventListener("click", (e)=>{
 
 This was one of the most unexpected issues of the project, I thought it was going to be straight forward playing one audio after another. However the complexity starts at the fact that the song tempo (beat) and the duration of the audio files have to be in sync. Which is an issue mostly outside javascript when just using external audio files. For that reason I created some chord audio files that were at the synchronized with the beat. 
 
-As far as "playing one audio after another" on the audios array in a song, there is a couple of ways to accomplish this, the two main basic methods I found were to with either an "onended" event listener or with a setInterval calback. 
+As far as "playing one audio after another" on the audios array in a song, there is a couple of ways to accomplish this, the two main basic methods I found were to with either an "onended" event listener or with a setInterval callback. 
 
-I was able to implement playing the audios on sequence with the setInterval option by creating a callback that would play the next audio every 2 seconds. Since the chords might need to be replayed in the same song, I pause the audios and reset them to the start. On the other hand, to modify the length of the beat and the song while its edited we create a condition to stop the intervals when we finish playing all the audios (array) in the song.
+I was able to implement playing the audios on sequence with the setInterval option by creating a callback that would play the next audio every 2 seconds. Since the chords might need to be replayed in the same song, I pause the audios and reset them to the start. Then beat audio stops and the interval is cleared when the index is greater than the number of chords.
 
 ```
-playSong(song) {
+playSong(song){
         
         let allAudios = document.querySelectorAll("audio")
             
@@ -77,41 +81,39 @@ playSong(song) {
                             return function(){
                                 if (index < song.audios.length -1 ){
                                     song.audios[index].currentTime = 0
+                                    song.audios[index].pause()
                                     index += 1
                                     song.audios[index].play()
                                 } else{
                                     clearInterval(playInterval)
-                                    clearInterval(stopInterval)
                                     
                                     song.beat.pause()
                                     song.beat.currentTime = 0;
+                                    const songButtons = document.getElementsByClassName("button btn-dark song")
+                                    document.getElementById("play").disabled = false
+                                    for(let songButton of songButtons){
+                                        songButton.disabled = false
+                                    }
+                                    
+
                               
                                 }
                                 
                             }
                         }
             
-        let stopAudio = function(index){
-                            return function(){
-                                if (index < song.audios.length){
-                                    song.audios[index].pause()
-                                    song.audios[index].currentTime = 0;
-                                
-                                } 
-                                
-                            }
-                        }
+        
         song.audios[0].play()
         song.beat.play()
         
         let i = 0
         const playInterval = setInterval(playAudio(i), 2000)
-        const stopInterval = setInterval(stopAudio(i), 1500)
-        
+        this.intervals.push(playInterval)
+
     }
 ```
 
-After having a functioning MVP with plain JS, it is worth mentioning the standard libraries for music apps would be [ Web Audio API](https://en.wikipedia.org/wiki/HTML5_audio#Web_Audio_API_and_MediaStream_Processing_API), [WebMIDI](https://www.w3.org/TR/webmidi/), and [Tone.js](https://tonejs.github.io/.).
+After having a functioning but basic MVP with plain JS, it is worth mentioning the standard libraries for music apps would be [ Web Audio API](https://en.wikipedia.org/wiki/HTML5_audio#Web_Audio_API_and_MediaStream_Processing_API), [WebMIDI](https://www.w3.org/TR/webmidi/), and [Tone.js](https://tonejs.github.io/.).
 
 
 
@@ -119,7 +121,7 @@ After having a functioning MVP with plain JS, it is worth mentioning the standar
 
 ## Transitioning from Ruby to JS
 
-I just wanted to mention some of the basics of moving to JS. Learning Ruby as a first language spoils you in a sense because it is really simple. There are many built in methods that will allow you to do things easily like the .each method which is almost equivalent to a .forEach in Javascript.
+I just wanted to mention some of the basics of moving to JS. Learning Ruby as a first language spoils you in a sense because it is really simple. There are many built in methods that will allow you to do things easily like the .each method which is almost equivalent to a .forEach of .map in Javascript.
 
 ```
 # Ruby:
@@ -149,10 +151,20 @@ collection.filter(function(element){
  
  While Ruby has only a block that will be executed in the iteration, Javascript makes an explicit call to a function. Ruby uses the puts method to print a string to the terminal and Javascript uses the console.log to print to the console on the browser. 
  
-Also Ruby uses *binding.pry* as a debugger, which stops the code in the scope of the execution with the methods and variables defined and available to access in the terminal, while Javascript uses *debbuger* which sends you to the browser where almost the same usability can be found (mostly the downside being that the console in the browser can be by default smaller than a terminal). Also in the learn.co platform when tests are ran with *learn --f-f* Javascript does not exit the test at the first failure but keeps running all the tests. But in the end it is a matter of getting used to change and learning.
+Also Ruby uses *binding.pry* as a debugger, which stops the code in the scope of the execution with the methods and variables defined and available to access in the terminal, while Javascript uses *debbuger* which sends you to the browser where almost the same usability can be found (mostly the downside being that the console in the browser can be by default smaller than a terminal). Also in the learn.co platform when tests are ran with *learn --f-f* Javascript does not exit the test at the first failure but keeps running all the tests. But in the end it is a matter of getting used to the change and continously learning new ways.
 
 Other big difference that Javascript brings is that many of the built-in functional methods may be limited or difficult to implement but with libraries like [ramda](https://ramdajs.com/) the methods in Javascript can become similar in simplicity to those found in Ruby. 
 
-Ruby is a great language to start programming and get a grasp of concepts without having to have a deep knowledge of technical syntax other programming languages use. 
+Ruby is a great language to start programming and get a grasp of concepts without having to have a deep knowledge of technical syntax other programming languages use like memory management syntax or even curly braces.
 
-Concepts that loosely translate from Ruby to Javascript also include .self (this),  object attribute accessors (constructors) and many more. However, in the end they may act different and so it is important to settle into new concepts and syntax properly.
+Concepts that loosely translate from Ruby to Javascript also include .self (this), object attribute accessors (constructors) and many more. However, in the end they may act different and so it is important to settle into new concepts and syntax properly.
+
+## Conclusion
+
+This has been a very rewarding experience, and it has been fun. It was very interesting to have a working app and being able to deploy it to the web through [heroku and Github Pages](https://santiagosalazarpavajeau.github.io/chords_beats_frontend/).
+
+Github Repos:
+* [Front End](https://github.com/SantiagoSalazarPavajeau/chords_beats_frontend)
+* [Back End](https://github.com/SantiagoSalazarPavajeau/chords_beats_backend)
+* [Joined before Postgress implementation](https://github.com/SantiagoSalazarPavajeau/chords_and_beats)
+
