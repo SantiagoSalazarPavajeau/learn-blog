@@ -1,10 +1,11 @@
 ---
 layout: post
-title:      "Hoisting variables in Javascript"
-date:       2020-06-08 21:17:52 +0000
+title:      "The results of using var in Javascript"
+date:       2020-06-08 17:17:53 -0400
 permalink:  hoisting_variables_in_javascript
 ---
 
+## Hoisting
 
 Hoisting literally refers to the concept of raising or lifting something onto the top. In Javascript it has to do with the way variables and functions exist at a certain moment in the "running" of the code and how they are "raised" to the top of the code by the Javascript engine. However, this JavaScript behavior is quite unique and has some specific rules that need to be accounted for in order to understand how to correctly declare variables.
 
@@ -55,10 +56,50 @@ const a = "hello"
 
 Both will return a Reference Error because the declaration of the variable **a** is hoisted but its value is inaccesible since they are not being initialized with *undefined* like **var** does. So initializing these variables to "hello" after the console.log will indeed create an error.
 
+## Block Context
+
+As with the above examples declaring variables with **var** has a suboptimal behavior regarding block scope, in fact, **var** variables do not have block scope at all. If you analyze the code below, the expected normal scope behavior would be that the variables inside the if statement could not be accessed outside its block. This happens as expected when we use **let** and **const**. However, as we see the value of *a* is changed on by the block so this block does not create a limited scope or context for *a*.
+
+```
+function variables(){
+ var a = 1
+ let b = 2
+ const c = 3
+ 
+ if (true) {
+  var a = 4
+  let b = 5
+  const c = 6
+ }
+ return `${a} ${b} ${c}`
+} // "4 2 3" ---- **a** is changed by the block in the if statement while b and c are not.
+```
+
+However, a variable declared and initiated with **var** can be set to a function scope and not have the same behavior as with a block.
+
+```
+var a = 1
+
+function variables( ){
+ var a = 4
+}
+
+console.log(a) // returns 1
+```
+
+So in conclusion, when we are trying to debug code that uses **var** to declare variables, we need to take into account that the behavior of hoisting and scoping of this variables will be different, but if we become familiar with some of this behavior it will not be unexpected.
+
+
 Resources:
 
 https://developer.mozilla.org/en-US/docs/Glossary/Hoisting
 
 https://blog.bitsrc.io/hoisting-in-modern-javascript-let-const-and-var-b290405adfda
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/block
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var
+
+https://medium.com/javascript-in-plain-english/how-to-use-let-var-and-const-in-javascript-cdf42b48d70
 
 
