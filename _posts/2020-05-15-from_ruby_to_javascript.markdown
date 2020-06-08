@@ -5,15 +5,15 @@ date:       2020-05-15 09:27:09 -0400
 permalink:  from_ruby_to_javascript
 ---
 
-This project was born after I was having again a hard time finding an idea that I liked. First I was considering another blog like app like my previous project [Young Papas Hobbies](https://santiagosalazarpavajeau.github.io/ruby_on_rails_project_-_young_papas_hobbies), however after seeing other projects in Javascript and what it could be done compared to Rails (like games and interactive single page applications), I went for a music app. Also music is a topic I am passionate about since I have been involved in music since I have memory due to my grandmother being a violin player and teacher. Also I recorded an album by myself when I was in highschool around 10 years ago, and I have been gearing up with some music gear lately. Specially proud of my analog synth, which made the chord sounds for this app, I also have been very curious about chord progessions lately which is the reason why I chose to create this specific app.
+This project was born after narrowing down from several project ideas that I liked. First I was considering another blog like app like my previous project [Young Papas Hobbies](https://santiagosalazarpavajeau.github.io/ruby_on_rails_project_-_young_papas_hobbies),  and even a restaurnt recipe web app. However after seeing other projects in Javascript I realized the type of web apps that could be built compared to Rails (like games and other interactive single page applications), so I decided to build a music app. Also music is a topic I am passionate about and I have been involved in music ever since I have memory due to my grandmother being a violin player and teacher. Also I have been recording music with my friends since I was a kid. But lately I have been looking into some new music gear like synths which I made some sounds on the app from. I also have been very curious about what goes into chord progessions lately which is the reason why I chose to create this specific app, and had fun building the chords.
 
-This project is meant to be a music web application that lets the user "jam" and create simple songs with a few clicks. It allows to add chords to a track and plays a beat. The variety of chords allows you to play almost any chord progression.  These sounds are stored in the local directory, and they are accessed through an *audio* html tag. We create the audio tags and accompanying buttons to play the sounds, by using a Javascript class called *Chord*. This class creates all the functionality of the audios, including playing the sounds on a click event, adding the sound to the track and removing the sounds from the track. 
+This project is meant to be a music web application that lets the user "jam" and create simple songs with a few clicks. It allows to add chords to a "track" that plays a beat. The variety of chords allows you to play almost any chord progression.  All the sounds are stored in the local directory, and they are accessed through an *audio* html tag. We create the audio tags and accompanying buttons to play the sounds, by using a Javascript class called *Chord*. This class creates all the functionality of the audios, including playing the sounds on a click event, adding the sound to the track and removing the sounds from the track. 
 
-All this functionality is done through the ability of JS to *manipulate the DOM*  (the web page's behavior).
+All this functionality is done through the ability of JS to *manipulate the DOM*  (change the web page's behavior from the users perspective).
 
 ## Organizing a Javascript App
 
-In rails applications are organized in a very clear way with controllers, router, models, views. However, when we work with plain Javascript for the front end of our app we have to create our own design to keep our app organized. For this we can use Modules to create different classes that have specific responsabilities. In my case, I saw some of the opportunites to separate concerns later on in my project but ended up choosing the following:
+In rails, applications are organized in a very specific way with controllers, router, models, views. However, when we work with plain Javascript for the front end of our app, we have to create our own design to keep our app organized. For this we can use Modules to create different classes that have specific responsabilities. In my case, I saw some of the opportunites to the code into around mid-way on in my project but ended up choosing the following:
 
 * App: launches the code.
 * Adapter: defines all the fetch/AJAX requests and manipulates the DOM.
@@ -22,23 +22,25 @@ In rails applications are organized in a very clear way with controllers, router
 
 ### Troubleshooting accesing contexts of different classes
 
-I tried to further separate the responsibilities of the Adapter class into a new "UI" class that exclusively manipulated the DOM, however while this works to get data from the database into the front end it is more complicated to use the same lgic when sending POST requests. I found myself having to initialize a request from "UI" class but would have to set a new Adapter on the constructor and then on the constructor set a new UI class. This generates an infinite loop and a stack overload. Thus my Adapter class by itself ended up having to handle all of the fetch requests and DOM manipulation with methods in its own scope/context.
+I tried to further separate the DOM manipulation responsibilities of the Adapter class into a new "UserInterface" class that exclusively had these methods/functions. However I realized that while this works to get data from the database into the front end it is more complicated to use it when sending data to the database (POST requests, etc.).
+
+So I found myself having to set the Post request method from the UserInterface class and not the Adapter, because the user input was obtained in the UserInterface class. That defeated my assumption that the Adapter could be exclusively responsible for AJAX requests and the UserInterface for DOM manipulation. Thus my Adapter class by itself ended up having to handle all of the fetch requests and DOM manipulation with methods in its own scope/context, in order for methods to have access to the data.
 
 ### Interaction between modules
 
-In a nutshell, the App class declares the Adapter which handles all of the rest of the methods to load the app like loading the songs from the database, and the chords. So new chord and song objects are created with the response from fetch. 
+In a nutshell, the App class declares the Adapter which has all of the methods to load the app like loading the songs from the database, loading the chords and the beats.
 
 The songs from the database are created in the front end by passing the json into a the renderSongButton method, which creates a button for the song that plays all of the chords belonging to the song when clicking on it. 
 
 Then, a new song object is created on load for the user to interact with and save into the database.
 
+The chords are pushed into a song into three Song methods, chords, to hold all the Chord objects, audios to store the chord audios, and files, to reference the .wav files on the front end directory.
+
 ## Editing the song in the track card
 
-So the goal was to be able to edit a song in the track card by adding/removing chords. This was a very challenging issue because of the structure of the chord and song objects. Initially I considered creating new .wav files to create a song but to acheive the editing ended up using an array of html audio tags as the song. 
+So the goal was to be able to edit a song in the track card by adding/removing chords. This was a very challenging issue because of the structure of the chord and song objects. Initially I considered joining the chord .wav sounds into a new .wav file to create a song, however, I found I could use collections of chords to make the song and edit the collections to acheive the editing of the song. Each chord has an "audio" HTML tag that can be played on the browser.
 
-This brings a new level of complexity because both classes have to deal with audio html tags in order to play sound, on top of their other attributes. And in a song there is a chords attribute that contains the chord objects but also the audios attribute which is a collection of html tags that is iterated over in order to play each audio.
-
-A refactoring could be to only access the audios from the chord objects in the song, so that there are no audios on the song but only chord objects.
+This brought a new level of complexity because both classes had to deal with audio html tags in order to play sound, on top of their other attributes.
 
 The process to delete a chord from a song involved creating a random id property called *edit_id* on the chords so that the audios on the track could be filtered by that edit_id. This attribute is assigned on the creation of a chord object, and its also assigned to the corresponsing audio html tag. For the audios in a song to have the same edit_id than the chords in the song they have to be created simultaneusly, however I encountered a bug where I was not creating them in the same instance so I was getting an edit_id that was not the same. So my filter method was not finding the correct id to delete the chord and audio from the song.
 
