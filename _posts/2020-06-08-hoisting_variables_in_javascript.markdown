@@ -80,7 +80,7 @@ Both will return a Reference Error because the declaration of the variable **a**
 
 ## Block Context
 
-When we look at declaring variables with **var** we also find that they do not have block scope at all. If you analyze the code below, the expected normal block scope behavior would be, that the variables inside the if statement block could not be accessed by the outer **vairables()** function. This happens as expected when we use **let** and **const**. However, as we see the value of *a* is changed by the block so this block does not create a limited scope or context for *a*.
+When we look at declaring variables with **var** we also find that they do not have block scope at all. If you analyze the code below, the expected normal block scope behavior would be, that the variables inside the if statement block could not be accessed by the outer **vairables()** function. This happens as expected when we use **let** and **const**. However, as we see the value of **var a** is changed by the block so this block does not create a limited scope or context for **var a** and there is only one instance of **var a** throughout the **variables()** function lexical environment and **var a** gets overrwriten.
 
 ```
 function variables(){
@@ -109,7 +109,9 @@ function variables( ){
 console.log(a) // returns 1
 ```
 
-Ignoring block scope can be very problematic because we loose control of the **var** variables and this can cause many bugs, its hard to think of how JS existed only with **var** and global variables having all these issues.
+So there is a way to limit the scope of **var** variables and that is by using function scope or closures.
+
+Ignoring block scope can be very problematic because we loose control of the **var** variables because its behavior is counterintuitive. This can cause bugs, and actually its hard to think of how JS existed only declaring variables with **var**  because it has all of these unexpected complexities.
 
 ## Loops and var as an example
 
