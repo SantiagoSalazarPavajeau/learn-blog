@@ -1,6 +1,6 @@
 ---
 layout: post
-title:      "Delving into var in Javascript"
+title:      "Dealing with var in Javascript"
 date:       2020-06-08 17:17:53 -0400
 permalink:  hoisting_variables_in_javascript
 ---
