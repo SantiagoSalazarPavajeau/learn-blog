@@ -25,7 +25,7 @@ In fact hoisting the variable declaration, but not the initialization. So the va
 The variable will be set to *undefined* during this time.
 
 
-So Javascrpt hoists variable declarations and does this differently for **var**, **let** and **const**. That is, let and const are hoisted but they are not declared into anything and are innaccesible during compile phase. So while a variable declared with **var** will be initialized to *undefined* a variable declared with **let** and **const**, will not be initialized and so it will be inaccesible during compile.
+So Javascrpt hoists variable declarations and does this differently for **var**, **let** and **const**. That is, **let** and **const** are hoisted but they are not declared into anything and are innaccesible during compile phase. So while a variable declared with **var** will be initialized to *undefined* a variable declared with **let** and **const**, will not be initialized and so it will be inaccesible during compile.
 
 Then during the execution phase of the code all variables will be set to their respective initialization value.
 
@@ -54,7 +54,7 @@ console.log(a)
 const a = "hello"
 ```
 
-Both will return a Reference Error because the declaration of the variable **a** is hoisted but its value is inaccesible since they are not being initialized with *undefined* like **var** does. So initializing these variables to "hello" after the console.log will indeed create an error.
+Both will return a Reference Error because the declaration of the variable **a** is hoisted but its value is inaccesible since they are not being initialized with *undefined* like **var** does. So initializing these variables to "hello" after the console.log will indeed create a Reference Error.
 
 ## Block Context
 
