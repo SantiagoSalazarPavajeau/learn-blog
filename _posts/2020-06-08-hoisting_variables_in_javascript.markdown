@@ -109,6 +109,44 @@ console.log(a) // returns 1
 
 Ignoring block scope can be very problematic because we loose control of the **var** variables and this can cause many bugs, its hard to think of how JS existed only with **var** and global variables having all these issues.
 
+## Loops and var as an example
+
+Lets look at a refactored example from the [MDN Closures Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures):
+
+```
+<p id="number">click on a number</p>
+<p id="1">10</p>
+<p id="2">14</p>
+<p id="3">7</p>
+```
+
+```
+function showNumber(number, i) {
+  document.getElementById('number').innerText = `You clicked but on all the numbers but only got ${number} and the loop var i is stuck with ${i}.`;
+}
+
+function setupNumber() {
+  var numberText = [
+      {'id': '1', 'number': '10'},
+      {'id': '2', 'number': '14'},
+      {'id': '3', 'number': '7'}
+    ];
+
+  for (var i = 0; i < helpText.length; i++) {
+    var data = numberText[i];
+    document.getElementById(item.id).onclick = function() {
+      showNumber(data.number, i);
+    }
+  }
+}
+
+setupNumber();
+```
+
+This loop wil only create one lexical environment for the three iterations so the **var data**  and the **var i** are  being overwritten each iteration. **var data** is being hoisted into the setupNumber function scope and ignoring the block scope. By the time we click on the numbers the loop has already finished and the **var item** is initialized with the last iteration which is 7.
+
+To have 3 different values for each loop there needs to be 3 different lexical scopes. So another scope has to be created with an inner function or closure in each iteration.
+
 So in conclusion, when we are trying to debug code that uses **var** to declare and initialize variables, we need to take into account that the behavior of hoisting, scoping, etc. will not be the same as with **let** and **const**. And this is a powerful tool to have as a developer.
 
 
@@ -125,5 +163,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var
 https://medium.com/javascript-in-plain-english/how-to-use-let-var-and-const-in-javascript-cdf42b48d70
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+
+https://www.freecodecamp.org/forum/t/how-does-js-compile-for-loops/151885
 
 
