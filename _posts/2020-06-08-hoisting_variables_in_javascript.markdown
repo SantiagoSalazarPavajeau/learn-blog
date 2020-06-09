@@ -5,6 +5,26 @@ date:       2020-06-08 17:17:53 -0400
 permalink:  hoisting_variables_in_javascript
 ---
 
+## Lexical Environment and Scope
+
+The lexical environment is where Javascript stores the meta data about variables and functions, for example, it will include the local variables inside the scope of a function when inside the function. So the variables available change as the scope changes.
+
+Specifically for variables declared with **var** they can be accessed by functions in their outer scope:
+
+```
+function outer(){
+ var outerVariable = 1
+  function inner(){
+	 alert(outerVariable);
+ }
+ inner()
+}
+
+outer() // alerts 1 in modal box
+```
+
+There is a single lexical environment of inner() and it exclusively includes  the *outerVariable*.
+ 
 ## Hoisting
 
 Hoisting literally refers to the concept of raising or lifting something onto the top. In Javascript it has to do with the way variables and functions exist at a certain moment in the "running" of the code and how they are "raised" to the top of the code by the Javascript engine. However, this JavaScript behavior is quite unique and has some specific rules that need to be accounted for in order to understand how to correctly declare variables.
@@ -103,5 +123,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/blo
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var
 
 https://medium.com/javascript-in-plain-english/how-to-use-let-var-and-const-in-javascript-cdf42b48d70
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
 
 
