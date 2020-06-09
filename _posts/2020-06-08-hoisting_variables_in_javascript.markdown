@@ -80,7 +80,7 @@ Both will return a Reference Error because the declaration of the variable **a**
 
 ## Block Context
 
-When we look at declaring variables with **var** we also find that they do not have block scope at all. If you analyze the code below, the expected normal block scope behavior would be, that the variables inside the if statement block could not be accessed by the outer **vairables()** function. This happens as expected when we use **let** and **const**. However, as we see the value of **var a** is changed by the block so this block does not create a limited scope or context for **var a** and there is only one instance of **var a** throughout the **variables()** function lexical environment and **var a** gets overrwriten.
+When we look at declaring variables with **var** we also find that they do not have block scope at all. If you analyze the code below, the expected normal block scope behavior would be, that the variables inside the if statement block could not be accessed by the outer **vairables()** function. This happens as expected when we use **let** and **const**. However, as we see the value of **var a** is changed by the block so this block does not create a limited scope or context for **var a** and there is only one instance of **var a** throughout the **variables()** function lexical environment and the **var a** inside the block gets hoisted to the function scope.
 
 ```
 function variables(){
@@ -109,9 +109,9 @@ function variables( ){
 console.log(a) // returns 1
 ```
 
-So there is a way to limit the scope of **var** variables and that is by using function scope or closures.
+So there is a way to limit the hoisting of **var** variables and that is by using function scope or closures.
 
-Ignoring block scope can be very problematic because we loose control of the **var** variables because its behavior is counterintuitive. This can cause bugs, and actually its hard to think of how JS existed only declaring variables with **var**  because it has all of these unexpected complexities.
+Ignoring block scope can be very problematic because we loose control of the **var** variables, i.e. their behavior is counterintuitive. This can cause bugs, and actually its hard to think of how JS existed only declaring variables with **var**  because it has all of these unexpected complexities.
 
 ## Loops and var as an example
 
@@ -140,9 +140,9 @@ function setupNumber() {
       {'id': '3', 'number': '7'}
     ];
 
-  for (var i = 0; i < helpText.length; i++) {
+  for (var i = 0; i < numberText.length; i++) {
     var data = numberText[i];
-    document.getElementById(item.id).onclick = function() {
+    document.getElementById(data.id).onclick = function() {
       showNumber(data.number, i);
     }
   }
@@ -150,11 +150,11 @@ function setupNumber() {
 
 setupNumber();
 
-// no matter where you clicked the numbers are the same => You clicked but on all the numbers but only got 7 and the loop var i is stuck with 3.
+// no matter where you click the numbers are the same => You clicked but on all the numbers but only got 7 and the loop var i is stuck with 3.
 
 ```
 
-This loop wil only create one lexical environment for the three iterations so the **var data**  and the **var i** are  being overwritten each iteration. **var data** is being hoisted into the setupNumber function scope and ignoring the block scope. By the time we click on the numbers on the html, the loop has already finished and the **var item** (that has already been overwritten three times)  is set to the last iteration which is 7.
+This loop wil only create one lexical environment for the three iterations so the **var data**  and the **var i** are  being overwritten each iteration, in other words, the **var data** and **var i** are being hoisted outside the block. To be exact, both variables are being hoisted into the **setupNumber()** function scope and ignoring the block scope. By the time we click on the numbers on the html, the loop has already finished and the variables (that has already been overwritten three times)  are set to the last iteration that was hoisted which (7 and 3).
 
 To have 3 different values for each loop there needs to be 3 different lexical scopes. So new scopes have to be created with an inner function or closure in each iteration.
 
@@ -171,15 +171,15 @@ function cointainingNewClosure(number, i){
 }
 
 function setupNumber() {
-  var helpText = [
+  var numberText = [
       {'id': '1', 'number': '10'},
       {'id': '2', 'number': '14'},
       {'id': '3', 'number': '7'}
     ];
 
-  for (var i = 0; i < helpText.length; i++) {
-    var item = helpText[i];
-    document.getElementById(item.id).onclick = cointainingNewClosure(item.number, i)
+  for (var i = 0; i < numberText.length; i++) {
+    var data = numberText[i];
+    document.getElementById(data.id).onclick = cointainingNewClosure(data.number, i)
   }
 }
 
@@ -187,9 +187,9 @@ setupNumber(); // we get the desired output
 
 ```
 
-We created a scope for each iteration using a closure. 
+Here we created a scope for each iteration using a closure. 
 
-Fortunately, presently we have the **let** keyword to declare variables, so to debug a **var** variable that is skipping the block scope and getting hoisted into the outer function scope, we can just use **let**. The **let** variable will have the block local scope. The following loop will not overwrite the **let i** and **let data** because the **let** variables have block scope.
+Fortunately, presently we have the **let** keyword to declare variables, so to debug a **var** variable that is skipping the block scope and getting hoisted into the outer scope, we can just use **let**. The **let** variable will have the block local scope. The following loop will not overwrite the **let i** and **let data** because the **let** variables have block scope.
 
 
 ```
