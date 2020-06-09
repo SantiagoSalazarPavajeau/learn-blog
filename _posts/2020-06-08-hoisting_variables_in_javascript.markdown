@@ -7,9 +7,9 @@ permalink:  hoisting_variables_in_javascript
 
 ## Lexical Environment and Scope
 
-The lexical environment is where Javascript stores the meta data about variables and functions, for example, it will include the local variables inside the scope of a function when inside the function. So the variables available change as the scope changes.
+The lexical environment is where Javascript stores the meta data about variables and functions, for example, it will include the local variables inside the scope of a function when inside the function. So the variables available and the lexical enviroment change as the scope changes.
 
-Specifically for variables declared with **var** they can be accessed by functions in their outer scope:
+In this example the **var outerVariable** is hoisted to **outer()** function and can be accessed by the **inner()** function.
 
 ```
 function outer(){
@@ -27,30 +27,32 @@ There is a single lexical environment of inner() and it exclusively includes  th
  
 ## Hoisting
 
-Hoisting literally refers to the concept of raising or lifting something onto the top. In Javascript it has to do with the way variables and functions exist at a certain moment in the "running" of the code and how they are "raised" to the top of the code by the Javascript engine. However, this JavaScript behavior is quite unique and has some specific rules that need to be accounted for in order to understand how to correctly declare variables.
+Hoisting literally refers to the concept of raising or lifting something onto the top. In Javascript it has to do with the way variables and functions exist at a certain moment in the "running" of the code and how they are "raised" to the top of the code by the Javascript engine. However, this JavaScript behavior is quite unique and has some specific rules that need to be accounted for in order to understand how to correctly declare variables in order to have access to them and their values.
 
-More specifically hoisting refers to what variables look like at compile phase vs execution phase. The compile phase is when the code that we write is prepared to be read by the machine and the execution phase when the machine reads it. So when Javascript prepares our code to be read by the machine it looks for the variables and declares them:
-
-```
- var hoisted;
-```
-
-
-In fact hoisting the variable declaration, but not the initialization. So the variable won't equal the below string in compile phase.
+More specifically, hoisting refers to what variables look like in the lexical environment at compile phase vs execution phase. The compile phase is when the code that we write is prepared to be read by the machine and the execution phase when the machine reads it. So when Javascript prepares our code to be read by the machine it looks up for the variables and declares them in the lexical environment by "hoisting them".
 
 ```
- hoisted = "but not initialized"
+ var hoisted; // variable declaration
 ```
 
-The variable will be set to *undefined* during this time.
-
-
-So Javascrpt hoists variable declarations and does this differently for **var**, **let** and **const**. That is, **let** and **const** are hoisted but they are not declared into anything and are innaccesible during compile phase. So while a variable declared with **var** will be initialized to *undefined* a variable declared with **let** and **const**, will not be initialized and so it will be inaccesible during compile.
-
-Then during the execution phase of the code all variables will be set to their respective initialization value.
+In fact, during compile, Javascript hoists the variable declaration, but not the initialization. So the variable won't equal the below string in compile phase.
 
 ```
- hoisted =  "now initialized"
+ var hoisted = "but not initialized to our value" // variable initialization
+```
+
+The **var** variable will be initialized to *undefined* during compile.
+
+
+So Javascrpt in compile hoists variable declarations and does this differently for **var**, **let** and **const**. That is, **let** and **const** are hoisted but they are not declared into anything and are innaccesible during compile phase. So while a variable declared with **var** will be initialized to *undefined* a variable declared with **let** and **const**, will not be initialized and so it will be inaccesible during compile.
+
+Then during the execution phase of the code all variables will be set to the initialization value we assigned them, so whatever string, integer, etc. we want them to be set to.
+
+```
+ var afterHoisted =  "now initialized" // in execution, after it was hoisted by compile and initialized to undefined
+ let letAfterHoisted =  "now initialized" // in execution, after it was hoisted by compile and initialized to nothing
+ const constAfterHoisted =  "now initialized"// in execution, after it was hoisted by compile and initialized to nothing
+
 ```
 
 In a more concrete example if we write:
@@ -74,7 +76,7 @@ console.log(a)
 const a = "hello"
 ```
 
-Both will return a Reference Error because the declaration of the variable **a** is hoisted but its value is inaccesible since they are not being initialized with *undefined* like **var** does. So initializing these variables to "hello" after the console.log will indeed create a Reference Error.
+Both will return a Reference Error because the declaration of the variable **a** is hoisted but its value is inaccesible since they are not being initialized with *undefined* like **var** does. So initializing these variables to "hello" after the console.log call will indeed create a Reference Error.
 
 ## Block Context
 
