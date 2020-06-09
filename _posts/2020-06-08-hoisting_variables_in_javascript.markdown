@@ -58,7 +58,7 @@ Both will return a Reference Error because the declaration of the variable **a**
 
 ## Block Context
 
-As with the above examples declaring variables with **var** has a suboptimal behavior regarding block scope, in fact, **var** variables do not have block scope at all. If you analyze the code below, the expected normal scope behavior would be that the variables inside the if statement could not be accessed outside its block. This happens as expected when we use **let** and **const**. However, as we see the value of *a* is changed on by the block so this block does not create a limited scope or context for *a*.
+When we look at declaring variables with **var** we also find that they do not have block scope at all. If you analyze the code below, the expected normal scope behavior would be that the variables inside the if statement could not be accessed outside its block. This happens as expected when we use **let** and **const**. However, as we see the value of *a* is changed by the block so this block does not create a limited scope or context for *a*.
 
 ```
 function variables(){
@@ -86,6 +86,8 @@ function variables( ){
 
 console.log(a) // returns 1
 ```
+
+Ignoring block scope can be very problematic because we loose control of the **var** variables and this can cause many bugs, its hard to think of how JS existed only with **var** and global variables having all these issues.
 
 So in conclusion, when we are trying to debug code that uses **var** to declare and initialize variables, we need to take into account that the behavior of hoisting, scoping, etc. will not be the same as with **let** and **const**. And this is a powerful tool to have as a developer.
 
