@@ -1,6 +1,6 @@
 ---
 layout: post
-title:      "From Ruby on Rails to Javascript"
+title:      "Chords and Beats - From Ruby on Rails to Javascript "
 date:       2020-05-15 09:27:09 -0400
 permalink:  from_ruby_to_javascript
 ---
