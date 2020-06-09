@@ -80,7 +80,7 @@ Both will return a Reference Error because the declaration of the variable **a**
 
 ## Block Context
 
-When we look at declaring variables with **var** we also find that they do not have block scope at all. If you analyze the code below, the expected normal scope behavior would be that the variables inside the if statement could not be accessed outside its block. This happens as expected when we use **let** and **const**. However, as we see the value of *a* is changed by the block so this block does not create a limited scope or context for *a*.
+When we look at declaring variables with **var** we also find that they do not have block scope at all. If you analyze the code below, the expected normal block scope behavior would be, that the variables inside the if statement block could not be accessed by the outer **vairables()** function. This happens as expected when we use **let** and **const**. However, as we see the value of *a* is changed by the block so this block does not create a limited scope or context for *a*.
 
 ```
 function variables(){
@@ -189,6 +189,7 @@ We created a scope for each iteration using a closure.
 
 Fortunately, presently we have the **let** keyword to declare variables, so to debug a **var** variable that is skipping the block scope and getting hoisted into the outer function scope, we can just use **let**. The **let** variable will have the block local scope. The following loop will not overwrite the **let i** and **let data** because the **let** variables have block scope.
 
+
 ```
 
 for (let i = 0; i < helpText.length; i++) {
@@ -198,7 +199,8 @@ for (let i = 0; i < helpText.length; i++) {
     }
   }
 	
-	```
+```
+
 
 So in conclusion, when we are trying to debug code that uses **var** to declare and initialize variables, we need to take into account that the behavior of hoisting, scoping, etc. of **var** variables will not be the same as with **let** and **const**. And this is a powerful tool to have as a new developer working with legacy code.
 
