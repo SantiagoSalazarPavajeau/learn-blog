@@ -23,4 +23,4 @@ I took a small course on data science with python and started to strive for a st
 
 In Flatiron I have learned an incredible amount of things and I would have never imagined myself building applications from scratch, which is very exciting. The sky is the limit with the amount of knowledge that is avaible to learn programming.
 
-I think the most remarkable thing about software engineering is being able to listen to people and then build the things people want. Its much like a craft where you need to develop skills throughout the years, and I think I have been building useful skills for software engineering throughout the years.
+I think the most remarkable thing about software engineering is being able to listen to people and then build the things people want. Its much like a craft where you need to develop skills throughout the years, and I think I have been building useful skills for software engineering throughout the years. And with an unlimited amount of perseverance I have been able to build a career that I am passionate about.
