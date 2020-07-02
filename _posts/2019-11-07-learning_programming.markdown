@@ -25,4 +25,4 @@ In Flatiron I have learned an incredible amount of fun things. I would have neve
 
 I think the most remarkable thing about software engineering is being able to listen to people and then build the things people want. Its much like a craft where you can improve your skills with practice and you can see and interact with the end result. 
 
-I believe that I have been building transferable skills required for software engineering throughout the years like research and other hard skills but most importantly also perseverance. And I really believe that people can have an unlimited amount of perseverance when they dedicate themselves to things they love and for me is to be a father but also building the career that I am passionate about.
+I believe that I have been building transferable skills required for software engineering throughout the years like research and other hard skills but most importantly also perseverance. And I really believe that people can have an unlimited amount of perseverance when they dedicate themselves to things they love and for me is to be a father but also building the career that I love.
