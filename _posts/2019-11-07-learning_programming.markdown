@@ -11,7 +11,9 @@ I moved to the US in 2006 where I finished highschool in 2009 and then went on t
 
 After college I felt dissatisfied with the type of jobs that were available to me but regardless, I worked in customer service and e-commerce and I had to continue with these jobs for some time. These unexpected jobs ended up being a big learning experience, in the sense of having to work many customers in high-intensity and high-volume environments, and also in starting to explore working in the world of intuernet through e-commerce.
 
-Then, after 2 1/2 years of graduating college I was extremely lucky to be able to go back to school to a shorter 1 year business school program, which was not as tolling as a 5+ year phd research route. This experience really helped me figure out that the fields that I wanted to work in involved engineering. I also figured out that I have technical profile (science major in college) but also a big passion for innovation and tech, and working in this field would be a dream career. 
+Then, after 2 1/2 years of graduating college I was extremely lucky to be able to go back to school to a shorter 1 year business school program, which was not as tolling as a 5+ year phd research route. This experience really helped me figure out that I have a technical profile (science major in college) but also a big passion technology and innovation and working in this field would be a dream career. 
+
+Having studied science and business I felt like the middle ground was engineering and so software engineering became the area in which I felt I could achieve this dream career. 
 
 Specifically, during the internship at the end of the business school program I ended up managing a website and working with databases, and also while doing interviews for the roles at companies that I was really interested in, I got technical questions which really pointed me in the direction of learning programming.
 
