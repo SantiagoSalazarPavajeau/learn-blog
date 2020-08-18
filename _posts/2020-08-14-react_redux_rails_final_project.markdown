@@ -1,19 +1,19 @@
 ---
 layout: post
-title:      "React / Redux / Rails Project"
+title:      "React Project + Redux + Rails "
 date:       2020-08-14 17:31:26 -0400
 permalink:  react_redux_rails_final_project
 ---
 
 
-On this project I decided to revisit the concept of the Sinatra Task-Process Log but instead of building a Process model, use a Project model. And use the React front end and Rails backend to acheive a nimble prototype web app. Some of the highlights of this prototype include rebuilding a has many to has many relationship "schema" in Redux, using React libraries to make the front end look crisp, and being able to have a running and deployed prototype Rails API with a few CLI commands.
+On this project I decided to revisit the concept of the Sinatra Task-Process Log project but instead of building a Process model, use a Project model. As well as using a React front end and Rails backend to acheive a nimble prototype web app. Some of the highlights of this prototype include rebuilding a has many to has many relationship "schema" in Redux, using React libraries to make the front end look crisp, and being able to have a running and deployed prototype Rails API with a few CLI commands.
 
-### React
+### React for Style
 
 
-I started building the app on the front end because I wanted to set up the style of the app from the start so I ended up building a sidebar and a navbar that aligned together to set the navigation. With a sidebar more views/routes and more functionality can be added and easily accesed. For example, libraries that deal with data visualization to create a dashboard app.
+I started building the app on the front end because I wanted to set up the style of the app from the start. So I built a sidebar and a navbar that aligned together to handle navigation. I wanted a sidebar because it allows for more views/routes and more functionality to be added and easily accesed. Next I would like to add for example calendar functionality or data visualization libraries to create a more visual dashboard. 
 
-### Redux - Thunk - Rails
+### Redux - Thunk - Rails for Data
 
 Following the basic set up of the front end style, I built three reducers on Redux for Projects, Tasks and People. The Projects and Tasks models have basically full CRUD functionality while People model is read only. 
 
@@ -34,7 +34,7 @@ This was one of the most challenging parts of the build because I used container
 
 ## React Router
 
-The react router was very different to use from the rails router as rails magic builds all the CRUD/RESTful routes and the controller manages them as well. The method that worked for me to implement the react router was to set the Router component on the App.js file where depending on each of the Route component's path a specific container component would render. To access these routes a react-router Link is needed from anywhere in the app. In this app I built a modal for the show pages. This modal is shown on the '/:id' route corresponding to each project. 
+The react router was very different to use from the rails router as rails magic builds all the CRUD/RESTful routes and then we only build the controller. The method that worked for me to implement the react router was to set the Router component on the App.js file and depending on each of the children Route-component's path/route, one of the container components would render. To access these routes a react-router Link is needed from anywhere in the app as a button. In this app I built a modal for the show pages and this modal is shown on the '/:id' route corresponding to each project. 
 
 ## Rails
 
@@ -56,7 +56,7 @@ rails g serializer Task description id person_id project_id completed
 
 ```
 
-The command to create a rails project included an ```--api ``` and a ```--database=postgresql``` command that personalized the build for this application. While the resource generators build a model, a controller, a database migration with the specified attributes, and router routes for each of the resources. The controller actions have to be customized manually with this method. Last the serializer generator creates a file that contains the attributes specified to be sent on the JSON file.
+The command to create a rails project included an ```--api ``` and a ```--database=postgresql``` command that personalized the build for this application to not include rails views(.erb) and to use postgres (heroku deployment). While the resource generators build a model, a controller, a database migration with the specified attributes, and router routes for each of the resources. The controller actions have to be customized manually with this method. Last, the serializer generator creates a file that contains the attributes specified to be sent on the JSON data sent to the front end as a response in redux thunk.
 
 Even deployment was very agile with Rails-Heroku after initializing the project with a Postgres database.
 
@@ -74,4 +74,4 @@ heroku open
 
 ## Finale
 
-Working in React allows for great front-end experiences, as using pre-made components from UI libraries allows the app have great looks very swiftly. Leveraging this can give more time to focus on functionality when building an app. Using Redux can allow for building complex model relationships that are managed in the front-end and could be technically hooked up to any backend that fits the needs of the project.
+Working in React allows for great front-end experiences, as using pre-made components from UI libraries allows the app have great looks very swiftly. Leveraging these benefits can give more time to focus on functionality when building an app. Using Redux can allow for building complex model relationships that are managed in the front-end and could be connected to any APIs that fit the needs of the project. 
