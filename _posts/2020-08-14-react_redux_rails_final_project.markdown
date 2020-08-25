@@ -8,12 +8,12 @@ permalink:  react_redux_rails_final_project
 
 On this project I decided to revisit the concept of the Sinatra Task-Process Log project but instead of building a Process model, use a Project model. As well as using a React front end and Rails backend to acheive a nimble prototype web app. Some of the highlights of this prototype include rebuilding a has many to has many relationship "schema" in Redux, using React libraries to make the front end look crisp, and being able to have a running and deployed prototype Rails API with a few CLI commands.
 
-### React for Style
+## React for Style
 
 
 I started building the app on the front end because I wanted to set up the style of the app from the start. So I built a sidebar and a navbar that aligned together to handle navigation. I wanted a sidebar because it allows for more views/routes and more functionality to be added and easily accesed. Next I would like to add for example calendar functionality or data visualization libraries to create a more visual dashboard. 
 
-### Redux - Thunk - Rails for Data
+## Redux - Thunk - Rails for Data
 
 Following the basic set up of the front end style, I built three reducers on Redux for Projects, Tasks and People. The Projects and Tasks models have basically full CRUD functionality while People model is read only. 
 
