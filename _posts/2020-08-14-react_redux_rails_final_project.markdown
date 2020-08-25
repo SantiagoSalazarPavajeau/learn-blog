@@ -6,7 +6,13 @@ permalink:  react_redux_rails_final_project
 ---
 
 
-On this project I decided to revisit the concept of the Sinatra Task-Process Log project but instead of building a Process model, use a Project model. As well as using a React front end and Rails backend to acheive a nimble prototype web app. Some of the highlights of this prototype include rebuilding a has many to has many relationship "schema" in Redux, using React libraries to make the front end look crisp, and being able to have a running and deployed prototype Rails API with a few CLI commands.
+On this project I decided to revisit the concept of the Ruby-Sinatra Task-Process Log project, where a user could describe their small business by defining both the business processes of the company and the jobs at the company and relate them by tasks assignment. 
+
+But in this new React version instead of building a Process , we use a Project model.
+
+I am interested in these tools because to me having a defined and organised set of tasks is very valuable when performing complex activities at work. 
+
+On the technical side,  I built a React front end and Rails backend to acheive a nimble prototype web app. Some of the highlights of this prototype include rebuilding a has many to has many relationship "schema" in Redux, using React libraries to make the front end look crisp, and being able to have a running and deployed prototype Rails API with a few CLI commands.
 
 ## React for Style
 
