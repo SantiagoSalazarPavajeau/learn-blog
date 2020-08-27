@@ -6,13 +6,13 @@ permalink:  react_redux_rails_final_project
 ---
 
 
-On this project I decided to revisit the concept of the Ruby-Sinatra Task-Process Log project, where a user could describe their small business by defining both the business processes and the jobs at the company and relate them by assigning tasks. 
+On this project I decided to revisit the concept of the Task-Process Log project (written in Ruby) where a user could describe their small business by creating the business processes and the jobs at the company. Then the user is able to relate them by assigning  shared tasks by process and job. 
 
-But in this React reimagining instead of using a Process model, I used a Project model.
+But in this React reimagining instead of using a Process model, I used a Project model. I wanted to have an app that was more practical for everyday use and React allows for a much more user friendly app. 
 
-These tools are interesting because I am firm believer that having defined and organised sets of tasks is very valuable when performing complex activities. These tools can allow increasing clarity to work in teams which can keep everyone happy.
+These tools are interesting to me because I am firm believer that having defined and organised sets of tasks is very valuable when performing complex activities. These tools can allow increasing clarity to work in teams which can keep everyone happy.
 
-Now, focusing on the technical side, I built a React front end and Rails backend to acheive a nimble prototype web app. Some of the highlights of this prototype include rebuilding a has many to has many relationship "schema" in Redux, using React libraries to make the front end look crisp, and being able to have a running and deployed prototype Rails API with a few CLI commands.
+Now, on the technical side, I worked in React for the front end and built a Rails API. Some of the highlights of this prototype include a has many to has many relationship "schema" in Redux, using React libraries to make the front end look crisp, and being able to have a running and deployed prototype Rails API with a few CLI commands.
 
 ## React for Style
 
