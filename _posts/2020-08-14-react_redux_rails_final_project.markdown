@@ -1,23 +1,23 @@
 ---
 layout: post
-title:      "React Project + Redux + Rails "
+title:      "React Project (+ Redux + Rails)"
 date:       2020-08-14 17:31:26 -0400
 permalink:  react_redux_rails_final_project
 ---
 
 
-On this project I decided to revisit the concept of the Task-Process Log project (written in Ruby) where a user could describe their small business by creating the business processes and the jobs at the company. Then the user is able to relate them by assigning  shared tasks by process and job. 
+On this project I decided to revisit the concept of the Task-Process Log project (written in Ruby) where a user could describe their small business by creating the business processes and the jobs at the company. Then the user was able to relate them by assigning shared tasks by a process and a job. 
 
-But in this React reimagining instead of using a Process model, I used a Project model. I wanted to have an app that was more practical for everyday use and React allows for a much more user friendly app. 
+But in this React reimagining instead of using a Process model, I used a Project model. I wanted to make an app that was practical for everyday use. React also allowed for a much more user friendly app. 
 
-These tools are interesting to me because I am firm believer that having defined and organised sets of tasks is very valuable when performing complex activities. These tools can allow increasing clarity to work in teams which can keep everyone happy.
+These tools are interesting to me because I am firm believer that having defined and organised sets of tasks is very valuable when performing complex activities. These tools can allow increasing clarity to work in teams and this keeps everyone happy.
 
 Now, on the technical side, I worked in React for the front end and built a Rails API. Some of the highlights of this prototype include a has many to has many relationship "schema" in Redux, using React libraries to make the front end look crisp, and being able to have a running and deployed prototype Rails API with a few CLI commands.
 
 ## React for Style
 
 
-I started building the app on the front end because I wanted to set up the style of the app from the start. So I built a sidebar and a navbar that aligned together to handle navigation. I wanted a sidebar because it allows for more views/routes and more functionality to be added and easily accesed. Next I would like to add for example calendar functionality or data visualization libraries to create a more visual dashboard. 
+I started building the app on the front end because I wanted to set up the looks of the app from the start. So I built a sidebar and a navbar that aligned together to handle navigation. I wanted a sidebar because it allows for more views/routes and more functionality to be added and easily accesed. Looking into future challenges I would like to add calendar functionality or data visualization libraries to create a more visual dashboard. 
 
 ## Redux - Thunk - Rails for Data
 
