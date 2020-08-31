@@ -5,7 +5,7 @@ header-img: img/home-bg.png
 email: santiago.s.pavajeau@gmail.com
 copyright_name: Santiago Salazar Pavajeau
 description: > # this means to ignore newlines until "baseurl:"
-  Ruby on Rails - Javascript - React - Flatiron School
+  Software Engineer | React | Redux | JavaScript (ES6) | Node | Postgres
 baseurl: "" # the subpath of your site, e.g. /blog
 twitter_username: 
 github_username:  SantiagoSalazarPavajeau
