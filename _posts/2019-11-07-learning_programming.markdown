@@ -17,22 +17,27 @@ During this time, alas, both my career and parenting responsibilities both grew 
 
 After this I felt dissatisfied with the type of jobs that were available to me but regardless, I worked in customer service and e-commerce and I had to continue with these jobs for some time. These unexpected jobs ended up being a big learning experience, in the sense of having to work with customers in high-intensity and high-volume commercial environments, and also in starting to explore working in the world of internet through e-commerce.
 
-Then, after 2 1/2 years of finishing college I was extremely lucky to be able to go back to school to a shorter 1 year business school program, which was not as tolling as a 5+ year md/phd route. This experience was challengin but finally gave me a much needed clarity of what I wanted to do, where I felt I could excel and advance in my career path. I realized that I have a technical profile (science major in college) but also a big passion technology and innovation and working in this field would be a dream career. 
+Then, after 2 1/2 years of finishing college I was extremely lucky to be able to go back to school to a shorter 1 year business school program, which was not as tolling as a 5+ year md/phd route. This experience was challenging but it finally provided me with much needed clarity of what I wanted to do, and where I felt I could excel to advance in my career path. 
 
-Having studied science and business I started to understand that the middle ground between these fields was engineering and so software engineering became a fit for me.
+I realized that I having a technical profile (science major in college) but also a big passion for cutting edge technology and innovation, working in tech would be an acheivable dream career. 
 
-Moreover, during the internship at the end of the business school program I ended up managing the company's wordpress websites and working with databases. Also while doing interviews for the roles at companies that I was really interested in, I got technical questions which really pointed me in the direction of programming.
+Having studied science and business I started to understand that the middle ground between these fields was engineering and so software engineering would eventually become a posibility for me.
 
-However, I did not know yet that my path would become specifically software engineering as this seemed a whole other profession to what I had done, but now I finally understand that the software engineering profession has always been aligned to my interests, talents and skills. 
+Moreover, during the internship at the end of the business school program I ended up managing the company's wordpress websites and working with databases, which really put me in the shoes of a web development project. However, I did not know yet that my path would become specifically software engineering/web development as this seemed a whole other profession to what I had done. After this experience, while doing interviews for new roles at companies that I was interested in, I got technical questions which really reinforced me in the direction of programming.
 
-As always, we don't know what we don't know (until we know).
+### As always, we don't know what we don't know (until we know).
 
-I ended up having to finding many answers to my career path after years of trying and only until after a lot of growth I started to realize that tech could be a possible career path for me.
+So I took a small course on data science with Python which was my first experience coding something beyond a 'hello world', but there was still much confusion and uncertainty on my mind about how to acheive my updated career goals. During this time in yet another 'Valley of Despair' of my career, I almost got dragged into indefinitely delaying my career growth and went back to working customer service full-time. 
 
-So I took a small course on data science with python and started to strive for a strong foundation in software engineering and after some advice by a family friend, I looked into web development and ended up signing up for Flatiron School.
+![Valley of Despair](https://qph.fs.quoracdn.net/main-qimg-479710148d811d4017b943691dff4325.webp)
+Source: Quora
+
+But luckily after some very valuable advice by a family friend who is an experienced software engineer, I looked into languages like Javascript, and then I finally understood that the software engineering profession specifically aligned with my interests, talents and skills. 
+
+I ended up having to finding many answers to my career path after years of trying and only until after a lot of growth and luck I started to realize that tech could be a suitable career path for me. So I started to strive for a strong foundation in software engineering and ended up signing up for Flatiron School, while still working full-time in customer service.
 
 In Flatiron I have learned an incredible amount of fun things. I would have never imagined myself working with different programming languages, building application prototypes from scratch, and publishing them to the internet. But also the most rewarding aspect, which to me is using software engineering to communicate with the world.
 
-I think the most remarkable thing about software engineering is being able to listen to people and then build the things people want. Its much like a craft where you can improve your skills with practice and you can see and interact with the end result. 
+I feel very lucky of to have found this path and what's really remarkable about software engineering is being able to listen to people and then build the things people want. Its much like a craft where you can improve your skills with practice and you then can literally see, test, and interact with the end result. 
 
-I believe that I have been building transferable skills required for software engineering throughout the years like research and other hard skills but most importantly also perseverance. And I really believe that people can have an unlimited amount of perseverance when they dedicate themselves to things they love and for me is to be a father but also building the career that I love.
+I believe that I have been building transferable skills required for software engineering throughout the years, but most importantly I have been building perseverance as my main value. And I really believe that people can have an unlimited amount of perseverance when they dedicate themselves to things they love and for me is to be a father and a husband but also building the career that I love.
