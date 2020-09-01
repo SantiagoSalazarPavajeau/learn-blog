@@ -1,15 +1,13 @@
 ---
 layout: post
-title:      "A rocky road but with perseverance"
+title:      "A blog post about perseverance"
 date:       2019-11-07 06:37:55 -0500
 permalink:  learning_programming
 ---
 
-I am a Software Engineer with experience in the biomedical innovation and business management fields. So throughout the years I have developed the soft skills that come with working in research like dealing with scientific and technical documentation, and also the communication skills developed through team collaboration in a business setting. I am pursuing my dream career in Software Engineering which to me, involves working in innovative and creative technical projects that make a difference and create positive impact in organizations and people. In Flatiron School I have specialised in working with React, Javascript, ES6 and Ruby on Rails. But most importantly I have been developed the skills to learn new technologies rapidly so I am very flexible and adaptable with new programming languages and frameworks. 
+I am a Software Engineer with experience in the biomedical innovation and business management fields. So throughout the years I have developed the soft skills that come with working in research like dealing with scientific and technical documentation, and also the communication skills developed through team collaboration in a business setting. I am pursuing my dream career in Software Engineering which to me, involves working in innovative and creative technical projects that make a difference and create positive impact in organizations and people. In Flatiron School I have specialised in working with React, Javascript, ES6 and Ruby on Rails. But most importantly I have been developed the skills to learn new technologies rapidly so I am very flexible and adaptable with new programming languages and frameworks. Software engineering is a field that I am passionate about overall as a person, whether its passing the tests on a difficult coding challenge, making songs with my 10 year old daughter on my music web app, or showing my wonderful wife my latest website for her design advice.
 
-Software engineering is a field that I am passionate about overall as a person, whether its passing the tests on a difficult coding challenge, making songs with my 10 year old daughter on my music web app, or showing my wonderful wife my latest website for her design advice.
-
-But in this blog, what I really want to try is to give an overview of the process behind my resume/career-path and the main experiences I've had throughout the years. I believe my youth and path has been challenging but interesting and most importantly I think perseverance has always been a common factor. 
+So that was the elevator pitch I came up with after many adventures. But in this blog, what I really want to try is to give an overview of the process behind my resume/career-path and the main experiences I've had throughout the years. I believe my path has been challenging but interesting as anyone else's but most importantly I think perseverance has always been a common factor in my path.
 
 To start way back, I moved to the US in 2006 and finished highschool in 2009 and then went on to start college. But at the same time I started college I became a young father -so responsibilities mounted up quickly for the rest of my college career-. After finding out about these news and much thinking I chose biomedical sciences as a major since I had a passion for science/medicine from a young age, but mostly because this major seemed to lead to a good career where I could support my daughter and take back control of this situation. The next couple of years would involve working a part-time job at the local theme park on the weekends, but also getting on track for an ambitous PhD/MD career at the guidance of my college mentors.
 
@@ -17,11 +15,11 @@ During this time, alas, both my career and parenting responsibilities both grew 
 
 After this I felt dissatisfied with the type of jobs that were available to me but regardless, I worked in customer service and e-commerce and I had to continue with these jobs for some time. These unexpected jobs ended up being a big learning experience, in the sense of having to work with customers in high-intensity and high-volume commercial environments, and also in starting to explore working in the world of internet through e-commerce.
 
-Then, after 2 1/2 years of finishing college I was extremely lucky to be able to go back to school to a shorter 1 year business school program, which was not as tolling as a 5+ year md/phd route. This experience was challenging but it finally provided me with much needed clarity of what I wanted to do, and where I felt I could excel to advance in my career path. 
+Then, after 2 1/2 years of finishing college I was extremely lucky to be able to go back to school to a shorter 1 year business school program, which was not as tolling as a 5+ year md/phd route. This experience was challenging but it finally provided me with much needed clarity of what I wanted to do, and where I felt I could excel to advance in my dream career path. 
 
-I realized that I having a technical profile (science major in college) but also a big passion for cutting edge technology and innovation, working in tech would be an acheivable dream career. 
+Having studied science and business I started to understand that the middle ground for between these fields was in organizations was engineering and innovation. Also, I realized that having a technical profile (science major in college) and also a big passion for cutting edge technology, made working in tech would be an acheivable dream career. 
 
-Having studied science and business I started to understand that the middle ground between these fields was engineering and so software engineering would eventually become a posibility for me.
+
 
 Moreover, during the internship at the end of the business school program I ended up managing the company's wordpress websites and working with databases, which really put me in the shoes of a web development project. However, I did not know yet that my path would become specifically software engineering/web development as this seemed a whole other profession to what I had done. After this experience, while doing interviews for new roles at companies that I was interested in, I got technical questions which really reinforced me in the direction of programming.
 
@@ -32,11 +30,11 @@ So I took a small course on data science with Python which was my first experien
 ![Valley of Despair](https://qph.fs.quoracdn.net/main-qimg-479710148d811d4017b943691dff4325.webp)
 Source: Quora
 
-But luckily after some very valuable advice by a family friend who is an experienced software engineer, I looked into languages like Javascript, and then I finally understood that the software engineering profession specifically aligned with my interests, talents and skills. 
+But luckily after some very valuable advice by a family friend who is an experienced software engineer, I looked into languages like Javascript, and then I finally understood that the software engineering profession -specifically- aligned with my interests, talents and skills. 
 
-I ended up having to finding many answers to my career path after years of trying and only until after a lot of growth and luck I started to realize that tech could be a suitable career path for me. So I started to strive for a strong foundation in software engineering and ended up signing up for Flatiron School, while still working full-time in customer service.
+I ended up having to finding many answers to my dream career path after years of trying and only until after a lot of growth and some luck I saw that tech could be a suitable career path for me. So I ended up signing up for Flatiron School, while still working full-time in customer service.
 
-In Flatiron I have learned an incredible amount of fun things. I would have never imagined myself working with different programming languages, building application prototypes from scratch, and publishing them to the internet. But also the most rewarding aspect, which to me is using software engineering to communicate with the world.
+In Flatiron I have learned an incredible amount of fun but practical skills. I would have never imagined myself working with different programming languages, building application prototypes from scratch, and publishing them to the internet. But also the most rewarding aspect, which to me is using programming to communicate and interact with the world.
 
 I feel very lucky of to have found this path and what's really remarkable about software engineering is being able to listen to people and then build the things people want. Its much like a craft where you can improve your skills with practice and you then can literally see, test, and interact with the end result. 
 
