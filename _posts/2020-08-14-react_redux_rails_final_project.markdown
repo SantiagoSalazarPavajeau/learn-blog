@@ -89,3 +89,7 @@ heroku open
 Working in React allows for great front-end experiences, and using the available CSS UI components from external libraries allows the app have great looks very swiftly and can give more time to focus on functionality when building an app. 
 
 Using Redux can allow for building complex model relationships that are managed in the front-end and could be connected to any APIs that fit the needs of the project. Hooks really simplify components and get rid of a lot of verbose that come with class-based React.
+
+[Live Project Manager App](https://santiagosalazarpavajeau.github.io/react-projects/#/projects) : [link](https://santiagosalazarpavajeau.github.io/react-projects/#/projects)
+
+[GitHub Repo](https://github.com/SantiagoSalazarPavajeau/react-projects): [link](https://github.com/SantiagoSalazarPavajeau/react-projects)
