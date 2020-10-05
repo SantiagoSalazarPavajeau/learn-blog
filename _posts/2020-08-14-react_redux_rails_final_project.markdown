@@ -6,41 +6,47 @@ permalink:  react_redux_rails_final_project
 ---
 
 
-On this project I decided to revisit the concept of the Task-Process Log project (written in Ruby) where a user could describe their small business by creating the business processes and the jobs at the company. Then the user was able to relate them by assigning shared tasks by a process and a job. 
+On this project I decided to revisit the concept of the [Task-Process Log project](https://santiagosalazarpavajeau.github.io/sinatra_cms_portfolio_project_task-process_log) (written in Ruby) where users can describe their small business by defining business processes and jobs at the company, and relating these by shared tasks (to set specifically who does what in the business). But in this React rewrite instead of using a Process model, I use a Project model which makes it more practical for everyday use.
 
-But in this React reimagining instead of using a Process model, I used a Project model. I wanted to make an app that was practical for everyday use. React also allowed for a much more user friendly app. 
+I have been very interested in these kinds of tools because I am firm believer that having defined, clear, and organised sets of tasks keeps everyone happy in collaborative projects and work. Plus React makes the front-end very user-friendly.
 
-These tools are interesting to me because I am firm believer that having defined and organised sets of tasks is very valuable when performing complex activities. These tools can allow increasing clarity to work in teams and this keeps everyone happy.
+Now, focusing on the technical side, I worked in React for the front end and paired it with a Rails API. Some of the highlights of this prototype include:
 
-Now, on the technical side, I worked in React for the front end and built a Rails API. Some of the highlights of this prototype include a has many to has many relationship "schema" in Redux, using React libraries to make the front end look crisp, and being able to have a running and deployed prototype Rails API with a few CLI commands.
+* Building model relationships in Redux and Rails.
+* Creating async actions through Redux Thunk.
+* Applying container and presentational component pattern.
+* Implementing Redux and Hooks.
+* Authentication using JWT, and other Ruby gems.
+* Deploying a Rails API to Heroku, and the React front end to Github Pages.
 
-## React for Style
+## Hooks - Redux - Thunk & Rails for Data Storage
 
+Following the basic set up of the front end UI, I built three reducers on Redux for Projects, Tasks and People, that communicate with the backend to store, edit or delete data. This setup allows to have access to temporary data in the form of "state", like the a command to open/close a pop up, but also allows to store the project data permanently in the Postgres database. 
 
-I started building the app on the front end because I wanted to set up the looks of the app from the start. So I built a sidebar and a navbar that aligned together to handle navigation. I wanted a sidebar because it allows for more views/routes and more functionality to be added and easily accesed. Looking into future challenges I would like to add calendar functionality or data visualization libraries to create a more visual dashboard. 
+### Synchronizing Redux and Rails
 
-## Redux - Thunk - Rails for Data
-
-Following the basic set up of the front end style, I built three reducers on Redux for Projects, Tasks and People. The Projects and Tasks models have basically full CRUD functionality while People model is read only. 
-
-These three models are connected though a has many through relationship in Redux and Rails. 
+Specifically, the three models are connected though a has many through relationship in Redux and Rails. 
 
 * Projects and People have many Tasks
 * Projects have many People through Tasks
 * People have many Projects through Tasks
 * Tasks belong to Projects and People
 
-The way this is implemented in Redux is by giving the Tasks a *projectid* and *personid* attribute that corresponds to the Project/Person they belong to. In Rails, this is acheived through ActiveRecord relationships.
+The way this is implemented in Redux is by giving the Tasks a *project_id* and *person_id* attribute that corresponds to the Project/Person they belong to. In Rails, this is acheived through ActiveRecord relationships.
 
 Finally, I connected the dispatch CRUD actions to the backend using the Thunk middleware.
 
+### Using Hooks
+
+Initially, I wrote the app with class components and then refactored to use Hooks. I used `useState` to replace the state class syntax and `useEffect` to replace class lifecycle methods. Also, I was able to refactor the verbose `connect` redux function by using `useSelector` to access the store and `useDispatch` to access the actions.
+
 ## Container vs Presentational Components
 
-This was one of the most challenging parts of the build because I used container components for the main models that had access to the Redux store, but the children presentational components seemed to need state due to being forms or needing to create interactivity. The way that I tackled building some stateless presentational components was to build on a very simple element like an input field or a close button.
+This was one of the most challenging parts of the build because I used container components for the main models that had access to the Redux store, but the children presentational components seemed to need complex state due to being having complex forms for easier user interactivity. The way that I initially tackled building some stateless presentational components was to build on a very simple element like an input field or a close button. But with hooks it was much more easy to simplify components.
 
 ## React Router
 
-The react router was very different to use from the rails router as rails magic builds all the CRUD/RESTful routes and then we only build the controller. The method that worked for me to implement the react router was to set the Router component on the App.js file and depending on each of the children Route-component's path/route, one of the container components would render. To access these routes a react-router Link is needed from anywhere in the app as a button. In this app I built a modal for the show pages and this modal is shown on the '/:id' route corresponding to each project. 
+The react router was very different to use from the rails router as rails magic builds all the CRUD/RESTful routes and then we only build the controller. The method that worked for me to implement the react router was to set the Router component on the App.js file and depending on each of the children Route-component's path/route, one of the container components would render. To access these routes a react-router Link is needed from anywhere in the app as a button. Setting up the view page of each project as a modal without having to change or build a complex route allowed for the deployment version to be compatible with the functionality I had in development.
 
 ## Rails
 
@@ -80,4 +86,6 @@ heroku open
 
 ## Finale
 
-Working in React allows for great front-end experiences, as using pre-made components from UI libraries allows the app have great looks very swiftly. Leveraging these benefits can give more time to focus on functionality when building an app. Using Redux can allow for building complex model relationships that are managed in the front-end and could be connected to any APIs that fit the needs of the project. 
+Working in React allows for great front-end experiences, and using the available CSS UI components from external libraries allows the app have great looks very swiftly and can give more time to focus on functionality when building an app. 
+
+Using Redux can allow for building complex model relationships that are managed in the front-end and could be connected to any APIs that fit the needs of the project. Hooks really simplify components and get rid of a lot of verbose that come with class-based React.
