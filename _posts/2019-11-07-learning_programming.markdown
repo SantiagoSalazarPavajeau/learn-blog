@@ -13,19 +13,19 @@ To start way back, I moved to the US in 2006 with my mother and two younger sibl
 
 I had to split my time in multiple directions, and my plans for a MD/PhD/graduate school became more distant as it became clear that I underestimated the timeline of the career plans I set for myself. Being the main caretaker of my daughter took the main stage in my life and I tried my best in juggling all of these challenges, but always felt I had to do more, even when i gave all I had, and so I postponed my original school plans.
 
-This made me feel greatly disappointed in myself in the new career path I was on, but had to settle with working in unexpected minimum wage jobs that had nothing to do with my original plans, but I sticked to it over the years and was able to finish my undergrad.
+This made me feel greatly disappointed in myself in the new career path I was on, but had to settle with working in unexpected minimum wage jobs that had nothing to do with my original plans, but I sticked to school part-time over the years and was able to finish my undergrad.
 
 Then, after some more years went by, I met my wife who was the greatest inspiration for me and got motivated to go back to school to a shorter 1 year business school program. I felt my daughter had a more stable environment, so I decided to keep pursuing my career dreams despite knowing how difficult going back to school would be again. And it was extremely difficult, the high cost of the school took a toll on everyone and the ROI didn't immediately materialize.
 
 So, studying business in the end wasn't a fast-track to the accomplishment of all my dreams but it was more like obtaining a basic grounded general education I was missing and the great professors and classmates I met really taught me a lot. But it mainly showed me that I had still a lot to learn and that I could not give up on having a voice and a story to share as finding my real talents, interests and but also recognizing my obstacles was the only way to improve.
 
-Having studied science and business I started to understand that the middle ground of these fields in organizations was in engineering and innovation. And so, I started to realize that me having a technical inclination (science major in college) I could specialize in this area, but the path wasn't clear at all.
+Having studied science and business I started to understand that the middle ground of these fields in organizations was in engineering and innovation. And so, I started to realize that me having a technical inclination (science major in college) I could specialize in this area, but the path to take was still not very clear .
 
 So my post-masters experience was not an ROI success and after an unsuccessful job search and some online courses, I actually went back to working customer service full-time and was very close to abandoning my career dreams once again. 
 
 ### As always, we don't know what we don't know (until we know).
 
-But luckily after some very valuable advice by a family friend who is an experienced software engineer, got pointed in the direction of Javascript, and only then I finally understood that the software engineering profession -specifically- aligned with my interests, talents and skills. 
+But luckily after some very valuable advice by a family friend who is an experienced software engineer, got pointed in the direction of Javascript, and only then I finally understood that the software engineering profession -specifically- aligned with my interests, talents and skills. But also what convinced me is that it is an accesible field since the technical knowledge is open over the internet.
 
 I ended up having to find the path to my dream career, through years of high expectations unmet and only until after a lot of growth and some luck I saw that tech would be the field for me. 
 
@@ -33,4 +33,4 @@ Looking a couple of years back, I would have never imagined myself working with 
 
 And I am mostly surprised and rewarded by using programming as a way to communicate and interact with the world.
 
-I believe that I have been building many skills over the years and also the talent required to be a software engineer, but most importantly, I have been building perseverance as my main value. And It really makes me believe that people can have an unlimited amount of perseverance when its about things they are commited to and for me my commitment has been to be a father and a husband but also to build the career that I love.
+I believe that I have been building many skills over the years -and posses the talent- required to be a software engineer, but most importantly, I have been building perseverance as my main value. And this really makes me believe that people can have an unlimited amount of perseverance when its about things they are commited to and for me my commitment has been to be a father and a husband but also to build the career that I love.
