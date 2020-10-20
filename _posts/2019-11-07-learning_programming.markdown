@@ -19,21 +19,21 @@ Then, after some more years went by, I met my wife who was the greatest inspirat
 
 So, studying business in the end wasn't a fast-track to the accomplishment of all my dreams but it was more like obtaining a basic grounded general education I was missing and the great professors and classmates I met really taught me a lot. But it mainly showed me that I had still a lot to learn and that I could not give up on having a voice and a story to share as finding my real talents, interests and assets was necesary, but also recognizing my obstacles was the only way to improve.
 
-Having studied science and business I started to understand that the middle ground of these fields in organizations was in engineering and innovation. And so, I started to realize that me having a technical inclination (science major in college) I could specialize in this area, but the path to take was still not very clear .
+Having studied science and business I started to understand that the middle ground of these fields in organizations was in engineering, technology and innovation. And so, only then I started to realize that having a technical inclination (science major in college) I could specialize in this area, but the path to take was still not very clear. The only thing I knew was that I thrived when collaborating on technical tasks and pure sales where not my prefered craft.
 
 So my post-masters experience was not an ROI success and after an unsuccessful job search and some online courses, I actually went back to working customer service full-time and was very close to abandoning my career dreams once again. 
 
 ### As always, we don't know what we don't know (until we know).
 
-But luckily after some very valuable advice by a family friend who is an experienced software engineer, got pointed in the direction of Javascript, and only then I finally understood that the software engineering profession -specifically- aligned with my interests, talents and skills. But also what convinced me is that it is an accesible field since the technical knowledge is open over the internet.
+But out of complete luck I asked a long time family friend who is an experienced software engineer in Colombia about programming and he gave me some of the most valuable advice and pointed me in the direction of Javascript, and only then I finally understood that the software engineering profession -specifically- aligned with my interests, talents and skills. But also what convinced me is that it is an accesible field since the technical knowledge is open over the internet. 
 
-I ended up having to find the path to my dream career, through years of high expectations unmet and only until after a lot of growth and some luck I saw that tech would be the field for me. 
+So only after years of high expectations unmet, a lot of growth and a lot of luck I ended up to finding the path to my dream career and I saw that tech could be the field for me.
 
 Looking a couple of years back, I would have never imagined myself working with different programming languages, building applications, and deploying them to the internet.
 
-And I am mostly surprised and rewarded by using programming as a way to communicate and interact with the world.
+And I am most surprised and rewarded by the posibility of using programming as a way to communicate and interact with the world.
 
-I believe that I have been building many skills over the years -and posses the talent- required to be a software engineer, but most importantly, I have been building perseverance as my main value. And this really makes me believe that people can have an unlimited amount of perseverance when its about things they are commited to and for me my commitment has been to be a father and a husband but also to build the career that I love.
+In the end, I believe that I have built many skills over the years -and posses the talent- required to be a software engineer, but most importantly, I have sticked to perseverance as my main value. And I really believe that people can have an unlimited amount of perseverance when its about things they are commited to and for me, my commitment has been to being a father and a husband, but also to building the career that I love.
 
 🔭 I’m currently working on ...
 * [A project management app or "Team Todos" in React](https://santiagosalazarpavajeau.github.io/react-projects/#/projects)
