@@ -19,7 +19,7 @@ Then, after some more years went by, I met my wife who was the greatest inspirat
 
 So, studying business in the end wasn't a fast-track to the accomplishment of all my dreams but it was more like obtaining a basic grounded general education I was missing and the great professors and classmates I met really taught me a lot. But it mainly showed me that I had still a lot to learn and that I could not give up on having a voice and a story to share as finding my real talents, interests and assets was necesary, but also recognizing my obstacles was the only way to improve.
 
-Having studied science and business I started to understand that the middle ground of these fields in organizations was in engineering, technology and innovation. And so, only then I started to realize that having a technical inclination (science major in college) I could specialize in this area, but the path to take was still not very clear. The only thing I knew was that I thrived when collaborating on technical tasks and pure sales where not my prefered craft.
+Having studied science and business I started to understand that the middle ground of these fields in organizations was in engineering, technology and innovation. And so, only then I started to realize that having a technical inclination (science major in college) I could specialize in this area, but the path to take was still not very clear. The only thing I knew was that I thrived when collaborating on technical tasks and pure sales where not my main craft.
 
 So my post-masters experience was not an ROI success and after an unsuccessful job search and some online courses, I actually went back to working customer service full-time and was very close to abandoning my career dreams once again. 
 
