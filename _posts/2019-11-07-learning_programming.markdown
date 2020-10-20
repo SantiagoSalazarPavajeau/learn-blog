@@ -34,3 +34,14 @@ Looking a couple of years back, I would have never imagined myself working with 
 And I am mostly surprised and rewarded by using programming as a way to communicate and interact with the world.
 
 I believe that I have been building many skills over the years -and posses the talent- required to be a software engineer, but most importantly, I have been building perseverance as my main value. And this really makes me believe that people can have an unlimited amount of perseverance when its about things they are commited to and for me my commitment has been to be a father and a husband but also to build the career that I love.
+
+🔭 I’m currently working on ...
+* [A project management app or "Team Todos" in React](https://santiagosalazarpavajeau.github.io/react-projects/#/projects)
+* [A music-jam app in Vanilla Javascript](santiagosalazarpavajeau.github.io/chords_beats_frontend/)
+* [A community for fellow Young Fathers in Ruby on Rails](https://pure-island-81017.herokuapp.com/)
+* [Algorithms](https://github.com/SantiagoSalazarPavajeau/coding_challenges)
+
+
+⚡ Fun facts: ...
+* I wrote all the music and recorded all the instruments on my high school band album (over 10 years ago!) and then played the songs in the battle of the bands with some great friends.
+* I sell random t-shirts and other merch in amazon.
