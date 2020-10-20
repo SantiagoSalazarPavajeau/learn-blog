@@ -25,7 +25,7 @@ So my post-masters experience was not an ROI success and after an unsuccessful j
 
 ### As always, we don't know what we don't know (until we know).
 
-But out of complete luck I asked a long time family friend who is an experienced software engineer in Colombia about programming and he gave me some of the most valuable advice and pointed me in the direction of Javascript, and only then I finally understood that the software engineering profession -specifically- aligned with my interests, talents and skills. But what also convinced me is that it is an accesible field since the technical knowledge is open over the internet, and the barrier to entry can be overcomed by learning online unlike other fields. 
+But out of complete luck I asked a long time family friend who is an experienced software engineer in Colombia about programming and he gave me some of the most valuable advice and pointed me in the direction of Javascript, and only then I finally understood that the software engineering profession -specifically- aligned with my interests, talents and skills. But what also convinced me is that it is an accesible field since the technical knowledge is open over the internet, and the barrier to entry can be overcome by learning online unlike other fields. 
 
 So only after years of high expectations unmet, a lot of growth and a lot of luck I ended up to finding the path to my dream career and I saw that tech could be the field for me.
 
