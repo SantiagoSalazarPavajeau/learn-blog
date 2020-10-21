@@ -46,7 +46,9 @@ Looking a couple of years back, I would have never imagined myself working with 
 
 And I am most surprised and rewarded by the posibility of using programming as a way to communicate and interact with the world, which is something that really motivates me, having a voice and a story to tell.
 
-In the end, I believe that I have built many skills over the years -and posses the talent- required to be a software engineer, but most importantly, I have sticked to perseverance as my main value. And I really believe that people can have an unlimited amount of perseverance when its about things they are commited to and for me, my commitment has been to being a father and a husband, but also to building the career that I love.
+In the end, I believe that I have built many skills over the years -and posses the talent- required to be a software engineer, but most importantly, I have sticked to perseverance as my main value. And I really believe that people can have an unlimited amount of perseverance when its about things they are commited to and for me, my commitment has been to being a father and a husband, but also to building the career that I love. 
+
+So I am currently looking to partner with a company with an open culture that values collaboration, and creative advancement. Where I can add value through my technical skills but also through my values.
 
 🔭 I’m currently working on ...
 * [A project management app or "Team Todos" in React](https://santiagosalazarpavajeau.github.io/react-projects/#/projects)
