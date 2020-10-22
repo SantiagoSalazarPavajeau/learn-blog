@@ -102,9 +102,9 @@ So there is a way to limit the hoisting of **var** variables and that is by usin
 
 ### Loops and var as an example
 
-Lets look at a refactored example from the [MDN Closures Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures):
+Lets look at a refactored example from the [Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures):
 
-(LINK OF EXAMPLE IN SANDBOX)[https://codesandbox.io/s/focused-feistel-9kqwv?file=/src/index.js]
+[LINK OF EXAMPLE IN SANDBOX](https://codesandbox.io/s/focused-feistel-9kqwv?file=/src/index.js)
 
 ```
 /index.html
