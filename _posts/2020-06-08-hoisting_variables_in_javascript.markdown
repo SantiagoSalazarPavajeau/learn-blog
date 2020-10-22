@@ -64,22 +64,27 @@ Both will return a Reference Error because the declaration of the variable **a**
 
 ### Block Context
 
-When we look at declaring variables with **var** we also find that they do not have block scope at all. If you analyze the code below, the expected normal block scope behavior would be, that the variables inside the if statement block could not be accessed by the outer **vairables()** function. This happens as expected when we use **let** and **const**. However, as we see the value of **var a** is changed by the block so this block does not create a limited scope or context for **var a** and there is only one instance of **var a** throughout the **variables()** function lexical environment and the **var a** inside the block gets hoisted to the function scope.
+When we look at declaring variables with **var** we also find that they do not have block scope with if statements. In the code below we try to change the value of the variables `a`, `b`, and `c`, and end up only being able to change `a`. So we can reassign a `var` variable and overwrite
 
 ```
 function variables(){
- var a = 1
- let b = 2
- const c = 3
- 
- if (true) {
-  var a = 4
-  let b = 5
-  const c = 6
- }
- return `${a} ${b} ${c}`
-} // "4 2 3" ---- **a** is changed by the block in the if statement while b and c are not.
+  var a = 1
+  let b = 2
+  const c = 3
+  
+  if (true) {
+	 var a = 4
+   var d = 5
+   let e = 6
+   const f = 7
+  }
+  return `${a} ${b} ${c} ${d} ${e} ${f}` // Reference Error: e is not defined
+} // "4 2 3 5" ---- **a** is changed by the block in the if statement 
 ```
+
+
+Normal block scope behavior would be, that the variables inside the if statement block could not be accessed by the outer scope. This happens as expected when we use **let** and **const**. However, **var d**  is accesible by the outside of the if statement. Also the first instance of `var a` is overwritten by the instance in the inner scope. So the instances of `var a` and `var d`  inside the block gets hoisted to the function scope. The block lexical environment of if statements is not respected by `var`.
+
 
 However, a variable declared and initiated with **var** can be set to a function scope and not have the same behavior as with a block.
 
@@ -93,13 +98,13 @@ function variables( ){
 console.log(a) // returns 1
 ```
 
-So there is a way to limit the hoisting of **var** variables and that is by using function scope or closures.
-
-Ignoring block scope can be very problematic because we loose control of the **var** variables, i.e. their behavior is counterintuitive. This can cause bugs, and actually its hard to think of how JS existed only declaring variables with **var**  because it has all of these unexpected complexities.
+So there is a way to limit the hoisting of **var** variables and that is by using function scope or "closures".
 
 ### Loops and var as an example
 
 Lets look at a refactored example from the [MDN Closures Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures):
+
+(LINK OF EXAMPLE IN SANDBOX)[https://codesandbox.io/s/focused-feistel-9kqwv?file=/src/index.js]
 
 ```
 /index.html
