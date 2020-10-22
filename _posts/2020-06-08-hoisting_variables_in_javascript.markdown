@@ -5,27 +5,11 @@ date:       2020-06-08 17:17:53 -0400
 permalink:  hoisting_variables_in_javascript
 ---
 
-## Lexical Environment and Scope
+### Lexical Environment and Scope
 
-The lexical environment is where Javascript stores the meta data about variables and functions, for example, it will include the local variables inside the scope of a function when inside the function. So the variables available and the lexical enviroment change as the scope changes.
-
-In this example the **var outerVariable** is hoisted to **outer()** function and can be accessed by the **inner()** function.
-
-```
-function outer(){
- var outerVariable = 1
-  function inner(){
-	 alert(outerVariable);
- }
- inner()
-}
-
-outer() // alerts 1 in modal box
-```
-
-There is a single lexical environment of inner() and it exclusively includes  the *outerVariable*.
+The lexical environment is where Javascript stores the meta data about variables and functions. So the meta-data of the lexical environment tells Javascript the scope of a variable whether is global or local.
  
-## Hoisting
+### Hoisting
 
 Hoisting literally refers to the concept of raising or lifting something onto the top. In Javascript it has to do with the way variables and functions exist at a certain moment in the "running" of the code and how they are "raised" to the top of the code by the Javascript engine. However, this JavaScript behavior is quite unique and has some specific rules that need to be accounted for in order to understand how to correctly declare variables in order to have access to them and their values.
 
@@ -78,7 +62,7 @@ const a = "hello"
 
 Both will return a Reference Error because the declaration of the variable **a** is hoisted but its value is inaccesible since they are not being initialized with *undefined* like **var** does. So initializing these variables to "hello" after the console.log call will indeed create a Reference Error.
 
-## Block Context
+### Block Context
 
 When we look at declaring variables with **var** we also find that they do not have block scope at all. If you analyze the code below, the expected normal block scope behavior would be, that the variables inside the if statement block could not be accessed by the outer **vairables()** function. This happens as expected when we use **let** and **const**. However, as we see the value of **var a** is changed by the block so this block does not create a limited scope or context for **var a** and there is only one instance of **var a** throughout the **variables()** function lexical environment and the **var a** inside the block gets hoisted to the function scope.
 
@@ -113,7 +97,7 @@ So there is a way to limit the hoisting of **var** variables and that is by usin
 
 Ignoring block scope can be very problematic because we loose control of the **var** variables, i.e. their behavior is counterintuitive. This can cause bugs, and actually its hard to think of how JS existed only declaring variables with **var**  because it has all of these unexpected complexities.
 
-## Loops and var as an example
+### Loops and var as an example
 
 Lets look at a refactored example from the [MDN Closures Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures):
 
