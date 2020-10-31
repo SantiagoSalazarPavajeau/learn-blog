@@ -52,7 +52,7 @@ So I am currently looking to partner with a company with an open culture that va
 
 🔭 I’m currently working on ...
 * [A project management app or "Team Todos" in React](https://santiagosalazarpavajeau.github.io/react-projects/#/projects)
-* [A music-jam app in Vanilla Javascript](santiagosalazarpavajeau.github.io/chords_beats_frontend/)
+* [A music-jam app in Vanilla Javascript](https://santiagosalazarpavajeau.github.io/chords_beats_frontend/)
 * [A community for fellow Young Fathers in Ruby on Rails](https://pure-island-81017.herokuapp.com/)
 * [Algorithms](https://github.com/SantiagoSalazarPavajeau/coding_challenges)
 
@@ -62,7 +62,7 @@ So I am currently looking to partner with a company with an open culture that va
 * I have t-shirts and other merch on an e-commerce platform in amazon (IP free or original designs).
 
 - 📫 How to reach me: ...
-* (Linkedin)[https://www.linkedin.com/in/santiago-salazar-pavajeau/]
-* (GitHub)[https://github.com/SantiagoSalazarPavajeau]
-* (Twitter)[https://twitter.com/santispavajeau]
+* [Linkedin](https://www.linkedin.com/in/santiago-salazar-pavajeau)
+* [GitHub](https://github.com/SantiagoSalazarPavajeau)
+* [Twitter](https://twitter.com/santispavajeau)
 
