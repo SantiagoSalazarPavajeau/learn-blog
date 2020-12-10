@@ -5,7 +5,7 @@ date:       2019-11-07 06:37:55 -0500
 permalink:  learning_programming
 ---
 
-"I am a Software Engineer committed to technical projects and with a big passion for collaboration. Looking to partner with a company with an open and positive culture, that focuses on collaboration for the development of cutting edge technology. Throughout the years I have developed the soft skills that come with working in research like dealing with scientific and technical documentation, and also the communication skills developed through team collaboration in a business setting..."
+"I am a Software Engineer with a passion for collaboration that thrives in technical projects. What I love about programming is working with others as I am a people person and this really motivates me to keep building things and to take on big challenges. Throughout the years I have developed the soft skills that come with working in research like dealing with scientific and technical documentation, and also the communication skills developed through team collaboration in a business setting..."
 
 So that is the start of the complex elevator pitch I have been building after many adventures. But in this blog, what I really want to try is to take a look at the process behind my story. I believe my path has been as challenging and interesting as anyone else's but most importantly I think perseverance has become the main value in my path.
 
