@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Building a Synth Bass with Tone.js"
-date:       2020-12-10 14:32:28 +0000
+date:       2020-12-10 09:32:29 -0500
 permalink:  building_a_synth_bass_with_tone_js
 ---
 
