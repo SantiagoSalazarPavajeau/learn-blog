@@ -58,11 +58,12 @@ So I am currently looking to partner with a company with an open culture that va
 
 
 ⚡ Fun facts: ...
-* I wrote all the music and recorded all the instruments on my high school band album (over 10 years ago!) and then played the songs in the battle of the bands with some great friends.
-* I have t-shirts and other merch on an e-commerce platform in amazon (IP free or original designs).
+* Always been a musician at heart and single-handedly wrote and recorded an alt-rock album in Logic (over 10 years ago!) and then performed the album live some great friends, recently been focusing on technology like synths, drum machines, etc.
+* Have hundrends of t-shirts and other merch over the internet from working on an e-commerce platform for amazon (IP free or original designs) while traveling.
 
 - 📫 How to reach me: ...
-* [Linkedin](https://www.linkedin.com/in/santiago-salazar-pavajeau)
-* [GitHub](https://github.com/SantiagoSalazarPavajeau)
-* [Twitter](https://twitter.com/santispavajeau)
+* [Connect with me on Linkedin!](https://www.linkedin.com/in/santiago-salazar-pavajeau)
+* [Checkout my code on GitHub!](https://github.com/SantiagoSalazarPavajeau)
+* [or connect through Twitter!](https://twitter.com/santispavajeau)
 
+Thank you!
