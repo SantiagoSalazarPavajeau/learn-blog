@@ -1,0 +1,52 @@
+I"�<p>This week I was able to join a team for my first time collaborating with git but also my first hackathon and the experience so far has been very intense and great! I entered the team a little bit late because they needed extra help after they started, but the tight deadline got me into a hackathon “rush” mode and had a couple of days of intense coding.</p>
+
+<p>I usually don’t code much on the weekends but with this “rush” found myself coding all the weekend from early in the morning (9-10am) until 1-2am, which was probably not the healthiest approach (still made sure I took a long 4-5 hour lunch break). But for the next time I will make sure I pace myself and not lose extreme amounts of sleep over it.</p>
+
+<p>We built this project with the full-stack react-typescript framework blitz which I never worked with before, excluding React, so it was a big learning experience!</p>
+
+<p>But, I think the main lesson I am taking away is learning to collaborate with git, as all software development work relies on version control to manage complex situations where everything needs to be in sync like a symphony or a complex machine.</p>
+
+<h2 id="collaborating-with-git">Collaborating with git</h2>
+
+<p>Some of the git commands that I got more familiar with working in this project were <code class="language-plaintext highlighter-rouge">git checkout -b</code>, <code class="language-plaintext highlighter-rouge">git checkout</code> and <code class="language-plaintext highlighter-rouge">git merge</code>. These commands allow you to create new branches or travel around existing branches in the project to make sure different branches are more compatible.</p>
+
+<h3 id="git-checkout--b-name-of-branch"><code class="language-plaintext highlighter-rouge">git checkout -b &lt;name-of-branch&gt;</code></h3>
+
+<p>Whenever we create or clone a repository we usually arrive to the <code class="language-plaintext highlighter-rouge">main</code> -or before the “master” branch-. But git allows to create branches or copies of the code (that will only exist in the ‘git alternate universe’ so you wont literally see that your project folder has been duplicated on your computer, but 
+ the new branch exists in git). Each branch in git has its own commits and modifications. So <code class="language-plaintext highlighter-rouge">git checkout -b new-branch</code> will create a new copy of your project called <code class="language-plaintext highlighter-rouge">new-branch</code> where you can make changes and make sure that the original is not affected.</p>
+
+<h3 id="git-checkout-name-of-branch"><code class="language-plaintext highlighter-rouge">git checkout &lt;name-of-branch&gt;</code></h3>
+
+<p>This command without the <code class="language-plaintext highlighter-rouge">-b</code> argument allows you to travel around the different branches/versions of the project as long as your current branch does not have any changes pending to be committed. If your branch has changes you can push them or <a href="https://git-scm.com/docs/git-stash#:~:text=DESCRIPTION,to%20match%20the%20HEAD%20commit.">stash</a> them. <a href="https://youtu.be/KLEDKgMmbBI?t=525">(Link to a great video about stash)</a></p>
+
+<h3 id="git-merge-name-of-branch"><code class="language-plaintext highlighter-rouge">git merge &lt;name-of-branch&gt;</code></h3>
+
+<p>This command will allow you to overwrite the branch you are currently on with another one. So the normal scenario could be that you want to have the new features that the team made. You can transfer the new features to your branch by doing <code class="language-plaintext highlighter-rouge">git merge &lt;new-features-branch&gt;</code> and the branch <code class="language-plaintext highlighter-rouge">new-features-branch</code> would overwrite yours.</p>
+
+<p>However, if you made some changes in the same files as the <code class="language-plaintext highlighter-rouge">new-features-branch</code> the merge conflict would have to be resolved manually <a href="https://www.youtube.com/watch?v=__cR7uPBOIk">(Great video on this)</a>.</p>
+
+<h3 id="some-scenarios">Some scenarios:</h3>
+
+<p><em>How can I add the latest of project features to my branch?</em></p>
+
+<p>It could be by first ‘traveling’ to the branch that you want to start from. Maybe you were working away from the project for a couple of days and some new things were added, and you would like to have them in your branch and build your new additions on-top of them.</p>
+
+<p>First, if you want to take a look at what the changes specifically look like, you can travel to the newest branch by doing <code class="language-plaintext highlighter-rouge">git checkout &lt;main&gt;</code> e.g. or <any branch="" name="">, and launch for server/app from there. Then if you want to make this changes available in your branch you can travel back to your branch (`git checkout <my-branch>`) and from there do `git merge &lt;main&gt;` and overwrite `my-branch` with `main`.</my-branch></any></p>
+
+<p><em>What if I have some changes in my branch?</em></p>
+
+<p>Also if you have a merge conflict but still want to tinker around with the <code class="language-plaintext highlighter-rouge">main</code> branch you can just ‘travel’ to the other branch e.g. (<code class="language-plaintext highlighter-rouge">git checkout &lt;main&gt;</code>) and then from there create a new branch by doing a <code class="language-plaintext highlighter-rouge">git checkout -b &lt;new-branch&gt;</code> and the git command with the <code class="language-plaintext highlighter-rouge">-b</code> attribute will allow you to create a brand new branch that is a copy of the <code class="language-plaintext highlighter-rouge">main</code> without changing your original branch <code class="language-plaintext highlighter-rouge">my-branch</code> where you had the changes you wanted to keep.</p>
+
+<h3 id="final-thoughts">Final thoughts:</h3>
+
+<p>If there was in fact a conflict of branches where the same files where modified this would have to be resolved ‘by hand’, which would just be a bit more tedious but not a problem impossible to solve.</p>
+
+<p>Hopefully this blog was helpful to get started with collaborating in the git universe, I know for me its been a confusing topic but learning these tools really helps to understand the software development process.</p>
+
+<p>Feel free to reach out for any conversations:</p>
+
+<p><a href="https://www.linkedin.com/in/santiago-salazar-pavajeau/">LinkedIn</a></p>
+
+<p><a href="https://twitter.com/santispavajeau">Twitter</a></p>
+
+:ET

@@ -1,0 +1,2 @@
+I"¬<p>When the user inputs data into a website using Ruby/Sinatra the data travels from HTML to Ruby and to SQL. In fact, Ruby uses Sinatra for get and post requests, then ActiveRecord and ORM to instantiate objects and also to connect the data to an SQL database. The following code snippets describe these steps in the process of saving user input into our program and also even showing a dynamic response to the user input.</p>
+:ET

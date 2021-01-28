@@ -1,0 +1,2 @@
+I"<p>On this project I decided to revisit the concept of the <a href="https://santiagosalazarpavajeau.github.io/sinatra_cms_portfolio_project_task-process_log">Task-Process Log project</a> (written in Ruby) where users can describe their small business by defining business processes and jobs at the company, and relating these by shared tasks (to set specifically who does what in the business). But in this React rewrite instead of using a Process model, I use a Project model which makes it more practical for everyday use.</p>
+:ET

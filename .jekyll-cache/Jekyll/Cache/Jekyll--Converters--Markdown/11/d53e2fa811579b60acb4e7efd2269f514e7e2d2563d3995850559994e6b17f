@@ -1,0 +1,177 @@
+I"�N<p>In this blog, I follow up on my earlier post: <a href="https://dev.to/santispavajeau/managing-big-o-notation-3162">Managing Big O Notation</a> and give it a shot at explaining a technique to improve some algorithms.</p>
+
+<p>I will be looking specifically at eliminating nested loops through memoization so these examples go from <code class="language-plaintext highlighter-rouge">O(n^2)</code> to <code class="language-plaintext highlighter-rouge">O(n)</code>. In an upcoming blog, I will take a look at improving some recursion solutions.</p>
+
+<h2 id="memoization">Memoization</h2>
+
+<p>This technique involves using an <code class="language-plaintext highlighter-rouge">Object</code> in javascript or any other data structure with key-value pairs (in other languages) to temporarily store some data while the algorithm is being executed. A key-value pair data structure is used because keys are unique so the same key won’t be generated more than once. So if certain data has to be accessed multiple times, it can be stored in only one run in the form of key value pairs and then it can be accessed multiple times without the need of regenerating it. When this technique is not used, identical data is created over and over again which makes the algorithm slower.</p>
+
+<p>This approach also allows to add some logic that helps get the solution at the same time we access the data of the object; as we will see in the following example.</p>
+
+<h2 id="two-sum">Two Sum</h2>
+<p><a href="https://codesandbox.io/s/twosum-7vkp0?file=/src/index.js">Code in Sandbox</a></p>
+
+<p>A basic example of using a memoization object (in javascript) is Two Sum which is Leetcode problem #1. Two Sum takes an array of integers and a target sum and asks to find any two numbers from the array that add to the target, but we return their indexes. The brute force solution is:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">twoSumSlow</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">,</span> <span class="nx">sum</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="c1">// O(n^2) big o complexity</span>
+    
+    <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+        
+        <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">j</span> <span class="o">=</span> <span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="nx">j</span><span class="o">&lt;</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">){</span><span class="c1">// nested loop j = i+1 to avoid adding same element</span>
+            
+            <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">+</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">===</span> <span class="nx">sum</span><span class="p">){</span>
+                
+                <span class="k">return</span> <span class="p">[</span><span class="nx">i</span><span class="p">,</span> <span class="nx">j</span><span class="p">];</span> <span class="c1">// return index of elements that sum to target</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+<span class="kd">const</span> <span class="nx">sum</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="nx">twoSumSlow</span><span class="p">(</span><span class="nx">numbers</span><span class="p">,</span> <span class="nx">sum</span><span class="p">)</span>
+<span class="c1">// returns =&gt; [0,4] which are the indexes of the correct numbers</span>
+<span class="c1">// because 1 + 9  = 10</span>
+</code></pre></div></div>
+
+<p>This solution uses a nested loop (numbers[i] vs numbers[j]) to check every combination of numbers in the array to see if they add to the required sum.</p>
+
+<p>However, what makes this solution slow is that every number is visited more than once by the nested loop so when the size of the array increases, the amount of visits by the parent and child loop to each number, grows exponentially, which makes the solution expensive.</p>
+
+<p>Taking a look at the memoization object solution:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">twoSumFast</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">,</span> <span class="nx">sum</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="c1">// O(n) big O time complexity</span>
+
+    <span class="kd">const</span> <span class="nx">dataObject</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="nx">dataObject</span><span class="p">[</span><span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">i</span> <span class="c1">// create memo object</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kd">const</span> <span class="nx">missingNumber</span> <span class="o">=</span> <span class="nx">sum</span> <span class="o">-</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> 
+
+        <span class="k">if</span><span class="p">(</span><span class="nx">dataObject</span><span class="p">[</span><span class="nx">missingNumber</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="nx">dataObject</span><span class="p">[</span><span class="nx">missingNumber</span><span class="p">]</span> <span class="o">!==</span> <span class="nx">i</span><span class="p">){</span> 
+
+            <span class="k">return</span> <span class="p">[</span><span class="nx">dataObject</span><span class="p">[</span><span class="nx">missingNumber</span><span class="p">],</span> <span class="nx">i</span><span class="p">]</span> <span class="c1">// return missing number's index and current index</span>
+
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+<span class="kd">const</span> <span class="nx">sum</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="nx">twoSumFast</span><span class="p">(</span><span class="nx">numbers</span><span class="p">,</span> <span class="nx">sum</span><span class="p">)</span>
+<span class="c1">// returns =&gt; [0,4] which are the indexes of the correct numbers</span>
+<span class="c1">// because 1 + 9  = 10</span>
+</code></pre></div></div>
+
+<p>We implement memoization by creating a <code class="language-plaintext highlighter-rouge">dataObject</code> with the array of numbers as keys of the object and the index of each number in the array as the corresponding value.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">dataobject</span> <span class="o">=</span> <span class="p">{</span>
+ <span class="mi">1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+ <span class="mi">2</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+ <span class="mi">7</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+ <span class="mi">8</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+ <span class="mi">9</span><span class="p">:</span> <span class="mi">4</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>This way, we can add a second loop (which is not nested) that checks for the <code class="language-plaintext highlighter-rouge">missingNumber</code> that adds out to our desired value.</p>
+
+<p>Generating the ‘memoization object’ <code class="language-plaintext highlighter-rouge">dataObject</code> allows us to store all the numbers as unique keys that can be accessed as <code class="language-plaintext highlighter-rouge">dataObject[missingNumber]</code> to retrieve the index of the missing number for the ‘two sum’.</p>
+
+<p>The added/unique logic in this example comes from using an indirect way of checking for the sum through the missing number, which is found by subtracting the current number from the sum.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">missingNumber</span> <span class="o">=</span> <span class="nx">sum</span> <span class="o">-</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>Then we can add this logic when accessing the object key with <code class="language-plaintext highlighter-rouge">dataObject[missingNumber]</code>. And so we kill two birds with one store by generating the <code class="language-plaintext highlighter-rouge">missingNumber</code> and also seeing if it exists as a key of the object.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="nx">dataObject</span><span class="p">[</span><span class="nx">missingNumber</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="nx">dataObject</span><span class="p">[</span><span class="nx">missingNumber</span><span class="p">]</span> <span class="o">!==</span> <span class="nx">i</span><span class="p">){</span> 
+
+  <span class="k">return</span> <span class="p">[</span><span class="nx">dataObject</span><span class="p">[</span><span class="nx">missingNumber</span><span class="p">],</span> <span class="nx">i</span><span class="p">]</span> 
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In the nested loop example, we set the sum logic equality in the nested loop which increases the time complexity.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//nested loop w/ i and j</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">+</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">===</span> <span class="nx">sum</span><span class="p">){</span>
+                
+ <span class="k">return</span> <span class="p">[</span><span class="nx">i</span><span class="p">,</span> <span class="nx">j</span><span class="p">];</span> 
+
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<h2 id="counting-duplicates">Counting Duplicates</h2>
+
+<p>This next example is an adaptation from <a href="https://youtu.be/2tW3XDVqvqA">Aaron Martin (AJMANNTECH)</a> video on youtube. This algorithm takes a list of numbers and counts the duplicates.</p>
+
+<p><a href="https://codesandbox.io/s/slowduplicates-k0mpx?file=/src/index.js">Code in sandbox</a></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">countDuplicatesSlow</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="c1">// O(n^2) big o complexity</span>
+
+    <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>  <span class="nx">i</span><span class="o">++</span><span class="p">){</span> 
+
+        <span class="kd">let</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span><span class="o">&lt;</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>  <span class="nx">j</span><span class="o">++</span><span class="p">){</span>
+
+            <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">j</span><span class="p">]){</span> <span class="c1">// if we find a duplicate as we compare all numbers to all numbers</span>
+
+                <span class="nx">count</span><span class="o">++</span>
+
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">`Found a total of: (</span><span class="p">${</span><span class="nx">count</span><span class="p">}</span><span class="s2">) number </span><span class="p">${</span><span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]}</span><span class="s2">s`</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="p">[...</span><span class="k">new</span> <span class="nb">Set</span><span class="p">(</span><span class="nx">result</span><span class="p">)])</span> <span class="c1">// only unique</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>In this example, we use a nested loop to evaluate every item (outer for loop) against the rest of the items (inner for loop) and start to count how many duplicates we have on the array.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">duplicateNumbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="nx">countDuplicatesSlow</span><span class="p">(</span><span class="nx">duplicateNumbers</span><span class="p">)</span>
+<span class="c1">// returns =&gt; [Found a total of: (2) number 1s,</span>
+<span class="c1">//             Found a total of: (3) number 2s,</span>
+<span class="c1">//             Found a total of: (1) number 3s]</span>
+</code></pre></div></div>
+
+<p>So first we create a loop to save the unique elements as keys to the object with an empty array as value and then we do a second loop to count the duplicates to the corresponding keys.</p>
+
+<p><a href="https://codesandbox.io/s/fastduplicates-yd462?file=/src/index.js">Code in sandbox</a></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">countDuplicates</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="c1">// O(n) big o complexity</span>
+
+    <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>  <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">[</span><span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]]){</span> <span class="c1">// if key does not exist the value has not been accounted for</span>
+
+            <span class="kd">let</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+            <span class="nx">result</span><span class="p">[</span><span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="c1">//initialize key</span>
+
+            <span class="nx">result</span><span class="p">[</span><span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nx">count</span> <span class="c1">// initialize value</span>
+
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+            <span class="nx">result</span><span class="p">[</span><span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span><span class="o">++</span> <span class="c1">//increase count if key already exists</span>
+            
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">result</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Not having a nested loop allows for the algorithm to be O(n) instead of O(n^2).</p>
+
+:ET

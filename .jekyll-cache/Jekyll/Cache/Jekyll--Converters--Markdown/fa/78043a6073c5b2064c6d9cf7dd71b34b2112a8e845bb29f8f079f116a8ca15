@@ -1,0 +1,182 @@
+I"�H<p>React class components can manage data with built in state and props, but when more complex data is used in an application,  Redux can also help manage it. However, Redux is very verbose and so Hooks can help reduce lines of code, which is why it has become the standard way to manage application data in React. The Hooks that I will be exploring are <code class="language-plaintext highlighter-rouge">useState()</code>, <code class="language-plaintext highlighter-rouge">useEffect()</code>, <a href="https://dev.to/santispavajeau/refactoring-apps-from-class-based-react-with-redux-to-functional-hooks-part-2-l14"><code class="language-plaintext highlighter-rouge">useSelector()</code>, and <code class="language-plaintext highlighter-rouge">useDispatch()</code> Part 2</a> as using these will allow a working refactor from class-based React with Redux. But lets start with <code class="language-plaintext highlighter-rouge">useState()</code> and <code class="language-plaintext highlighter-rouge">useEffect()</code> for now.</p>
+
+<h3 id="refactoring-from-class-based-to-functional-react">Refactoring from class-based to functional React</h3>
+
+<p>The first step to be able to access hooks is to change your components from classes to functions. So a component would change like this:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span><span class="nx">Component</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">Component</span><span class="p">{</span>
+
+ <span class="nx">renderText</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span> <span class="nx">I</span> <span class="nx">am</span> <span class="nx">a</span> <span class="nx">React</span> <span class="kd">class</span> <span class="nx">component</span> <span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span> <span class="p">}</span>
+
+ <span class="nx">render</span><span class="p">(){</span>
+  <span class="k">return</span><span class="p">(</span>
+   <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">renderText</span><span class="p">()}</span>
+  <span class="p">)</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>to:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+
+ <span class="kd">const</span> <span class="nx">renderText</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span> <span class="nx">I</span> <span class="nx">am</span> <span class="nx">a</span> <span class="nx">React</span> <span class="nx">arrow</span> <span class="kd">function</span> <span class="nx">component</span> <span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span> <span class="p">}</span>
+ <span class="k">return</span><span class="p">(</span>
+  <span class="p">{</span><span class="nx">renderText</span><span class="p">()}</span>
+ <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// or </span>
+
+<span class="kd">function</span> <span class="nx">App</span><span class="p">(){</span>
+
+ <span class="kd">function</span> <span class="nx">renderText</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span> <span class="nx">I</span> <span class="nx">am</span> <span class="nx">a</span> <span class="nx">React</span> <span class="nx">functional</span> <span class="nx">component</span> <span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span> <span class="p">}</span>
+ <span class="k">return</span><span class="p">(</span>
+  <span class="p">{</span><span class="nx">renderText</span><span class="p">()}</span>
+ <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>So we don’t need to inherit from the React Component class and also we don’t use the render method but only a return statement containing the HTML tags. Also we don’t use <code class="language-plaintext highlighter-rouge">this</code> anymore and access class methods in functional React, since methods are just defined in the local scope of the functional component.</p>
+
+<h3 id="usestate">useState()</h3>
+
+<p>This is probably the most fundamental Hook and it replaces the state object in class-based. The way I use state in class components is by just doing:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">Component</span><span class="p">{</span>
+ <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">state1</span><span class="p">:</span> <span class="dl">"</span><span class="s2">some changing value by/for the user</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">state2</span><span class="p">:</span> <span class="dl">"</span><span class="s2">etc..</span><span class="dl">"</span>
+ <span class="p">}</span>
+ 
+ <span class="nx">handleClick</span><span class="p">(){</span>
+  <span class="nx">setState</span><span class="p">({</span>
+   <span class="na">state1</span><span class="p">:</span> <span class="dl">"</span><span class="s2">state1 changed after we clicked on the button</span><span class="dl">"</span>
+  <span class="p">})</span>
+ <span class="p">}</span>
+
+ <span class="nx">render</span><span class="p">(){</span>
+  <span class="k">return</span><span class="p">(</span>
+   <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleClick</span><span class="p">}</span><span class="o">&gt;</span> <span class="nx">Click</span> <span class="nx">me</span> <span class="nx">to</span> <span class="nx">change</span> <span class="nx">the</span> <span class="nx">following</span> <span class="nx">text</span><span class="o">!</span> <span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>  <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">state1</span><span class="p">}</span> <span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>  <span class="p">)</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>And the same functionality can be achieved by writing this in functional JS (arrow functions is my preference):</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+
+ <span class="kd">const</span> <span class="p">[</span><span class="nx">state1</span><span class="p">,</span> <span class="nx">setState1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">"</span><span class="s2">some changing value by/for the user</span><span class="dl">"</span><span class="p">)</span>
+ <span class="kd">const</span> <span class="p">[</span><span class="nx">state2</span><span class="p">,</span> <span class="nx">setState2</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">"</span><span class="s2">etc...</span><span class="dl">"</span><span class="p">)</span>
+ 
+ <span class="kd">const</span> <span class="nx">handleClick</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">setState1</span><span class="p">(</span><span class="dl">"</span><span class="s2">state1 changed after we clicked on the button</span><span class="dl">"</span><span class="p">)</span>
+ <span class="p">}</span>
+
+ <span class="k">return</span><span class="p">(</span>
+  <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">handleClick</span><span class="p">}</span><span class="o">&gt;</span> <span class="nx">Click</span> <span class="nx">me</span> <span class="nx">to</span> <span class="nx">change</span> <span class="nx">the</span> <span class="nx">following</span> <span class="nx">text</span><span class="o">!</span> <span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>  <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span> <span class="p">{</span><span class="nx">state1</span><span class="p">}</span> <span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span> <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Note that we don’t use <code class="language-plaintext highlighter-rouge">setState()</code> to change state but we name our own methods (e.g. <code class="language-plaintext highlighter-rouge">setState1</code> and <code class="language-plaintext highlighter-rouge">setState2</code>) that can change each specific state attributes.</p>
+
+<p>Using the useState() hook might not reduce the related lines of code significantly but it allows the replacement of the <code class="language-plaintext highlighter-rouge">this.state</code> class method with the direct names (e.g. <code class="language-plaintext highlighter-rouge">state1</code>, <code class="language-plaintext highlighter-rouge">state2</code>) of the attributes we want to manage with local state in the component.</p>
+
+<h3 id="useeffect">useEffect()</h3>
+
+<p>This hook is a bit more complex and it replaces the lifecycle methods for class-based React. For useEffect() to behave like componentDidMount() we only add an empty array as a second argument to the hook: <code class="language-plaintext highlighter-rouge">useEffect(()=&gt;{},[])</code>. This allows to call functions that require that the DOM is already rendered, like for example an async fetch to the back-end that renders data on loaded DOM nodes. For it to behave like componentDidUpdate() we add a value to the array that will trigger the callback when the value changes like <code class="language-plaintext highlighter-rouge">useEffect(()=&gt;{},[value])</code>. Last, for it to behave like componentWillUnmount() we just return the function that undos the side effect.</p>
+
+<p>The componentDidMount() lifecycle method in class-based React would look like:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">Component</span><span class="p">{</span>
+
+ <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">username</span><span class="p">:</span> <span class="dl">''</span>
+ <span class="p">}</span>
+ 
+ <span class="nx">componentDidMount</span><span class="p">(){</span>
+  <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">some.api/data</span><span class="dl">'</span><span class="p">)</span>
+   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">data</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="na">username</span><span class="p">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">username</span><span class="p">})</span>
+ <span class="p">}</span>
+
+ <span class="nx">render</span><span class="p">(){</span>
+  <span class="k">return</span><span class="p">(</span>
+  <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">username</span><span class="p">}</span> <span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>  <span class="p">)</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>And the refactor to hooks would simply look like:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+
+ <span class="kd">const</span> <span class="p">[</span><span class="nx">username</span><span class="p">,</span> <span class="nx">setUsername</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">""</span><span class="p">)</span>
+ 
+ <span class="nx">useEffect</span><span class="p">(()</span><span class="o">=&gt;</span><span class="p">{</span>
+  <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">some.api/data</span><span class="dl">"</span><span class="p">)</span>
+   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">data</span> <span class="o">=&gt;</span> <span class="nx">setUsername</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">username</span><span class="p">)</span>
+ <span class="p">},</span> <span class="p">[])</span>
+
+ <span class="k">return</span><span class="p">(</span>
+  <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span> <span class="p">{</span><span class="nx">username</span><span class="p">}</span> <span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span> <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Here we use the two hooks useState() and useEffect() which are some of the main React Hooks, and allow for a refactoring of components that have state and use lifecycle methods. Further control of useEffect() like activating callbacks with events can be achieved by coupling it with another React hook called useRef(). Also, useCallback() and useMemo() can be used to improve performance for computationally expensive components, but we’ll leave those for another series of posts.</p>
+
+<p>I will be covering Redux Hooks useSelector() and useReducer() on the next blog, which will allow for a full refactor of a React Redux app to Hooks.</p>
+
+<p>Thank you for taking a look!</p>
+
+<p><a href="https://github.com/SantiagoSalazarPavajeau/react-projects/blob/master/src/App.js">Visit an example of a refactor in my project</a></p>
+
+<h2 id="to-connect-with-me">To connect with me:</h2>
+
+<p><a href="https://twitter.com/santispavajeau">Twitter</a>
+<a href="https://www.linkedin.com/in/santiago-salazar-pavajeau/">LinkedIn</a></p>
+
+<h2 id="also-some-of-my-projects">Also some of my projects:</h2>
+
+<ul>
+  <li>
+    <p><a href="https://santiagosalazarpavajeau.github.io/react-projects/#/projects">A project management app or “Team Todos” in React</a></p>
+  </li>
+  <li>
+    <p><a href="santiagosalazarpavajeau.github.io/chords_beats_frontend/">A music-jam app in Vanilla Javascript</a></p>
+  </li>
+  <li>
+    <p><a href="https://pure-island-81017.herokuapp.com/">A community for fellow young fathers in Ruby on Rails</a></p>
+  </li>
+</ul>
+
+<p>Some reference articles:
+https://leewarrick.com/blog/react-use-effect-explained/
+https://medium.com/trabe/react-useeffect-hook-44d8aa7cccd0
+https://www.digitalocean.com/community/tutorials/react-converting-to-a-hook</p>
+:ET

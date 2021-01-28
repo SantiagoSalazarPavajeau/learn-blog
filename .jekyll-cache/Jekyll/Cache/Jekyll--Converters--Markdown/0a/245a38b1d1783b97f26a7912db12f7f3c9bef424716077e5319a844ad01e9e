@@ -1,0 +1,87 @@
+I"�+<p>As my first main experiment with JavaScript, I built an app to <a href="https://santiagosalazarpavajeau.github.io/chords_beats_frontend/">play around with chord progressions</a> which allows the user to add different combinations of <code class="language-plaintext highlighter-rouge">chords</code> to a <code class="language-plaintext highlighter-rouge">song</code> and experiment with chord progressions to provide a quick and simple ‘song-making’ experience.</p>
+
+<p>This project has really helped me improve my JS skills and it helps me to keep coding when I need a break from other projects.</p>
+
+<p>So, I have been looking into improving the code and adding more features since the first iteration, and so recently I was able to add a synth bass keyboard with the Tone.js library. Here I explain the process.</p>
+
+<h2 id="implementing-tonejs">Implementing <a href="https://tonejs.github.io/">Tone.js</a></h2>
+
+<p>I find this library very interesting because it comes with a synthesizer right out of the box. So all the common properties of sound design like oscillator/wave types, attack, release, frequency, envelope, detune, filter, etc. can be set and played.</p>
+
+<p>It is fairly straightforward to get the ‘keyboard’ working since a synth can be initialized with:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">synth</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Tone</span><span class="p">.</span><span class="nx">Synth</span><span class="p">().</span><span class="nx">toDestination</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>And different keys can be played by just by passing a note and duration value:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">synth</span><span class="p">.</span><span class="nx">triggerAttackRelease</span><span class="p">(</span><span class="dl">"</span><span class="s2">A1</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">8n</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>However, what really excites me about the library is to be able to design the sound of the synthesizer, so I started by adding buttons that can change the wave shape of the oscillator, so it can sound softer(sine) or more robotic(sawtooth). This can be achieved by simply setting:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">synth</span><span class="p">.</span><span class="nx">oscillator</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">sawtooth</span><span class="dl">"</span>
+</code></pre></div></div>
+
+<p><a href="https://github.com/SantiagoSalazarPavajeau/chords_beats_frontend/blob/384b012b8389aa3395e8a692b78ecf9c752cc3f0/adapter.js#L67">Checkout the method where the Synth Bass is implemented.</a></p>
+
+<h2 id="keydown-event-listener-and-switch-statement">Keydown event listener and switch statement</h2>
+
+<p>Now to implement the actual feature of playing the ‘synth bass’ notes when pressing keyboard keys we can just use event listeners for <code class="language-plaintext highlighter-rouge">keydown</code>. This type of event has an <code class="language-plaintext highlighter-rouge">event.code</code> property so the switch statement can tell which key has been pressed trigger a different note with each key.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">keydown</span><span class="dl">"</span><span class="p">,</span>  <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+
+            <span class="k">switch</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">code</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">case</span> <span class="dl">"</span><span class="s2">ShiftLeft</span><span class="dl">"</span><span class="p">:</span>
+                  <span class="k">return</span> <span class="nx">synth</span><span class="p">.</span><span class="nx">triggerAttackRelease</span><span class="p">(</span><span class="dl">"</span><span class="s2">A1</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">16n</span><span class="dl">"</span><span class="p">)</span>
+                <span class="k">case</span> <span class="dl">"</span><span class="s2">KeyZ</span><span class="dl">"</span><span class="p">:</span>
+                  <span class="k">return</span> <span class="nx">synth</span><span class="p">.</span><span class="nx">triggerAttackRelease</span><span class="p">(</span><span class="dl">"</span><span class="s2">A#1</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">16n</span><span class="dl">"</span><span class="p">)</span>
+                <span class="k">case</span> <span class="dl">"</span><span class="s2">KeyX</span><span class="dl">"</span><span class="p">:</span>
+                  <span class="k">return</span> <span class="nx">synth</span><span class="p">.</span><span class="nx">triggerAttackRelease</span><span class="p">(</span><span class="dl">"</span><span class="s2">B1</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">16n</span><span class="dl">"</span><span class="p">)</span>
+                <span class="k">case</span> <span class="dl">"</span><span class="s2">KeyC</span><span class="dl">"</span><span class="p">:</span>
+                  <span class="k">return</span> <span class="nx">synth</span><span class="p">.</span><span class="nx">triggerAttackRelease</span><span class="p">(</span><span class="dl">"</span><span class="s2">C2</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">16n</span><span class="dl">"</span><span class="p">)</span>
+                <span class="c1">/// ETC...</span>
+                <span class="na">default</span><span class="p">:</span>
+                  <span class="k">return</span>
+              <span class="p">}</span>
+        <span class="p">})</span>
+
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>As the code shows, coupling the event listener with a switch statement allows triggering a specific note for each key. Our <code class="language-plaintext highlighter-rouge">e.code</code> argument changes with each keypress so for example pressing left shift (<code class="language-plaintext highlighter-rouge">ShiftLeft</code>) will play an ‘A1’ for the duration of an eight note.</p>
+
+<p>So the synth bass currently plays by pressing keys in between the left and right shift to have all lower 12 notes and from A to Enter for the 12 higher octaves which allows to play higher and lower notes easily.</p>
+
+<h2 id="event-listener-for-oscillator-wave-type">Event listener for oscillator wave type</h2>
+
+<p>I implemented a basic on click event listener to change the wave type and sound of the Synth Bass.</p>
+
+<p>So I added some buttons to the synth bass card where the type of the wave can be picked to change the sound of the synth bass. The options are sine, sawtooth, triangle, and square. To acheive this we just add buttons and corresponding event listeners that set the type of wave.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"waves"</span><span class="nt">&gt;</span>Triangle<span class="nt">&lt;/button&gt;</span>
+   <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"waves"</span><span class="nt">&gt;</span>Sawtooth<span class="nt">&lt;/button&gt;</span>
+   <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"waves"</span><span class="nt">&gt;</span>Square<span class="nt">&lt;/button&gt;</span>
+   <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"waves"</span><span class="nt">&gt;</span>Sine<span class="nt">&lt;/button&gt;</span>
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">wavesButtons</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">"</span><span class="s2">button.waves</span><span class="dl">"</span><span class="p">)</span>
+
+<span class="k">for</span><span class="p">(</span> <span class="kd">let</span> <span class="nx">wavesButton</span> <span class="k">of</span> <span class="nx">wavesButtons</span><span class="p">){</span>
+   <span class="nx">wavesButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">synth</span><span class="p">.</span><span class="nx">oscillator</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">innerText</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+   <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In this case, I only use the lowercase inner text of the buttons to set the oscillator wave type because these texts correspond to the properties that <code class="language-plaintext highlighter-rouge">synth.oscillator.type</code> accepts.</p>
+
+<h2 id="looking-forward">Looking forward</h2>
+
+<p>I am looking to improve the UI/UX layout but haven’t been able to decide on a specific idea. However, I am thinking of making the app more accessible implementing some type of mini-modals tutorial. Also looking to add some feature that helps the user decide which chord progressions to use either by showing chord progressions of actual songs or by a ‘smart’ suggestion’ of a good next chord depending on the theme wanted for the song. There are many possibilities of where this project can be headed to which will surely keep me busy building for a long time.</p>
+
+<p>Please feel more than welcome to share any thoughts/ideas and reach out!</p>
+
+<p><a href="https://www.linkedin.com/in/santiago-salazar-pavajeau/">LinkedIn</a>
+<a href="https://twitter.com/santispavajeau">Twitter</a></p>
+:ET

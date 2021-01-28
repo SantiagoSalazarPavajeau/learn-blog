@@ -1,0 +1,233 @@
+I"FC<p>This project was born after narrowing down from several project ideas that I liked. First I was considering another blog like app like my previous project <a href="https://santiagosalazarpavajeau.github.io/ruby_on_rails_project_-_young_papas_hobbies">Young Papas Hobbies</a>,  and even a restaurant recipe web app. However after seeing other projects in Javascript I realized the type of web apps that could be built compared to Rails (like games and other interactive single page applications), so I decided to build a music app. Music is a topic I am passionate about and have been involved in ever since I have memory due to my grandmother being a violinist. So I have always played/recorded music with friends and family, eventhough lately I put it aside alot. But to get back into creativity I have been looking into music gear like synths and exploring chord progressions. So I ended up getting inspiration from this and built the chords from scratch.</p>
+
+<p>This project is meant to be a music web application that lets the user “jam” and create simple songs with a few clicks. It allows to add chords to a “track” that plays a beat. The variety of chords allows you to play almost any chord progression.  All the sounds are stored in the local directory, and they are accessed through an <em>audio</em> html tag. We create the audio tags and accompanying buttons to play the sounds, by using a Javascript class called <em>Chord</em>. This class creates all the functionality of the audios, including playing the sounds on a click event, adding the sound to the track and removing the sounds from the track.</p>
+
+<p>All this functionality is done through the ability of JS to <em>manipulate the DOM</em>  (change the web page’s behavior from the users perspective).</p>
+
+<h2 id="organizing-a-javascript-app">Organizing a Javascript App</h2>
+
+<p>In rails, applications are organized in a very specific way with controllers, router, models, views. However, when we work with plain Javascript for the front end of our app, we have to create our own design to keep our app organized. For this we can use Modules to create different classes that have specific responsabilities. In my case, I saw some of the opportunites to the code into around mid-way on in my project but ended up choosing the following:</p>
+
+<ul>
+  <li>App: launches the code.</li>
+  <li>Adapter: defines all the fetch/AJAX requests and manipulates the DOM.</li>
+  <li>Song: creates song object.</li>
+  <li>Chord: creates chord object.</li>
+</ul>
+
+<h3 id="troubleshooting-accesing-contexts-of-different-classes">Troubleshooting accesing contexts of different classes</h3>
+
+<p>I tried to further separate the DOM manipulation responsibilities of the Adapter class into a new “UserInterface” class that exclusively had these methods/functions. However I realized that while this works to get data from the database into the front end it is more complicated to use it when sending data to the database (POST requests, etc.).</p>
+
+<p>So I found myself having to set the Post request method from the UserInterface class and not the Adapter, because the user input was obtained in the UserInterface class. That defeated my assumption that the Adapter could be exclusively responsible for AJAX requests and the UserInterface for DOM manipulation. Thus my Adapter class by itself ended up having to handle all of the fetch requests and DOM manipulation with methods in its own scope/context, in order for methods to have access to the data.</p>
+
+<h3 id="interaction-between-modules">Interaction between modules</h3>
+
+<p>In a nutshell, the App class declares the Adapter which has all of the methods to load the app like loading the songs from the database, loading the chords and the beats.</p>
+
+<p>The songs from the database are created in the front end by passing the json into a the renderSongButton method, which creates a button for the song that plays all of the chords belonging to the song when clicking on it.</p>
+
+<p>Then, a new song object is created on load for the user to interact with and save into the database.</p>
+
+<p>The chords are pushed into a song into three Song methods, chords, to hold all the Chord objects, audios to store the chord audios, and files, to reference the .wav files on the front end directory.</p>
+
+<h2 id="main-adapter-methods">Main Adapter Methods:</h2>
+
+<h3 id="editing-the-song-in-the-track-card">Editing the song in the track card</h3>
+
+<p>So the goal was to be able to edit a song in the track card by adding/removing chords. This was a very challenging issue because of the structure of the chord and song objects. Initially I considered joining the chord .wav sounds into a new .wav file to create a song, however, I found I could use collections of chords to make the song and edit the collections to acheive the editing of the song. Each chord has an “audio” HTML tag that can be played on the browser.</p>
+
+<p>This brought a new level of complexity because both classes had to deal with audio html tags in order to play sound, on top of their other attributes.</p>
+
+<p>The process to delete a chord from a song involved creating a random id property called <em>edit_id</em> on the chords so that the audios on the track could be filtered by that edit_id. This attribute is assigned on the creation of a chord object, and its also assigned to the corresponsing audio html tag. For the audios in a song to have the same edit_id than the chords in the song they have to be created simultaneusly, however I encountered a bug where I was not creating them in the same instance so I was getting an edit_id that was not the same on the audio tag and the chord attribute. So my filter method was not finding the correct id to delete the chord and audio from the song.</p>
+
+<p>However, after making sure I wasn’t creating two different random numbers when they needed to be the same the following method acheived the correct editing of the song:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chordButtonTrack.addEventListener("click", (e)=&gt;{
+             
+ this.newSong.chords = this.newSong.chords.filter((chord)=&gt;{return chord.edit_id !== newSongChord.edit_id})
+ this.newSong.audios  = this.newSong.audios.filter((audio)=&gt; {return parseInt(audio.id) !== newSongChord.edit_id})
+ newSongChord.audio().pause()
+ newSongChord.audio().currentTime = 0
+ chordButtonTrack.parentNode.removeChild(chordButtonTrack)
+                
+})
+</code></pre></div></div>
+<h3 id="playing-an-array-of-html-audio-tags">Playing an array of html audio tags</h3>
+
+<p>This was one of the most unexpected issues of the project, I thought it was going to be straight forward playing one audio after another. However the complexity starts at the fact that the song tempo (beat) and the duration of the audio files have to be in sync. Which is an issue mostly outside javascript when just using external audio files. For that reason I created some chord audio files that were at the synchronized with the beat.</p>
+
+<p>As far as “playing one audio after another” on the audios array in a song, there is a couple of ways to accomplish this, the two main basic methods I found were to with either an “onended” event listener or with a setInterval callback.</p>
+
+<p>I was able to implement playing the audios on sequence with the setInterval option by creating a callback that would play the next audio every 2 seconds. Since the chords might need to be replayed in the same song, I pause the audios and reset them to the start. Then beat audio stops and the interval is cleared when the index is greater than the number of chords.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>playSong(song){
+        
+        let allAudios = document.querySelectorAll("audio")
+            
+        for(let audio of allAudios){
+            audio.pause()
+            audio.currentTime = 0
+        }
+        
+        let playAudio = function(index){
+                            return function(){
+                                if (index &lt; song.audios.length -1 ){
+                                    song.audios[index].currentTime = 0
+                                    song.audios[index].pause()
+                                    index += 1
+                                    song.audios[index].play()
+                                } else{
+                                    clearInterval(playInterval)
+                                    
+                                    song.beat.pause()
+                                    song.beat.currentTime = 0;
+                                    const songButtons = document.getElementsByClassName("button btn-dark song")
+                                    document.getElementById("play").disabled = false
+                                    for(let songButton of songButtons){
+                                        songButton.disabled = false
+                                    }
+                                    
+
+                              
+                                }
+                                
+                            }
+                        }
+            
+        
+        song.audios[0].play()
+        song.beat.play()
+        
+        let i = 0
+        const playInterval = setInterval(playAudio(i), 2000)
+        this.intervals.push(playInterval)
+
+    }
+</code></pre></div></div>
+
+<p>After having a functioning but basic MVP with plain JS, it is worth mentioning the standard libraries for music apps would be <a href="https://en.wikipedia.org/wiki/HTML5_audio#Web_Audio_API_and_MediaStream_Processing_API"> Web Audio API</a>, <a href="https://www.w3.org/TR/webmidi/">WebMIDI</a>, and <a href="https://tonejs.github.io/.">Tone.js</a>.</p>
+
+<h2 id="transitioning-from-ruby-to-js">Transitioning from Ruby to JS</h2>
+
+<p>I just wanted to mention some of the basics of moving to JS. Learning Ruby as a first language spoils you in a sense because it is really simple. There are many built in methods that will allow you to do things easily like the .each method which is almost equivalent to a .forEach of .map in Javascript.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Ruby:
+
+collection.each do |element|
+
+end
+
+// Javascript
+
+collection.forEach(function(element){
+})
+
+also for specific uses:
+
+collection.map(function(element){
+})
+
+collection.reduce(function(element){
+}) // to return one aggregated value
+
+collection.filter(function(element){
+}) // to return elements of our choice
+
+
+</code></pre></div></div>
+
+<p>While Ruby has only a block that will be executed in the iteration, Javascript makes an explicit call to a function. Ruby uses the puts method to print a string to the terminal and Javascript uses the console.log to print to the console on the browser.</p>
+
+<p>Also Ruby uses <em>binding.pry</em> as a debugger, which stops the code in the scope of the execution with the methods and variables defined and available to access in the terminal, while Javascript uses <em>debbuger</em> which sends you to the browser where almost the same usability can be found (mostly the downside being that the console in the browser can be by default smaller than a terminal). Also in the learn.co platform when tests are ran with <em>learn –f-f</em> Javascript does not exit the test at the first failure but keeps running all the tests. But in the end it is a matter of getting used to the change and continously learning new ways.</p>
+
+<p>Other big difference that Javascript brings is that many of the built-in functional methods may be limited or difficult to implement but with libraries like <a href="https://ramdajs.com/">ramda</a> the methods in Javascript can become similar in simplicity to those found in Ruby.</p>
+
+<p>Ruby is a great language to start programming and get a grasp of concepts without having to have a deep knowledge of technical syntax other programming languages use like memory management syntax or even curly braces.</p>
+
+<p>Concepts that loosely translate from Ruby to Javascript also include .self (this), object attribute accessors (constructors) and many more. However, in the end they may act different and so it is important to settle into new concepts and syntax properly.</p>
+
+<h3 id="connection-between-rails-api-and-a-javascript-front-end">Connection between Rails API and a Javascript front end</h3>
+
+<p>My Ruby on Rails backend for this project was fairly simple, with the Chord and Song classes being parallel to the front end. I render json for each song and use the Fast Json API serializer to send the nested chord instances to the Adapter on the JS side. The serializer class to produce our service with our data looks like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class SongSerializer
+  include FastJsonapi::ObjectSerializer
+  attributes :name, :chords
+
+  def chords
+    object.chords
+  end
+end
+
+</code></pre></div></div>
+
+<p>The chords method, allows for our chords attribute on the serializer to access all the chord objects (and their data structure) belonging to the song.</p>
+
+<p>Also to create a new song I recieve a JSON from the Adapter with the song name and chords and save the song and its chord instances into the database using the params hash. The same process is applied to delete a song by using the params hash to find the song and delete each of its chord instances from the database. The difference between a POST and DELETE request is that the latter does not need a body paramaterer in the configuration object, only a reference to the song id on the URL where our request is directed to, so the id can be accessed from the params hash on the Rails destoy action in the Song controller.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>saveSong(song){ 
+        let postObj = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                song: {
+                    name: song.name, // returns name string from input
+                    chords_attributes: song.chords //returns array of chord objects //need only an array of files
+                }
+            })
+        }
+        return fetch(`${this.baseURL}/songs`, postObj)
+            .then(resp =&gt; resp.json())
+            .then(json=&gt; {
+                let chordObjs=[]
+
+                for(let chord of json.data.attributes.chords){
+                    chordObjs.push(new Chord(chord.name, chord.file))
+                }
+                let song = new Song(json.data.attributes.name, chordObjs, json.data.id)
+                this.allSongs.push(song)
+
+                this.renderSongButton(song)
+            }) 
+            .catch(error =&gt; alert(`Cant render new song and ${error}`))
+    }
+		
+		deleteSong(song){
+        let deleteObj = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+  
+        }
+        return fetch(`${this.baseURL}/songs/${song.id}`, deleteObj)
+            .then(resp =&gt; resp.json())
+            .then(()=&gt; {
+                alert("song deleted")
+            }) 
+            .catch(error =&gt; alert(`Couldn't delete song and ${error}`))
+    }
+
+</code></pre></div></div>
+
+<p>The AJAX call that I did not yet implement was an Edit. This would mean being able to load the songs from the server into the track for edit and I think it can be implemented doing some DOM manipulation making reference to the correct attributes on the Song class to load and PATCH the data.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This has been a very rewarding experience, and it has been fun. Having an MVP makes me feel like I was able to build something from simple and smaller parts into something a little bit more complex that works, it almost feels like building a machine in your backyard workshop. In the end, it was very interesting to have a working app and being able to deploy it to the web through <a href="https://santiagosalazarpavajeau.github.io/chords_beats_frontend/">heroku and Github Pages</a>.</p>
+
+<p>Also it was very challenging and I faced some stages where I was facing problems that extended from the fundamentals of the Flatiron curriculum (e.g. playing audios). But it was an opportunity to find the solutions through google and outside resources. Now what motivates me is to be able to build-up more on this app and optimize it with some libraries, and iterate over the code in general to improve it.</p>
+
+<p>Github Repos:</p>
+<ul>
+  <li><a href="https://github.com/SantiagoSalazarPavajeau/chords_beats_frontend">Front End</a></li>
+  <li><a href="https://github.com/SantiagoSalazarPavajeau/chords_beats_backend">Back End</a></li>
+  <li><a href="https://github.com/SantiagoSalazarPavajeau/chords_and_beats">Original before Postgress implementation</a></li>
+</ul>
+
+:ET

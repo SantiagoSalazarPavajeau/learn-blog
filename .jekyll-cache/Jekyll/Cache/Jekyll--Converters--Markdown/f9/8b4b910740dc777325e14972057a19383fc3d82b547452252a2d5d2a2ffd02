@@ -1,0 +1,134 @@
+I":H<p>This might not be a very traditional explanation/approach to this algorithm, but maybe it will help seeing these problems from a perspective that could help clarify things for some! Even though it is an intricate topic!</p>
+
+<p>I was asked this question on a technical interview and was surprised by how much learning could come out of a single question. The problem description itself can require some googling to figure out. But what this problem is asking for is to find if there are any substrings that if split in half they are proportional. For example:</p>
+
+<p><em>madam</em>
+Or
+<em>noon</em></p>
+
+<p>Are both palindromes and if the string was <code class="language-plaintext highlighter-rouge">'goodafternoonmadam'</code> the longest palindrome substring would be <em>madam</em>.</p>
+
+<h2 id="approach">Approach</h2>
+
+<p><a href="https://codesandbox.io/s/longest-palindrome-challenge-4juzy?file=/src/index.js">Solution in Sandbox</a></p>
+
+<p>I used javascript to solve this algorithm, but to give an overview to the challenge we can start looking at the edge cases this problem considers from the start:</p>
+
+<ul>
+  <li>The String is 1 or less elements long.</li>
+  <li>The whole String is a palindrome.</li>
+  <li>All Characters are the same.</li>
+  <li>The substring is a palindrome starting between two Characters (noon).</li>
+  <li>The substring is a palindrome starting from a Character (madam).</li>
+</ul>
+
+<p>We check if the string is 1 or less elements:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">if</span><span class="p">(</span><span class="nx">string</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">){</span> 
+        <span class="c1">// exit if string in 1 or less elements</span>
+        <span class="k">return</span> <span class="nx">string</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>To iterate over a string and modify/analyze it in javascript we can convert it into an array as follows:</p>
+
+<p><code class="language-plaintext highlighter-rouge">let initialChecks = string.split('')</code></p>
+
+<p>Then to check if the whole string is a palindrome we reverse the <code class="language-plaintext highlighter-rouge">initialChecks</code> array with the string characters as elements and compare it to the initial string.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">if</span> <span class="p">(</span><span class="nx">string</span> <span class="o">===</span> <span class="nx">initialChecks</span><span class="p">.</span><span class="nx">reverse</span><span class="p">().</span><span class="nx">join</span><span class="p">(</span><span class="dl">''</span><span class="p">)){</span>
+        <span class="k">return</span> <span class="nx">string</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Then use the .every method to compare the each character to the first character(<code class="language-plaintext highlighter-rouge">initialChecks[0]</code>), and if they are equal we return the original string as it would be already a palindrome from the start.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">if</span><span class="p">(</span><span class="nx">initialChecks</span><span class="p">.</span><span class="nx">every</span><span class="p">(</span> <span class="p">(</span><span class="nx">character</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">character</span> <span class="o">===</span> <span class="nx">initialChecks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)){</span> <span class="c1">// exit if all charactes are equal</span>
+        <span class="k">return</span> <span class="nx">string</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="checking-for-palindrome-substrings">Checking for palindrome substrings</h2>
+
+<p>So the first thing we do to start looking for actual palindrome substrings, is to add an empty string/blank space between every character in our <code class="language-plaintext highlighter-rouge">initialChecks</code> array and define an array with spaces (<code class="language-plaintext highlighter-rouge">arrSp</code>). That way, we can check for palindromes that are proportional from the space between two characters like <em>noon</em> or from a character <em>madam</em>.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arrSp</span> <span class="o">=</span> <span class="nx">initialChecks</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="dl">""</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now we can iterate over this new array with blank spaces between each character of the string and get the main work that the problem asks for.</p>
+
+<p>In summary, we use a nested loop to visit each element in our prepared array (<code class="language-plaintext highlighter-rouge">arrSp</code>) to be able to expand on each element (<code class="language-plaintext highlighter-rouge">center</code>) and check if the characters are the same on the left (<code class="language-plaintext highlighter-rouge">i-j</code>) and the right (<code class="language-plaintext highlighter-rouge">i+j</code>) of our <code class="language-plaintext highlighter-rouge">center</code>.</p>
+
+<p>We add the equivalent surrounding characters that are not spaces or empty strings into a <code class="language-plaintext highlighter-rouge">palindrome</code> array that will contain each substring, and as we find more palindromes, we push them into an array which we called <code class="language-plaintext highlighter-rouge">results</code> here. On this array containing all of the palindrome subtrings, we can check which one is the longest, and thus find the final answer.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">arrSp</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+ <span class="kd">let</span> <span class="nx">palindrome</span> <span class="o">=</span> <span class="p">[];</span>
+ <span class="kd">let</span> <span class="nx">center</span><span class="p">;</span>
+ <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>  <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">arrSp</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">){</span> <span class="c1">// inner loop to expand from each center (space or letter)</span>
+  <span class="nx">center</span> <span class="o">=</span> <span class="nx">arrSp</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">arrSp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="nx">j</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="nx">arrSp</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="nx">j</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">arrSp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="nx">j</span><span class="p">]</span> <span class="o">===</span> <span class="nx">arrSp</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="nx">j</span><span class="p">])</span> <span class="p">){</span> <span class="c1">// loop outwards on every center</span>
+  <span class="c1">// and keep expanding if equivalent characters found </span>
+  <span class="c1">// but only push if elements are not falsy a.k.a. our empty strings we added earlier</span>
+  <span class="nx">arrSp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="nx">j</span><span class="p">].</span><span class="nx">trim</span><span class="p">()</span> <span class="p">?</span> <span class="nx">palindrome</span><span class="p">.</span><span class="nx">unshift</span><span class="p">(</span><span class="nx">arrSp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="nx">j</span><span class="p">])</span> <span class="p">:</span> <span class="kc">null</span>
+  <span class="nx">arrSp</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="nx">j</span><span class="p">].</span><span class="nx">trim</span><span class="p">()</span> <span class="p">?</span> <span class="nx">palindrome</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">arrSp</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="nx">j</span><span class="p">])</span> <span class="p">:</span> <span class="kc">null</span> 
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+   <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>                
+ <span class="p">}</span>       
+ <span class="o">!!</span><span class="nx">center</span><span class="p">.</span><span class="nx">trim</span><span class="p">()</span> <span class="p">?</span> <span class="nx">palindrome</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">palindrome</span><span class="p">.</span><span class="nx">length</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">center</span><span class="p">)</span> <span class="p">:</span> <span class="kc">null</span> 
+ <span class="c1">// add center back into palindrome at the end of outside of loop</span>
+ <span class="c1">// but only if the center is not a blank space</span>
+ <span class="c1">// by inserting into half of length</span>
+  <span class="nx">palindrome</span><span class="p">.</span><span class="nx">length</span> <span class="p">?</span> <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">palindrome</span><span class="p">)</span> <span class="p">:</span> <span class="kc">null</span>
+ <span class="c1">// add palindrome to result which is the collection of all substring palindromes in the string       </span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<h2 id="breaking-it-down">Breaking it down</h2>
+
+<p>Using an if statement, we can check each of the surrounding elements of each <code class="language-plaintext highlighter-rouge">center</code> to see if the surrounding elements are the same character. The centers are accessed by the top loop index <code class="language-plaintext highlighter-rouge">i</code> and we use the nested index <code class="language-plaintext highlighter-rouge">j</code> to expand to the left and the right of each center.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="nx">arrSp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="nx">j</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="nx">arrSp</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="nx">j</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">arrSp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="nx">j</span><span class="p">]</span> <span class="o">===</span> <span class="nx">arrSp</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="nx">j</span><span class="p">])</span> <span class="p">){</span> <span class="c1">// loop outwards on every center</span>
+<span class="c1">// and keep expanding if equivalent characters found </span>
+<span class="c1">// but only push if elements are not falsey a.k.a. our empty strings/blank spaces we added earlier</span>
+  <span class="nx">arrSp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="nx">j</span><span class="p">].</span><span class="nx">trim</span><span class="p">()</span> <span class="p">?</span> <span class="nx">palindrome</span><span class="p">.</span><span class="nx">unshift</span><span class="p">(</span><span class="nx">arrSp</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="nx">j</span><span class="p">])</span> <span class="p">:</span> <span class="kc">null</span>
+  <span class="nx">arrSp</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="nx">j</span><span class="p">].</span><span class="nx">trim</span><span class="p">()</span> <span class="p">?</span> <span class="nx">palindrome</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">arrSp</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="nx">j</span><span class="p">])</span> <span class="p">:</span> <span class="kc">null</span> <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+ <span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>                
+</code></pre></div></div>
+<p>** This algorithm’s nested loops make O(n^2) so it could be optimized</p>
+
+<p>Since we added blank spaces we use the <code class="language-plaintext highlighter-rouge">.trim()</code> method  to make sure we only add actual characters to rebuild each palindrome we find. We add these equivalent characters to left of the center with <code class="language-plaintext highlighter-rouge">.unshift(arrSp[i-j])</code> and to the right of the center with <code class="language-plaintext highlighter-rouge">.push(arrSp[i+j])</code>. Then if we stop having a palindrome center we exit out of the loop and move on to the next center by triggering the <code class="language-plaintext highlighter-rouge">break</code>.</p>
+
+<p>After we found all the proportional sides of the palindrome substring, we add the center back into the palindrome, but only if its a character and not a blank space.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">!!</span><span class="nx">center</span><span class="p">.</span><span class="nx">trim</span><span class="p">()</span> <span class="p">?</span> <span class="nx">palindrome</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">palindrome</span><span class="p">.</span><span class="nx">length</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">center</span><span class="p">)</span> <span class="p">:</span> <span class="kc">null</span> 
+ <span class="c1">// add center back into palindrome at the end of outside of loop</span>
+ <span class="c1">// but only if the center is not a blank space</span>
+ <span class="c1">// by inserting into half of length</span>
+  <span class="nx">palindrome</span><span class="p">.</span><span class="nx">length</span> <span class="p">?</span> <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">palindrome</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">''</span><span class="p">))</span> <span class="p">:</span> <span class="kc">null</span>
+ <span class="c1">// add palindrome to result which is the collection of all substring palindromes in the string   </span>
+</code></pre></div></div>
+
+<p>And then we can push the palindrome we just rebuilt into the <code class="language-plaintext highlighter-rouge">result</code> array where we are collecting all the palindrome substrings from the original string.</p>
+
+<h2 id="how-do-we-find-the-longest-string-in-the-result-array">How do we find the longest string in the <code class="language-plaintext highlighter-rouge">result</code> array?</h2>
+
+<p>We can just use a <code class="language-plaintext highlighter-rouge">.sort()</code> method as follows:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">return</span> <span class="nx">result</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="nx">a</span><span class="p">.</span><span class="nx">length</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>We sort the array by decreasing palindrome length and then return the first element of the sorted array.</p>
+
+<p>Feel free to check out the <a href="https://codesandbox.io/s/longest-palindrome-challenge-4juzy?file=/src/index.js">code in the sandbox.</a></p>
+
+<p>Any comments/ideas are more than welcome!</p>
+
+<p>Feel more than welcome to reach out! :)</p>
+
+<p><a href="https://www.linkedin.com/in/santiago-salazar-pavajeau/">LinkedIn</a>
+<a href="https://twitter.com/santispavajeau">Twitter</a></p>
+
+:ET

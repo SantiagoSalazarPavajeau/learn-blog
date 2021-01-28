@@ -1,0 +1,90 @@
+I"<p>When the user inputs data into a website using Ruby/Sinatra the data travels from HTML to Ruby and to SQL. In fact, Ruby uses Sinatra for get and post requests, then ActiveRecord and ORM to instantiate objects and also to connect the data to an SQL database. The following code snippets describe these steps in the process of saving user input into our program and also even showing a dynamic response to the user input.</p>
+
+<p>The user inputs data into a form from a website:</p>
+
+<form method="POST" action="/site">
+      <input type="text" name="attribute" />
+      <input type="submit" />
+</form>
+
+<p><img src="https://photos.app.goo.gl/DTjLPuUP3PJJk9Qu9" alt="" /></p>
+
+<p>And the html to acheive this should look like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;form method="POST" action="/site"&gt;
+      &lt;input type="text" name="attribute"&gt;
+      &lt;input type="submit"&gt;
+&lt;/form&gt;
+</code></pre></div></div>
+
+<p>ERB allows for the transfer of data from the browser or front end HTML code to ruby.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>params[:attribute] = "user input"
+
+</code></pre></div></div>
+
+<p>Sinatra connects the client and the server:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>get "/"
+   erb: html_and_ruby_file_name
+end
+</code></pre></div></div>
+
+<p>ActiveRecord saves the data to the database.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Model.create(params[:attribute])
+</code></pre></div></div>
+
+<p>Ruby instantiates an object.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Model
+
+     attr_accessor :attribute
+
+     def self.method
+            self.first
+     end
+
+end
+</code></pre></div></div>
+
+<p>ORM of the method uses SQL to map the object to the database.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sql = "CREATE TABLE models (  id  INTEGER PRIMARY KEY, 
+attribute TEXT)"
+
+DB[:conn].execute(sql)
+
+sql = "INSERT INTO models (attribute) VALUES ('user input')"
+
+DB[:conn].execute(sql)
+
+</code></pre></div></div>
+
+<p>SQL saves the user input into the SQL database.</p>
+
+<p>To ouput information from out app we can use a Sinatra POST request</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>post "/"
+     Model.method
+		 erb: htm_and_ruby_file_name
+end
+</code></pre></div></div>
+
+<p>And send the ruby instance variable into the front end on the HTML through the ERB file:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+   
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;h1&gt;Title&lt;/h1&gt;
+
+    &lt;h2&gt;&lt;%= Model.method %&gt;&lt;/h2&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+:ET

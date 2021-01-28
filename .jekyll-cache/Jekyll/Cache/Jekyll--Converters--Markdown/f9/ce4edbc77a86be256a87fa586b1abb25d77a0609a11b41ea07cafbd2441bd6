@@ -1,0 +1,191 @@
+I"�,<h3 id="lexical-environment-and-scope">Lexical Environment and Scope</h3>
+
+<p>The lexical environment is where Javascript stores the meta data about variables and functions. So the meta-data of the lexical environment tells Javascript the scope of a variable whether is global or local.</p>
+
+<h3 id="hoisting">Hoisting</h3>
+
+<p>Hoisting literally refers to the concept of raising or lifting something onto the top. In Javascript it has to do with the way variables and functions exist at a certain moment in the “running” of the code and how they are “raised” to the top of the code by the Javascript engine. However, this JavaScript behavior is quite unique and has some specific rules that need to be accounted for in order to understand how to correctly declare variables in order to have access to them and their values.</p>
+
+<p>More specifically, hoisting refers to what variables look like in the lexical environment at compile phase vs execution phase. The compile phase is when the code that we write is prepared to be read by the machine and the execution phase when the machine reads it. So when Javascript prepares our code to be read by the machine it looks up for the variables and declares them in the lexical environment by “hoisting them”.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> var hoisted; // variable declaration
+</code></pre></div></div>
+
+<p>In fact, during compile, Javascript hoists the variable declaration, but not the initialization. So the variable won’t equal the below string in compile phase.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> var hoisted = "but not initialized to our value" // variable initialization
+</code></pre></div></div>
+
+<p>The <strong>var</strong> variable will be initialized to <em>undefined</em> during compile.</p>
+
+<p>So Javascrpt in compile hoists variable declarations and does this differently for <strong>var</strong>, <strong>let</strong> and <strong>const</strong>. That is, <strong>let</strong> and <strong>const</strong> are hoisted but they are not declared into anything and are innaccesible during compile phase. So while a variable declared with <strong>var</strong> will be initialized to <em>undefined</em> a variable declared with <strong>let</strong> and <strong>const</strong>, will not be initialized and so it will be inaccesible during compile.</p>
+
+<p>Then during the execution phase of the code all variables will be set to the initialization value we assigned them, so whatever string, integer, etc. we want them to be set to.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> var afterHoisted =  "now initialized" // in execution, after it was hoisted by compile and initialized to undefined
+ let letAfterHoisted =  "now initialized" // in execution, after it was hoisted by compile and initialized to nothing
+ const constAfterHoisted =  "now initialized"// in execution, after it was hoisted by compile and initialized to nothing
+
+</code></pre></div></div>
+
+<p>In a more concrete example if we write:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>console.log(a)
+var a = "hello"
+</code></pre></div></div>
+
+<p>Running this code will return undefined as the variable declaration of <em>a</em> will be hoisted but not the initialization, so it will just be set to <em>undefined</em> since we declared it with <strong>var</strong>.</p>
+
+<p>On the other hand looking at the behavior of the following code:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>console.log(a)
+let a = "hello"
+
+or
+
+console.log(a)
+const a = "hello"
+</code></pre></div></div>
+
+<p>Both will return a Reference Error because the declaration of the variable <strong>a</strong> is hoisted but its value is inaccesible since they are not being initialized with <em>undefined</em> like <strong>var</strong> does. So initializing these variables to “hello” after the console.log call will indeed create a Reference Error.</p>
+
+<h3 id="block-context">Block Context</h3>
+
+<p>When we look at declaring variables with <strong>var</strong> we also find that they do not have block scope with if statements. In the code below we try to change the value of the variables <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">b</code>, and <code class="language-plaintext highlighter-rouge">c</code>, and end up only being able to change <code class="language-plaintext highlighter-rouge">a</code>. So we can reassign a <code class="language-plaintext highlighter-rouge">var</code> variable and overwrite</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function variables(){
+  var a = 1
+  let b = 2
+  const c = 3
+  
+  if (true) {
+	 var a = 4
+   var d = 5
+   let e = 6
+   const f = 7
+  }
+  return `${a} ${b} ${c} ${d} ${e} ${f}` // Reference Error: e is not defined
+} // "4 2 3 5" ---- **a** is changed by the block in the if statement 
+</code></pre></div></div>
+
+<p>Normal block scope behavior would be, that the variables inside the if statement block could not be accessed by the outer scope. This happens as expected when we use <strong>let</strong> and <strong>const</strong>. However, <strong>var d</strong>  is accesible by the outside of the if statement. Also the first instance of <code class="language-plaintext highlighter-rouge">var a</code> is overwritten by the instance in the inner scope. So the instances of <code class="language-plaintext highlighter-rouge">var a</code> and <code class="language-plaintext highlighter-rouge">var d</code>  inside the block gets hoisted to the function scope. The block lexical environment of if statements is not respected by <code class="language-plaintext highlighter-rouge">var</code>.</p>
+
+<p>However, a variable declared and initiated with <strong>var</strong> can be set to a function scope and not have the same behavior as with a block.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var a = 1
+
+function variables( ){
+ var a = 4
+}
+
+console.log(a) // returns 1
+</code></pre></div></div>
+
+<p>So there is a way to limit the hoisting of <strong>var</strong> variables and that is by using function scope or “closures”.</p>
+
+<h3 id="loops-and-var-as-an-example">Loops and var as an example</h3>
+
+<p>Lets look at a refactored example from the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures">Documentation</a>:</p>
+
+<p><a href="https://codesandbox.io/s/focused-feistel-9kqwv?file=/src/index.js">LINK OF EXAMPLE IN SANDBOX</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/index.html
+
+&lt;p id="number"&gt;click on a number&lt;/p&gt;
+&lt;p id="1"&gt;10&lt;/p&gt;
+&lt;p id="2"&gt;14&lt;/p&gt;
+&lt;p id="3"&gt;7&lt;/p&gt;
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/index.js
+
+function showNumber(number, i) {
+  document.getElementById('number').innerText = `You clicked but on all the numbers but only got ${number} and the loop var i is stuck with ${i}.`;
+}
+
+function setupNumber() {
+  var numberText = [
+      {'id': '1', 'number': '10'},
+      {'id': '2', 'number': '14'},
+      {'id': '3', 'number': '7'}
+    ];
+
+  for (var i = 0; i &lt; numberText.length; i++) {
+    var data = numberText[i];
+    document.getElementById(data.id).onclick = function() {
+      showNumber(data.number, i);
+    }
+  }
+}
+
+setupNumber();
+
+// no matter where you click the numbers are the same =&gt; You clicked but on all the numbers but only got 7 and the loop var i is stuck with 3.
+
+</code></pre></div></div>
+
+<p>This loop wil only create one lexical environment for the three iterations so the <strong>var data</strong>  and the <strong>var i</strong> are  being overwritten each iteration, in other words, the <strong>var data</strong> and <strong>var i</strong> are being hoisted outside the block. To be exact, both variables are being hoisted into the <strong>setupNumber()</strong> function scope and ignoring the block scope. By the time we click on the numbers on the html, the loop has already finished and the variables (that has already been overwritten three times)  are set to the last iteration that was hoisted which (7 and 3).</p>
+
+<p>To have 3 different values for each loop there needs to be 3 different lexical scopes. So new scopes have to be created with an inner function or closure in each iteration.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+function showNumber(number, i) {
+  document.getElementById('number').innerText = `You clicked ${number} and got ${number} and the loop var i is ${i} which corresponds!`;
+}
+
+function cointainingNewClosure(number, i){
+    return function(){
+        showNumber(number, i)
+    }
+}
+
+function setupNumber() {
+  var numberText = [
+      {'id': '1', 'number': '10'},
+      {'id': '2', 'number': '14'},
+      {'id': '3', 'number': '7'}
+    ];
+
+  for (var i = 0; i &lt; numberText.length; i++) {
+    var data = numberText[i];
+    document.getElementById(data.id).onclick = cointainingNewClosure(data.number, i)
+  }
+}
+
+setupNumber(); // we get the desired output
+
+</code></pre></div></div>
+
+<p>Here we created a scope for each iteration using a closure.</p>
+
+<p>Fortunately, presently we have the <strong>let</strong> keyword to declare variables, so to debug a <strong>var</strong> variable that is skipping the block scope and getting hoisted into the outer scope, we can just use <strong>let</strong>. The <strong>let</strong> variable will have the block local scope. The following loop will not overwrite the <strong>let i</strong> and <strong>let data</strong> because the <strong>let</strong> variables have block scope.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+for (let i = 0; i &lt; helpText.length; i++) {
+    let data = numberText[i];
+    document.getElementById(item.id).onclick = function() {
+      showNumber(data.number, i);
+    }
+  }
+	
+</code></pre></div></div>
+
+<p>So in conclusion, when we are trying to debug code that uses <strong>var</strong> to declare and initialize variables, we need to take into account that the behavior of hoisting, scoping, etc. of <strong>var</strong> variables will not be the same as with <strong>let</strong> and <strong>const</strong>. And this is a powerful tool to have as a new developer working with legacy code.</p>
+
+<p>Resources:</p>
+
+<p>https://developer.mozilla.org/en-US/docs/Glossary/Hoisting</p>
+
+<p>https://blog.bitsrc.io/hoisting-in-modern-javascript-let-const-and-var-b290405adfda</p>
+
+<p>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/block</p>
+
+<p>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var</p>
+
+<p>https://medium.com/javascript-in-plain-english/how-to-use-let-var-and-const-in-javascript-cdf42b48d70</p>
+
+<p>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures</p>
+
+<p>https://www.freecodecamp.org/forum/t/how-does-js-compile-for-loops/151885</p>
+
+:ET

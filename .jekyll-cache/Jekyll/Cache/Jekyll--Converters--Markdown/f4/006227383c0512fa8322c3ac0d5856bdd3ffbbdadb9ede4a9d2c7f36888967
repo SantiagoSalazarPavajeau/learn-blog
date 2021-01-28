@@ -1,0 +1,126 @@
+I"/%<p>I am going to go through some CSS techniques I worked on while doing a frontend challenge for an internship. The internship was unpaid so I could not make an all-in commitment with my time, but I found the challenge pretty interesting and it motivated me to take a deeper dive into CSS.</p>
+
+<p>Before this challenge, I got good at using libraries like bootstrap, material-ui, or semantic-ui, which allowed me to survive styling and design. But exploring CSS properties in more depth has helped me see styling as less ‘tedious-y’ to actually become more fun.</p>
+
+<h2 id="css-display-property">CSS display property</h2>
+
+<p>The main CSS property to control the way HTML tags are set on the page is <code class="language-plaintext highlighter-rouge">display</code>. I will show some practical ways I explored to set a layout where the tags can be controlled and positioned effectively.</p>
+
+<p>The way containers are distributed on the page can change depending on if we use <code class="language-plaintext highlighter-rouge">grid</code> or <code class="language-plaintext highlighter-rouge">flex</code> property values on the display property. For example, to achieve the following design:</p>
+
+<p><img src="https://i.imgur.com/x2WvVOl.png" alt="alt-text" title="Layout with grid/flex" /></p>
+
+<p>We can set a parent div to <code class="language-plaintext highlighter-rouge">{display: grid;}</code> for the horizontal sections (beige and gold), and the child divs are set to <code class="language-plaintext highlighter-rouge">{display: flex;}</code> for the inner alignment.</p>
+
+<h2 id="parent-and-child-css-classes">Parent and child CSS classes</h2>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.grid-app</span><span class="p">{</span>
+ <span class="nl">display</span><span class="p">:</span> <span class="n">grid</span><span class="p">;</span>
+ <span class="py">grid-template-columns</span><span class="p">:</span> <span class="p">[</span><span class="nb">left</span><span class="p">]</span> <span class="m">1</span><span class="n">fr</span> <span class="p">[</span><span class="nb">right</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This <code class="language-plaintext highlighter-rouge">.grid-app</code> parent class gives us control of the child divs that will serve as horizontal headers where content can be divided by different topics or styles.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.flexbox-light</span> <span class="p">{</span>
+ <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+ <span class="nl">justify-content</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+ <span class="nl">height</span><span class="p">:</span> <span class="m">500px</span><span class="p">;</span>
+ <span class="nl">background-color</span><span class="p">:</span> <span class="m">#fff1e6</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.flexbox-dark</span> <span class="p">{</span>
+ <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+ <span class="nl">justify-content</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+ <span class="nl">height</span><span class="p">:</span> <span class="m">500px</span><span class="p">;</span>
+ <span class="nl">background-color</span><span class="p">:</span> <span class="m">#eddcd2</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The big pattern is that setting the display property to <code class="language-plaintext highlighter-rouge">grid</code> or <code class="language-plaintext highlighter-rouge">flex</code> will affect the tags that are nested as children. In this case, the parent <code class="language-plaintext highlighter-rouge">grid</code> affects the <code class="language-plaintext highlighter-rouge">flex</code> children.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"grid-app"</span><span class="nt">&gt;</span>
+
+ <span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"flexbox-light"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"width-control-container"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;/div&gt;</span>
+
+ <span class="nt">&lt;/div&gt;</span>
+
+ <span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"flexbox-dark"</span><span class="nt">&gt;</span>
+
+ <span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>But now using <code class="language-plaintext highlighter-rouge">display: flex;</code> and <code class="language-plaintext highlighter-rouge">justify-content: center;</code> the child <code class="language-plaintext highlighter-rouge">flex</code> tags become parents. So we can set a div tag with class <code class="language-plaintext highlighter-rouge">width-control-container</code> that controls the margins of the text as follows and to center the content.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.width-control-container</span><span class="p">{</span>
+ <span class="nl">width</span><span class="p">:</span> <span class="m">70%</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>And this would allow us to add another level of nested flex div tags where the text can be justified independently on each one by using flex.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.nav</span><span class="p">{</span>
+ <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+ <span class="nl">justify-content</span><span class="p">:</span> <span class="n">space-between</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.title</span><span class="p">{</span>
+ <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+ <span class="nl">justify-content</span><span class="p">:</span> <span class="n">flex-start</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.subtitle</span><span class="p">{</span>
+ <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+ <span class="nl">justify-content</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.search</span><span class="p">{</span>
+ <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+ <span class="nl">justify-content</span><span class="p">:</span> <span class="n">flex-end</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Using flexbox the content can be set to positions like: distributed evenly over the page (<code class="language-plaintext highlighter-rouge">space-between</code>), to the left (<code class="language-plaintext highlighter-rouge">flex-start</code>), center, and to the right (<code class="language-plaintext highlighter-rouge">flex-end</code>).</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"grid-app"</span><span class="nt">&gt;</span>
+
+ <span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"flexbox-light"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"width-control-container"</span><span class="nt">&gt;</span>
+
+       <span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"nav"</span><span class="nt">&gt;&lt;/div&gt;</span>
+       <span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"title"</span><span class="nt">&gt;&lt;/div&gt;</span>
+       <span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"subtitle"</span><span class="nt">&gt;&lt;/div&gt;</span>
+       <span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"search"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+    <span class="nt">&lt;/div&gt;</span>
+
+ <span class="nt">&lt;/div&gt;</span>
+
+ <span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"flexbox-dark"</span><span class="nt">&gt;</span>
+
+ <span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p><a href="https://codesandbox.io/s/grid-and-flexbox-css-njsyd?file=/src/styles.css">Code in sandbox</a></p>
+
+<p>Feel more than welcome to reach out with any comments/ideas!</p>
+
+<p><a href="https://www.linkedin.com/in/santiago-salazar-pavajeau/">LinkedIn</a>
+<a href="https://twitter.com/santispavajeau">Twitter</a></p>
+
+<p>References:</p>
+
+<p><a href="https://www.w3schools.com/cssref/pr_class_display.asp">CSS display</a></p>
+
+<p><a href="http://1linelayouts.glitch.me/">One line layouts</a></p>
+
+:ET

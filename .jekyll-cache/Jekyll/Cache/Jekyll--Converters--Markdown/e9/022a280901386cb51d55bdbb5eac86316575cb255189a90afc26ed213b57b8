@@ -1,0 +1,94 @@
+I"&(<p>In this blog I go over some concepts of Big O Notation that I’ve been breaking through after some months of practicing algorithms and might be helpful to others in the same process of improving their technical interview skills.</p>
+
+<h2 id="time-complexity">Time complexity</h2>
+
+<p>Tracks how long an algorithm takes to run (processing). We focus on time complexity when we really want to improve the performance of algorithms. Loops, recursion, and methods of iteration will usually increase the time complexity of algorithms and slow down our programs. Processing power is an expensive resource, and everyone needs websites to load fast so time complexity is has the higher priority when dealing with Big O.</p>
+
+<h2 id="space-complexity">Space complexity</h2>
+
+<p>It tracks the memory taken by the assignment of variables (RAM) and data types like integers, strings, arrays etc. Integers take a constant amount of memory <code class="language-plaintext highlighter-rouge">O(1)</code>, but strings and arrays take more memory as they increase in size (n) <code class="language-plaintext highlighter-rouge">O(n)</code>. However, space complexity is not a priority in the improvement of Big O notation in algorithms as RAM resources run out less frequently.</p>
+
+<h2 id="nested-loops">Nested Loops</h2>
+
+<p>Dealing with nested loops is a bit of a contradiction because most algorithms have a ‘brute force’ or ‘intuitive solution’ that uses nested loops. However every time we nest a loop the time complexity increases exponentially.</p>
+
+<p>For example:</p>
+
+<p><a href="https://codesandbox.io/s/slowduplicates-k0mpx?file=/src/index.js">Code in sandbox</a></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">countDuplicatesSlow</span> <span class="o">=</span> <span class="p">(</span><span class="nx">numbers</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="c1">// O(n^2) big o complexity</span>
+
+    <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>  <span class="nx">i</span><span class="o">++</span><span class="p">){</span> 
+
+        <span class="kd">let</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span><span class="o">&lt;</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>  <span class="nx">j</span><span class="o">++</span><span class="p">){</span>
+
+            <span class="k">if</span><span class="p">(</span><span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">j</span><span class="p">]){</span> <span class="c1">// if we find a duplicate as we compare all numbers to all numbers</span>
+
+                <span class="nx">count</span><span class="o">++</span>
+
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">`Found a total of: (</span><span class="p">${</span><span class="nx">count</span><span class="p">}</span><span class="s2">) number </span><span class="p">${</span><span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]}</span><span class="s2">s`</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">([...</span><span class="k">new</span> <span class="nb">Set</span><span class="p">(</span><span class="nx">result</span><span class="p">)])</span> <span class="c1">// print only unique for readability</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+<p>Source: <a href="https://youtu.be/2tW3XDVqvqA">Aaron Martin (AJMANNTECH)</a></p>
+
+<p>In this example, we use a nested loop to evaluate every item (outer for loop) against the rest of the items (inner for loop) and start to count how many duplicates we have on the array.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">duplicateNumbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="nx">countDuplicatesSlow</span><span class="p">(</span><span class="nx">duplicateNumbers</span><span class="p">)</span>
+<span class="c1">// returns =&gt; [Found a total of: (2) number 1s,</span>
+<span class="c1">//             Found a total of: (3) number 2s,</span>
+<span class="c1">//             Found a total of: (1) number 3s]</span>
+</code></pre></div></div>
+
+<p>This is a great example of an opportunity to improve Big O with a ‘memoization’ object. With this technique we can go from <code class="language-plaintext highlighter-rouge">O(n^2)</code> to <code class="language-plaintext highlighter-rouge">O(n)</code> which is a great improvement. I will be focusing on this in an upcoming blog.</p>
+
+<h2 id="recursion">Recursion</h2>
+
+<p>With recursion, the algorithms get very slow when we have to perform binary tree searches. Usually, if we search a binary tree 
+on all nodes the time complexity will be <code class="language-plaintext highlighter-rouge">O(2^n)</code> where n is the depth of the tree.</p>
+
+<p>If we look at a recursion example like this adaptation from <a href="https://leetcode.com/explore/interview/card/top-interview-questions-easy/97/dynamic-programming/569/">climbing steps on leetcode</a>, which asks to find how many unique ways there are to go up a set of steps, when we can take either one or two steps on each opportunity to go up. The resulting time complexity is a <code class="language-plaintext highlighter-rouge">O(2^n)</code> which is even <a href="https://www.bigocheatsheet.com/">slower</a> than an <code class="language-plaintext highlighter-rouge">O(n^2)</code> nested loop.</p>
+
+<p><a href="https://codesandbox.io/s/slow-recursion-cy4ez?file=/src/index.js">Code in sandbox</a></p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">recursionTreeSlow</span> <span class="o">=</span> <span class="p">(</span><span class="nx">maxLevel</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">recursion_Tree_Slow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">maxLevel</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">recursion_Tree_Slow</span> <span class="o">=</span> <span class="p">(</span><span class="nx">currentLevel</span><span class="p">,</span> <span class="nx">maxLevel</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">currentLevel</span> <span class="o">&gt;</span> <span class="nx">maxLevel</span><span class="p">){</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">currentLevel</span> <span class="o">===</span> <span class="nx">maxLevel</span><span class="p">){</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">recursion_Tree_Slow</span><span class="p">(</span><span class="nx">currentLevel</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nx">maxLevel</span><span class="p">)</span> <span class="o">+</span> <span class="nx">recursion_Tree_Slow</span><span class="p">(</span><span class="nx">currentLevel</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="nx">maxLevel</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>In this slower recursion example the program unnecessarily builds the data multiple times on nodes that are the same. So the program is rebuilding data that has already been created but had not been stored, thus wasting resources.</p>
+
+<p>The ‘memoization’ technique can also be used in binary tree recursion but understanding the implementation might need a bit more visualization because binary trees can be a bit more abstract than arrays and objects. I will also give it a go at explaining this in an upcoming blog.</p>
+
+<p>Feel more than welcome to reach out and also to help with any comments/ideas.</p>
+
+<p><a href="https://www.linkedin.com/in/santiago-salazar-pavajeau/">LinkedIn</a>
+<a href="https://twitter.com/santispavajeau">Twitter</a></p>
+
+<p>Resources:</p>
+
+<p><a href="https://www.bigocheatsheet.com/">Big O Cheatsheet</a>
+<a href="https://web.stanford.edu/class/archive/cs/cs106b/cs106b.1176/handouts/midterm/5-BigO.pdf">Big O tips</a>
+<a href="https://learn.co/tracks/computer-science/why-algorithms/big-o/time-complexity">Learn.co on time-complexity</a>
+<a href="https://youtu.be/2tW3XDVqvqA">AJMANNTECH</a>
+<a href="https://www.youtube.com/watch?v=_F29n4Z69rE">KodingKevin on Space Complexity</a></p>
+
+:ET
